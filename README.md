@@ -1,5 +1,5 @@
 # Azure
-gonna paint transformers on the boxes
+going to paint transformers on the boxes
 doesnt know what size boxes he wants
 nice if there were some basic defaults but also have custom orders
 ingravings would be nice
