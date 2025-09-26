@@ -1,5 +1,6 @@
-# Azure
-going to paint transformers on the boxes
+# Azure - Austin, Devin, and Grant
+Some of the most recent goals and notes we have for the project: 
+we are going to paint transformers on the boxes
 doesnt know what size boxes he wants
 nice if there were some basic defaults but also have custom orders
 ingravings would be nice
