@@ -7,10 +7,6 @@
 <dc:title>Simple Box With Lid And Handle</dc:title>
 <dc:date>2025-10-01 16:57:30</dc:date>
 </cc:Work></rdf:RDF></metadata>
-<g id="p-0" style="fill:none;stroke-linecap:round;stroke-linejoin:round;">
-  <path d="M 10.100 554.400 H 110.100 V 544.400 H 10.100 V 554.400 Z" stroke="rgb(0,0,0)" stroke-width="0.20" />
-  <text dominant-baseline="hanging" font-size="6px" style="font-family: sans-serif ; font-weight: normal; font-style: normal; fill: rgb(255,0,0)" text-anchor="middle" transform="matrix( 1.000 0.000 0.000 1.000 60.100 546.400 )">100.0mm, burn:0.10mm</text>
-</g>
 <g id="p-1" style="fill:none;stroke-linecap:round;stroke-linejoin:round;">
   <path d="M 24.100 539.500 H 21.200 C 21.100 539.500 21.200 539.600 21.200 539.500 V 536.700 C 21.200 536.600 21.100 536.700 21.200 536.700 H 27.000 C 27.100 536.700 27.000 536.600 27.000 536.700 V 539.500 C 27.000 539.600 27.100 539.500 27.000 539.500 H 24.100 Z" stroke="rgb(0,0,255)" stroke-width="0.20" />
   <path d="M 36.100 539.500 H 33.200 C 33.100 539.500 33.200 539.600 33.200 539.500 V 536.700 C 33.200 536.600 33.100 536.700 33.200 536.700 H 39.000 C 39.100 536.700 39.000 536.600 39.000 536.700 V 539.500 C 39.000 539.600 39.100 539.500 39.000 539.500 H 36.100 Z" stroke="rgb(0,0,255)" stroke-width="0.20" />
