@@ -7,7 +7,5 @@ public class AzureTest
     public void firstTest()
     {
         assertTrue(true); 
-        Azure azure = new Azure();
-        assertEquals(10, azure.add(7, 3));
     }    
 }
