@@ -10,4 +10,5 @@ public class BoxSpec {
   double width;
   double depth;
   double tolerance;
+  double teethPerInch;
 }
