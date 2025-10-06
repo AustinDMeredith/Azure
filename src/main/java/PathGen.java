@@ -4,5 +4,9 @@
  * */
 
 public class PathGen {
-  double startPoint;  
+  double startPoint;
+
+  public void generate () {
+    
+  }
 }

@@ -6,5 +6,10 @@ public class Main {
 
     boxSpec.panels.add(panel1);
     roleSetter.setRoles(boxSpec.panels);
+  
+    System.out.print(panel1.role);
+    for (int i = 0; i < 4; i++) {
+      System.out.print(panel1.edges.get(i)); 
+    }
   }  
 }
