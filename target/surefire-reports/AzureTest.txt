@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: AzureTest
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in AzureTest
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in AzureTest
->>>>>>> ab71ff0 (random stufff)
