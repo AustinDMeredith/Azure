@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /home/austin/se1/azure/src/main/java/BoxSpec.java
 /home/austin/se1/azure/src/main/java/LayoutService.java
 /home/austin/se1/azure/src/main/java/Main.java
@@ -5,3 +6,6 @@
 /home/austin/se1/azure/src/main/java/PathGen.java
 /home/austin/se1/azure/src/main/java/SetEdgeRoles.java
 /home/austin/se1/azure/src/main/java/SvgGen.java
+=======
+/home/austin/se1/azure/src/main/java/Azure.java
+>>>>>>> ab71ff0 (random stufff)
