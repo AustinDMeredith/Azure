@@ -4,5 +4,10 @@
  * */
 
 public class LayoutService {
+  static String startPoint = "5, 5";
 
+  public static String findStartPoint() {
+    // logic to find and set the start point
+    return startPoint;
+  }
 }

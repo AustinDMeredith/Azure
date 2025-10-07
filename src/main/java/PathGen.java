@@ -4,8 +4,7 @@
  * */
 
 public class PathGen {
-  double startPoint;
-
+  String startPoint = LayoutService.findStartPoint();     
   public void generate () {
     
   }
