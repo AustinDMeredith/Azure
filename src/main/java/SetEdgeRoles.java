@@ -6,7 +6,7 @@
 import java.util.ArrayList;
 
 public class SetEdgeRoles {
-  public void setRoles (ArrayList<Panel> panels) {
+  public static void setRoles (ArrayList<Panel> panels) {
     for (int i = 0; i < panels.size(); i++) {
       Panel panel = panels.get(i);
       for (int j = 0; j < 4; j++) {
