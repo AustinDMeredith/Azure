@@ -1,10 +1,10 @@
 public class Main {
   public static void main (String args[]) {
-    BoxSpec.height = 100;
-    BoxSpec.width = 100;
-    BoxSpec.depth = 100;
+    BoxSpec.height = 200;
+    BoxSpec.width = 200;
+    BoxSpec.depth = 200;
     BoxSpec.tolerance = 2;
-    BoxSpec.teethPerEdge = 8;
+    BoxSpec.teethPerEdge = 15;
     double toothDepth = 3.175;       
 
     Panel panel1 = new Panel("p-0", Panel.PanelRole.side);

@@ -13,10 +13,10 @@ public class SvgGen {
      xmlns:xlink="http://www.w3.org/1999/xlink">\n
   """;
   
-  static String line3 = "<g id=\"" + BoxSpec.panels.get(0).id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">";
-  static String line4 = "<path d=\"" + BoxSpec.panels.get(0).path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.10\" />";
-  static String line5 = "</g>";
-  static String line6 = "</svg>";
+  static String line3 = "<g id=\"" + BoxSpec.panels.get(0).id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n";
+  static String line4 = "<path d=\"" + BoxSpec.panels.get(0).path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.10\" />\n";
+  static String line5 = "</g>\n";
+  static String line6 = "</svg>\n";
 
   static public void generateFile () {
     try {
