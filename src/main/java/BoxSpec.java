@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class BoxSpec {
   // all of these should be in mm
-  static double highth;
+  static double height;
   static double width;
   static double depth;
   static double tolerance;
-  static double teethPerEdge;
+  static int teethPerEdge;
   static ArrayList<Panel> panels = new ArrayList<Panel>();
 }

@@ -8,7 +8,7 @@ public class AzureTest
     {
         assertTrue(true);
 
-    BoxSpec.highth = 100;
+    BoxSpec.height = 100;
     BoxSpec.width = 100;
     BoxSpec.depth = 100;
     BoxSpec.tolerance = 2;

@@ -18,6 +18,4 @@ public class Panel {
     this.id = id;
     this.role = role;
   }
-
-  // call the path gen function here
 }
