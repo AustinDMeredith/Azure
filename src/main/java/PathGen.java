@@ -16,18 +16,14 @@ public class PathGen {
     d.append(String.format("M%.3f %.3f ", x0, y0));
 
     // Set up edge sequence: top, right, bottom, left
-    // You can consult panel.edges (male/female/top/bottom/slide) to choose patterns later:contentReference[oaicite:3]{index=3}.
-    // For now, infer male on top/right and female on bottom/left as a demo.
-    boolean[] maleEdge = new boolean[] { true, true, false, false };
-
     // Top edge → move +X
-    d.append(edgeWithTeeth(w, teethPerEdge, toothDepth, 1, 0,  true,  maleEdge[0]));
+    d.append(edgeWithTeeth(w, teethPerEdge, toothDepth, 1, 0, panel.edges.get(0)));
     // Right edge → move +Y
-    d.append(edgeWithTeeth(h, teethPerEdge, toothDepth, 0, 1,  true,  maleEdge[1]));
+    d.append(edgeWithTeeth(h, teethPerEdge, toothDepth, 0, 1, panel.edges.get(1)));
     // Bottom edge → move -X
-    d.append(edgeWithTeeth(w, teethPerEdge, toothDepth, -1,0,  false, maleEdge[2]));
+    d.append(edgeWithTeeth(w, teethPerEdge, toothDepth, -1, 0, panel.edges.get(2)));
     // Left edge → move -Y
-    d.append(edgeWithTeeth(h, teethPerEdge, toothDepth, 0,-1,  false, maleEdge[3]));
+    d.append(edgeWithTeeth(h, teethPerEdge, toothDepth, 0, -1, panel.edges.get(3)));
 
     // Close
     d.append("Z");
@@ -45,26 +41,38 @@ public class PathGen {
    * @param forward if true we walk forward; if false we walk backward (used for alternating parity)
    * @param male if true teeth go "out", if false they go "in"
    */
-  private static String edgeWithTeeth(double length, int teeth, double depth, int dx, int dy, boolean forward, boolean male) {
+  private static String edgeWithTeeth(double length, int teeth, double depth, int dx, int dy, Panel.EdgeRole role) {
 
     // pitch along the main direction per tooth step
     double pitch = length / teeth;
 
-    // Tooth parity: start OUT for male edges; start IN for female
     // Flip when traversing backwards to keep corners aligned visually
     int px = dy, py = -dx;
 
     StringBuilder sb = new StringBuilder();
-
-    for (int i = 0; i < teeth; i++) {
-    // half step along the edge baseline
-    sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
-    // go OUT by 'depth'
-    sb.append(rel(px * depth, py * depth));
-    // second half step along baseline
-    sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
-    // return to baseline
-    sb.append(rel(px * -depth, py * -depth));
+    
+    if (role == Panel.EdgeRole.male) {
+      for (int i = 0; i < teeth; i++) {
+      // half step along the edge baseline
+      sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
+      // go OUT by 'depth'
+      sb.append(rel(px * depth, py * depth));
+      // second half step along baseline
+      sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
+      // return to baseline
+      sb.append(rel(px * -depth, py * -depth));
+      }
+    } else if (role == Panel.EdgeRole.female) {
+      for (int i = 0; i < teeth; i++) {
+      // go OUT by 'depth'
+      sb.append(rel(px * depth, py * depth));
+      // half step along the edge baseline
+      sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
+      // return in by 'depth'
+      sb.append(rel(px * -depth, py * -depth));
+      // second half step along baseline
+      sb.append(rel(dx * (pitch / 2.0), dy * (pitch / 2.0)));
+      }
     }
 
     return sb.toString();

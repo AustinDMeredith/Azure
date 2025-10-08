@@ -10,7 +10,11 @@ public class SetEdgeRoles {
     for (int i = 0; i < panels.size(); i++) {
       Panel panel = panels.get(i);
       for (int j = 0; j < 4; j++) {
-        panel.edges.add(Panel.EdgeRole.male);  
+        if (j % 2 == 0) {
+          panel.edges.add(Panel.EdgeRole.male);  
+        } else {
+          panel.edges.add(Panel.EdgeRole.female);
+        }
       }
     }
   }
