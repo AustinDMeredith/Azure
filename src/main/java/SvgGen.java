@@ -9,7 +9,7 @@ import java.io.IOException;
 public class SvgGen {
   static String line1 = "<?xml version='1.0' encoding='utf-8'?>\n";
   static String line2 = """ 
-    <svg height="1000mm" viewBox="0.0 0.0 1000 1000" width="1000mm"
+    <svg height="110mm" viewBox="0.0 0.0 110 110" width="110mm"
      xmlns:xlink="http://www.w3.org/1999/xlink">\n
   """;
   
