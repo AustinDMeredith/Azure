@@ -5,11 +5,13 @@
 
 public class PathGen {
 
-  public static void generatePanelPath(Panel panel, double w, double h, double toothWidth) {
+  public static void generatePanelPath(Panel panel, double toothWidth) {
     // 1) Start point (e.g., "5, 5")
     double x0 = panel.startPoint.get(0);
     double y0 = panel.startPoint.get(1);
     double toothDepth = 3.175;
+    double w = panel.width;
+    double h = panel.height;
 
     // Build path with a StringBuilder; use absolute M then relative l segments
     StringBuilder d = new StringBuilder();
@@ -34,38 +36,60 @@ public class PathGen {
 
   private static String edgeWithTeeth(double length, double toothWidth, double depth, int dx, int dy, Panel.EdgeRole role) {
 
-    // sets the amount of teeth per edge
-    int teeth = (int)Math.floor(length / toothWidth);
-    double cornerOffset = length % teeth;
-
+    // sets the amount of teeth per edge and the corner offset
+    double teethD = length / toothWidth;
+    int teeth = (int)teethD / 2;
+    double cornerOffset = ((length % teeth) + toothWidth) / 2;
+    teeth--;
     // flip when traversing backwards to keep corners aligned visually
     int px = dy, py = -dx;
 
     StringBuilder sb = new StringBuilder();
-    
+       
     if (role == Panel.EdgeRole.male) {
-      
+      sb.append(rel(dx * (cornerOffset - depth), dy * (cornerOffset - depth)));
       for (int i = 0; i < teeth; i++) {
-      // half step along the edge baseline
-      sb.append(rel(dx * (toothWidth / 2.0), dy * (toothWidth / 2.0)));
-      // go OUT by 'depth'
-      sb.append(rel(px * depth, py * depth));
-      // second half step along baseline
-      sb.append(rel(dx * (toothWidth / 2.0), dy * (toothWidth / 2.0)));
-      // return to baseline
-      sb.append(rel(px * -depth, py * -depth));
+        if (i == teeth - 1) {
+          // go OUT by 'depth'
+          sb.append(rel(px * depth, py * depth));
+          // half step along the edge baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+          // return to baseline
+          sb.append(rel(px * -depth, py * -depth));
+        } else {
+          // go OUT by 'depth'
+          sb.append(rel(px * depth, py * depth));
+          // half step along the edge baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+          // return to baseline
+          sb.append(rel(px * -depth, py * -depth));
+          // second half step along baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+        }
       }
+      sb.append(rel(dx * (cornerOffset - depth), dy * (cornerOffset - depth)));
     } else if (role == Panel.EdgeRole.female) {
+      sb.append(rel(dx * cornerOffset, dy * cornerOffset));
       for (int i = 0; i < teeth; i++) {
-      // go OUT by 'depth'
-      sb.append(rel(px * -depth, py * -depth));
-      // half step along the edge baseline
-      sb.append(rel(dx * (toothWidth / 2.0), dy * (toothWidth / 2.0)));
-      // return in by 'depth'
-      sb.append(rel(px * depth, py * depth));
-      // second half step along baseline
-      sb.append(rel(dx * (toothWidth / 2.0), dy * (toothWidth / 2.0)));
+        if (i == teeth - 1) {
+          // go in by 'depth'
+          sb.append(rel(px * -depth, py * -depth));
+          // half step along the edge baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+          // return out by 'depth'
+          sb.append(rel(px * depth, py * depth));
+        } else {
+          // go in by 'depth'
+          sb.append(rel(px * -depth, py * -depth));
+          // half step along the edge baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+          // return out by 'depth'
+          sb.append(rel(px * depth, py * depth));
+          // second half step along baseline
+          sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+        }
       }
+      sb.append(rel(dx * cornerOffset, dy * cornerOffset));
     }
 
     return sb.toString();

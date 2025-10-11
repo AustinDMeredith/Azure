@@ -21,14 +21,26 @@ public class BoxSpec {
     this.depth = depth;
     this.tolerance = tolerance;
     this.teethWidth = teethWidth;
+
+    // add all the panels to the array
+    this.panels.add(new Panel("p-0", Panel.PanelRole.front, this.height, this.width));
+    this.panels.add(new Panel("p-1", Panel.PanelRole.bottom, this.depth, this.width));
+
+    // set roles and find startpoints for panels
+    SetEdgeRoles.setRoles(this.panels);
+    LayoutService.findStartPoint(this.panels);
+  
+    for (Panel panel : this.panels) {
+      PathGen.generatePanelPath(panel, this.teethWidth);
+    }
   }
 
   // getters
-  public double getHeight() {return this.height;}
-  public double getWidth() {return this.width;}
-  public double getDepth() {return this.depth;}
-  public double getTolerance() {return this.tolerance;}
-  public double getTeethWidth() {return this.teethWidth;}
+  public double getHeight() {return height;}
+  public double getWidth() {return width;}
+  public double getDepth() {return depth;}
+  public double getTolerance() {return tolerance;}
+  public double getTeethWidth() {return teethWidth;}
 
-  public ArrayList<Panel> getPanels() {return this.panels;}
+  public ArrayList<Panel> getPanels() {return panels;}
 }

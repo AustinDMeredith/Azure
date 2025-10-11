@@ -10,9 +10,6 @@ public class LayoutService {
   public static void findStartPoint(ArrayList<Panel> panels) {
     // logic to find and set the start point
     for (Panel panel : panels) {
-      // used to track where panels need to be placed so they dont overlap each other
-      lastHeight += panel.height;
-      lastWidth += panel.width;
 
       if (panel.id == "p-0") { // p-0 should always be the front panel
         if (panel.edges.get(0) == Panel.EdgeRole.male) { // if starting edge is male the start pos is moved down 3.175 mm
@@ -24,8 +21,12 @@ public class LayoutService {
         }
       } else if (panel.id == "p-1") {
         panel.startPoint.add(0, lastWidth);
-        panel.startPoint.add(0, lastWidth);
+        panel.startPoint.add(0, 5.0);
       }
+      
+      // used to track where panels need to be placed so they dont overlap each other
+      lastHeight += panel.height + 5;
+      lastWidth += panel.width + 5;
     }
   }
 }

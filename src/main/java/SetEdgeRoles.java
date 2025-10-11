@@ -7,14 +7,27 @@ import java.util.ArrayList;
 
 public class SetEdgeRoles {
   public static void setRoles (ArrayList<Panel> panels) {
-    for (int i = 0; i < panels.size(); i++) {
-      Panel panel = panels.get(i);
-      for (int j = 0; j < 4; j++) {
-        if (j % 2 == 0) {
-          panel.edges.add(Panel.EdgeRole.male);  
-        } else {
-          panel.edges.add(Panel.EdgeRole.female);
-        }
+    for (Panel panel : panels) {
+      if (panel.role == Panel.PanelRole.front) {
+        panel.edges.add(0, Panel.EdgeRole.male);
+        panel.edges.add(1, Panel.EdgeRole.male);
+        panel.edges.add(2, Panel.EdgeRole.male);
+        panel.edges.add(3, Panel.EdgeRole.male);
+      } else if (panel.role == Panel.PanelRole.bottom) {
+        panel.edges.add(0, Panel.EdgeRole.female);
+        panel.edges.add(1, Panel.EdgeRole.female);
+        panel.edges.add(2, Panel.EdgeRole.female);
+        panel.edges.add(3, Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.right) {
+        panel.edges.add(0, Panel.EdgeRole.male);
+        panel.edges.add(1, Panel.EdgeRole.female);
+        panel.edges.add(2, Panel.EdgeRole.male);
+        panel.edges.add(3, Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.left) {
+        panel.edges.add(0, Panel.EdgeRole.male);
+        panel.edges.add(1, Panel.EdgeRole.female);
+        panel.edges.add(2, Panel.EdgeRole.male);
+        panel.edges.add(3, Panel.EdgeRole.female);
       }
     }
   }
