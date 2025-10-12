@@ -6,7 +6,7 @@
 public class PathGen {
 
   public static void generatePanelPath(Panel panel, double toothWidth) {
-    // 1) Start point (e.g., "5, 5")
+    // 1) Start point, tooth depth, height and width of panel
     double x0 = panel.startPoint.get(0);
     double y0 = panel.startPoint.get(1);
     double toothDepth = 3.175;
@@ -39,7 +39,8 @@ public class PathGen {
     // sets the amount of teeth per edge and the corner offset
     double teethD = length / toothWidth;
     int teeth = (int)teethD / 2;
-    double cornerOffset = ((length % teeth) + toothWidth) / 2;
+    double cornerOffset = ((length % teeth) + (toothWidth * 3)) / 2;
+    teeth -= 2;
     // flip when traversing backwards to keep corners aligned visually
     int px = dy, py = -dx;
 

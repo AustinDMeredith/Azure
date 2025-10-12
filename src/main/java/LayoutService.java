@@ -9,6 +9,9 @@ public class LayoutService {
   static double lastHeight = 0;
   public static void findStartPoint(ArrayList<Panel> panels) {
     // logic to find and set the start point
+    
+    lastHeight = 0;
+    lastWidth = 0;
     for (Panel panel : panels) {
 
       if (panel.id == "p-0") { // p-0 should always be the front panel
