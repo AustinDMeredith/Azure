@@ -30,7 +30,7 @@ public class PathGen {
     // Close
     d.append("Z");
 
-    // Assign back to the panel (Panel has a 'path' field):contentReference[oaicite:4]{index=4}
+    // Assign back to the panel 
     panel.path = d.toString();
   }
 
@@ -40,7 +40,6 @@ public class PathGen {
     double teethD = length / toothWidth;
     int teeth = (int)teethD / 2;
     double cornerOffset = ((length % teeth) + toothWidth) / 2;
-    teeth--;
     // flip when traversing backwards to keep corners aligned visually
     int px = dy, py = -dx;
 

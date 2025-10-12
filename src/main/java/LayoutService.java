@@ -20,13 +20,13 @@ public class LayoutService {
           panel.startPoint.add(1, 5.0);
         }
       } else if (panel.id == "p-1") {
-        panel.startPoint.add(0, lastWidth);
-        panel.startPoint.add(0, 5.0);
+        panel.startPoint.add(0, lastWidth + 5);
+        panel.startPoint.add(1, 5.0);
       }
       
       // used to track where panels need to be placed so they dont overlap each other
-      lastHeight += panel.height + 5;
-      lastWidth += panel.width + 5;
+      lastHeight += panel.height;
+      lastWidth += panel.width;
     }
   }
 }
