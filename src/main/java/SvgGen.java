@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SvgGen {
-  static double x = LayoutService.lastWidth + 30;
-  static double y = LayoutService.lastHeight + 30;
+  static double x = 250;
+  static double y = 350;
   
   // prefix and viewbox data
   static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";

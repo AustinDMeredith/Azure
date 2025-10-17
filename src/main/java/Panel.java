@@ -11,7 +11,8 @@ public class Panel {
   double height, width;
   ArrayList<Double> startPoint = new ArrayList<Double>();
   ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
-  
+  ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
+
   public enum PanelRole {lid, front, back, right, left, bottom}
   public enum EdgeRole {male, female, top, bottom, slide}
 

@@ -28,15 +28,15 @@ public class PathGen {
 
       if (edgeRole == Panel.EdgeRole.male) {
         if (i % 2 == 0) {
-          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next)));    
+          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel)); 
         } else {
-          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next)));    
+          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));    
         }
       } else if (edgeRole == Panel.EdgeRole.female) {
         if (i % 2 == 0) {
-          d.append(FemalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next)));
+          d.append(FemalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
         } else {
-          d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next)));
+          d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
         }
       }
       i++;
