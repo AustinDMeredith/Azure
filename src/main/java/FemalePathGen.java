@@ -29,7 +29,7 @@ public class FemalePathGen {
       // ---- corner policy ----
       // Minimum corner offset for structural integrity.
       // You can tune this rule; a common heuristic is max(depth, 0.5*toothWidth).
-      final double baseMinCorner = Math.max(depth, 0.5 * toothWidth);
+      final double baseMinCorner = Math.max(depth * 2, 0.5 * toothWidth);
 
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
       final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
@@ -53,8 +53,8 @@ public class FemalePathGen {
 
       // If the edge is very short, n can be 0 (no slots). That’s fine & robust.
       // Recompute corner to absorb the remainder exactly.
-      final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth);
-      double corner = (length - patternFootprint) / 2.0;
+      final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
+      double corner = (length - patternFootprint) / 2.0; // the final space of each corner
 
       // Due to rounding, corner should already be >= minCorner, but clamp defensively
       if (corner < minCorner) {
@@ -120,14 +120,14 @@ public class FemalePathGen {
       // ---- right corner offset ----
       sb.append(rel(dx * rightCornerTravel, dy * rightCornerTravel));
 
-      int interiorSteps = (2 * n) + 1;
-      setFinalLength(panel, leftCornerTravel, rightCornerTravel, toothWidth, interiorSteps);
+      setFinalLength(panel, corner, patternFootprint);
 
       return sb.toString();
     }
 
-  private static void setFinalLength(Panel panel, double leftCornerTravel, double rightCornerTravel, double toothWidth, int interiorSteps) {
-    double finalLength = leftCornerTravel + rightCornerTravel + interiorSteps * toothWidth;
+  private static void setFinalLength(Panel panel, double corner, double patternFootprint) {
+    // 2*corner + (2n - 1)*toothWidth == length
+    double finalLength = (2 * corner) + patternFootprint;
     panel.finalEdgeLengths.add(finalLength);
   }
 

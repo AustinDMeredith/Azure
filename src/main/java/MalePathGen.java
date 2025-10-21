@@ -29,7 +29,7 @@ public class MalePathGen {
       // ---- corner policy ----
       // Minimum corner offset for structural integrity.
       // You can tune this rule; a common heuristic is max(depth, 0.5*toothWidth).
-      final double baseMinCorner = Math.max(depth, 0.5 * toothWidth);
+      final double baseMinCorner = Math.max(depth * 2, 0.5 * toothWidth);
 
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
       final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
@@ -120,14 +120,13 @@ public class MalePathGen {
       // ---- right corner offset ----
       sb.append(rel(dx * rightCornerTravel, dy * rightCornerTravel));
 
-      int interiorSteps = (2 * n) + 1;
-      setFinalLength(panel, leftCornerTravel, rightCornerTravel, toothWidth, interiorSteps);
+      setFinalLength(panel, corner, patternFootprint);
 
       return sb.toString();
     }
 
-  private static void setFinalLength(Panel panel, double leftCornerTravel, double rightCornerTravel, double toothWidth, int interiorSteps) {
-    double finalLength = leftCornerTravel + rightCornerTravel + interiorSteps * toothWidth;
+  private static void setFinalLength(Panel panel, double corner, double patternFootprint) {
+    double finalLength = (2 * corner) + patternFootprint;
     panel.finalEdgeLengths.add(finalLength);
   }
   

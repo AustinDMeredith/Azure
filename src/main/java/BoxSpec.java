@@ -24,11 +24,11 @@ public class BoxSpec {
 
     // add all the panels to the array
     this.panels.add(new Panel("p-0", Panel.PanelRole.front, this.height, this.width));
-    this.panels.add(new Panel("p-1", Panel.PanelRole.right, this.depth, this.width));
-    this.panels.add(new Panel("p-2", Panel.PanelRole.left, this.depth, this.width));
-    this.panels.add(new Panel("p-3", Panel.PanelRole.front, this.depth, this.width));
-    this.panels.add(new Panel("p-4", Panel.PanelRole.bottom, this.depth, this.width));
-    this.panels.add(new Panel("p-5", Panel.PanelRole.bottom, this.depth, this.width));
+    this.panels.add(new Panel("p-1", Panel.PanelRole.right, this.height, this.depth));
+    this.panels.add(new Panel("p-2", Panel.PanelRole.left, this.height, this.depth));
+    this.panels.add(new Panel("p-3", Panel.PanelRole.front, this.height, this.width));
+    this.panels.add(new Panel("p-4", Panel.PanelRole.bottom, this.width, this.depth));
+    this.panels.add(new Panel("p-5", Panel.PanelRole.bottom, this.width, this.depth));
 
     // set roles and find startpoints for panels
     SetEdgeRoles.setRoles(this.panels);

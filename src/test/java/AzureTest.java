@@ -8,15 +8,22 @@ public class AzureTest
   public void firstTest()
   {
     assertTrue(true);
-    BoxSpec box1 = new BoxSpec(100, 100, 100, 2, 8);
-    BoxSpec box2 = new BoxSpec(85, 50, 70, 2, 10);
+    BoxSpec box1 = new BoxSpec(200, 250, 250, 2, 14);
+    BoxSpec box2 = new BoxSpec(40, 40, 40, 2, 7);
 
     // 
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 4; j++) {
-        assertEquals(box1.getWidth(), box1.panels.get(i).finalEdgeLengths.get(j), 0);
-        assertEquals(box2.getWidth(), box1.panels.get(i).finalEdgeLengths.get(j), 0);
+        if (j % 2 == 0) {
+          assertEquals(box1.panels.get(i).width, box1.panels.get(i).finalEdgeLengths.get(j), 0);
+          assertEquals(box2.panels.get(i).width, box2.panels.get(i).finalEdgeLengths.get(j), 0);
+        } else {
+          assertEquals(box1.panels.get(i).height, box1.panels.get(i).finalEdgeLengths.get(j), 0);
+          assertEquals(box2.panels.get(i).height, box2.panels.get(i).finalEdgeLengths.get(j), 0);
+        }
       }
     }
-  }    
+  }
+  
+  // add more tests here
 }
