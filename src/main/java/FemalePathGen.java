@@ -3,8 +3,7 @@
  * Description: Scrpit for generating female edge paths
  * */
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import java.util.ArrayList;
 
 public class FemalePathGen {
   public static String gen(
@@ -32,10 +31,9 @@ public class FemalePathGen {
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
       final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
 
-      String edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
-      JsonObject json = JsonParser.parseString(edgeSpec).getAsJsonObject();
-      double corner = json.get("corner").getAsDouble();
-      double n = json.get("n").getAsDouble();
+      ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
+      double corner = edgeSpec.get(0);
+      double n = edgeSpec.get(1);
 
       // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0);

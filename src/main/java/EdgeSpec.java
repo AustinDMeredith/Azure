@@ -4,11 +4,10 @@
  * Return: Json object {"corner": corner,"n": n}
  * */
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import java.util.ArrayList;
 
 public class EdgeSpec {
-  public static String getEdgeSpec (
+  public static ArrayList<Double> getEdgeSpec (
     double length, 
     double depth, 
     double toothWidth, 
@@ -63,9 +62,9 @@ public class EdgeSpec {
         }
       }
     }
-    JsonObject obj = new JsonObject();
-    obj.addProperty("corner", corner);
-    obj.addProperty("n", n);
-    return new Gson().toJson(obj);
+    ArrayList<Double> obj = new ArrayList<Double>();
+    obj.add(corner);
+    obj.add((double)n);
+    return obj;
   }
 }
