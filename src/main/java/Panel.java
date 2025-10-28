@@ -13,7 +13,7 @@ public class Panel {
   ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
   ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
 
-  public enum PanelRole {lid, front, back, right, left, bottom}
+  public enum PanelRole {lid, front, back, right, left, bottom, basedBottom}
   public enum EdgeRole {male, female, top, bottom, slide}
 
   // constructor
@@ -23,6 +23,4 @@ public class Panel {
     this.height = height;
     this.width = width;
   }
-
-  // call the path gen function here
 }

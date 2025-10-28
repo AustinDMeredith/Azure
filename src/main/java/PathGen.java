@@ -38,6 +38,12 @@ public class PathGen {
         } else {
           d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
         }
+      } else if (edgeRole == Panel.EdgeRole.bottom) {
+        if (i % 2 ==0) {
+
+        } else {
+          
+        }
       }
       i++;
     }

@@ -28,6 +28,11 @@ public class SetEdgeRoles {
         panel.edges.add(1, Panel.EdgeRole.female);
         panel.edges.add(2, Panel.EdgeRole.male);
         panel.edges.add(3, Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.basedBottom) {
+        panel.edges.add(0, Panel.EdgeRole.bottom);
+        panel.edges.add(1, Panel.EdgeRole.bottom);
+        panel.edges.add(2, Panel.EdgeRole.bottom);
+        panel.edges.add(3, Panel.EdgeRole.bottom);
       }
     }
   }
