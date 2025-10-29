@@ -41,7 +41,7 @@ public class SvgGen {
       // writes paths for panels
       for (Panel panel : panels) {
         writer.write("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
-        writer.write("  <path d = \"" + panel.path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\" />\n");
+        writer.write("  <path d = \"" + panel.path);
         writer.write("</g>\n");
       }
 

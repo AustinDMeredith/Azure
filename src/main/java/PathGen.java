@@ -16,7 +16,6 @@ public class PathGen {
 
     // Build path with a StringBuilder; use absolute M then relative l segments
     StringBuilder d = new StringBuilder(); // used for edges
-    StringBuilder s = new StringBuilder(); // used for holes if there are any
     d.append(String.format("M%.3f %.3f ", x0, y0));
 
     // Set up edge sequence: top, right, bottom, left
@@ -49,9 +48,13 @@ public class PathGen {
       }
       i++;
     }
+    
     // Close
-    d.append("Z");
+    d.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
 
+    if (panel.role == Panel.PanelRole.basedBottom) {
+      d.append(BottomPathGen.holeGen(toothWidth, toothDepth, panel, true));
+    }
     // Assign back to the panel 
     panel.path = d.toString();
   }
