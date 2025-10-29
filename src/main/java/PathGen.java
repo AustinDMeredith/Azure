@@ -12,9 +12,11 @@ public class PathGen {
     double toothDepth = 3.175;
     double w = panel.width;
     double h = panel.height;
+    boolean isBased = false;
 
     // Build path with a StringBuilder; use absolute M then relative l segments
-    StringBuilder d = new StringBuilder();
+    StringBuilder d = new StringBuilder(); // used for edges
+    StringBuilder s = new StringBuilder(); // used for holes if there are any
     d.append(String.format("M%.3f %.3f ", x0, y0));
 
     // Set up edge sequence: top, right, bottom, left
@@ -40,9 +42,9 @@ public class PathGen {
         }
       } else if (edgeRole == Panel.EdgeRole.bottom) {
         if (i % 2 == 0) {
-
+          d.append(BottomPathGen.edgeGen(w, toothDepth, dx, dy, panel));
         } else {
-          
+          d.append(BottomPathGen.edgeGen(h, toothDepth, dx, dy, panel));
         }
       }
       i++;

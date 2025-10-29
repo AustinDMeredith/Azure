@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class FemalePathGen {
   public static String gen(
-        double length,
-        double toothWidth,
-        double depth,
-        int dx, int dy,
-        Panel.EdgeRole lastRole,
-        Panel.EdgeRole nextRole,
-        Panel panel
+      double length,
+      double toothWidth,
+      double depth,
+      int dx, int dy,
+      Panel.EdgeRole lastRole,
+      Panel.EdgeRole nextRole,
+      Panel panel
     ) {
       // ---- basic validation ----
       if (length <= 0 || toothWidth <= 0 || depth <= 0) {
