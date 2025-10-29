@@ -6,11 +6,23 @@
 import java.util.ArrayList;
 
 public class BoxSpec {
-  // all of these should be in mm
-  static double height;
-  static double width;
-  static double depth;
-  static double tolerance;
-  static int teethPerEdge;
-  static ArrayList<Panel> panels = new ArrayList<Panel>();
+  // class atributes
+  double height;
+  double width;
+  double depth;
+  double tolerance;
+  double teethWidth;
+  ArrayList<Panel> panels = new ArrayList<Panel>();
+
+  // constructor
+  public BoxSpec () {};
+
+  // getters
+  public double getHeight() {return height;}
+  public double getWidth() {return width;}
+  public double getDepth() {return depth;}
+  public double getTolerance() {return tolerance;}
+  public double getTeethWidth() {return teethWidth;}
+
+  public ArrayList<Panel> getPanels() {return panels;}
 }

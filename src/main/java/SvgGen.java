@@ -5,21 +5,25 @@
  * */
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SvgGen {
-  static String line1 = "<?xml version='1.0' encoding='utf-8'?>\n";
-  static String line2 = """ 
-    <svg height="110mm" viewBox="0.0 0.0 110 110" width="110mm"
-     xmlns:xlink="http://www.w3.org/1999/xlink">\n
-  """;
+  static double x = 250;
+  static double y = 350;
   
-  static String line3 = "<g id=\"" + BoxSpec.panels.get(0).id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n";
-  static String line4 = "<path d=\"" + BoxSpec.panels.get(0).path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.10\" />\n";
-  static String line5 = "</g>\n";
-  static String line6 = "</svg>\n";
+  // prefix and viewbox data
+  static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";
+  static String viewBox = "<svg height=\"" + y + "mm" + "\"" + " viewBox=\"0.0 0.0 " + x + " " + y + "\" width=\"" + x + "mm" + "\" \n";
+  static String urls = """
+  xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
-  static public void generateFile () {
-    try {
+    """;  
+
+  // function to generate file
+  static public void generateFile (ArrayList<Panel> panels) {
+    try { // clears the box.svg, later we'll make new files and name them
       FileWriter clear = new FileWriter("box.svg");
       clear.write("");
       clear.close();
@@ -28,13 +32,20 @@ public class SvgGen {
       e.printStackTrace();
     }
     
+    // appends data to the cleared file
     try (FileWriter writer = new FileWriter("box.svg", true)) {
-      writer.write(line1);
-      writer.write(line2);
-      writer.write(line3);
-      writer.write(line4);
-      writer.write(line5);
-      writer.write(line6);
+      writer.write(prefix);
+      writer.write(viewBox);
+      writer.write(urls);
+      
+      // writes paths for panels
+      for (Panel panel : panels) {
+        writer.write("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
+        writer.write("  <path d = \"" + panel.path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\" />\n");
+        writer.write("</g>\n");
+      }
+
+      writer.write("</svg>");
       System.out.println("Successfully wrote to box.svg");
     } catch (IOException e) {
       System.out.println("An error occurred.");
