@@ -3,6 +3,8 @@
  * Description: Class holds 2 functions, 1 to make the flat edge and 1 to make the holes for the teeth to slot into.
  * */
 
+import java.util.ArrayList;
+
 public class BottomPathGen {
   // This function generates edge path
   public static String edgeGen(
@@ -20,8 +22,8 @@ public class BottomPathGen {
     return sb.toString();
   }
 
+  // This function generates the hole paths for any given edge
   public static String holeGen(
-    double length,
     double toothWidth,
     double depth,
     int dx, int dy,
@@ -29,7 +31,37 @@ public class BottomPathGen {
     Panel.EdgeRole nextRole,
     Panel panel
   ) {
+    // ---- basic validation ----
+    if (toothWidth <= 0 || depth <= 0) {
+      throw new IllegalArgumentException("length, toothWidth, and depth must be > 0");
+    }
+    // Keep "slot" depth reasonable relative to tooth width
+    if (depth >= toothWidth) {
+      // You can choose to clamp instead of throw; throwing is safer.
+      throw new IllegalArgumentException("depth must be < toothWidth to keep material between slots.");
+    }
+  
+    ArrayList<Double> sp = panel.startPoint;
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < 4; i++) {
+      if (i % 2 == 0) {
+        ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(panel.width, depth, toothWidth, lastRole, nextRole);
+        double corner = edgeSpec.get(0);
+        double n = edgeSpec.get(1);
+          
+        for (int j = 0; j < n; j++) {
+          sb.append(String.format("<path d=\"M%.3f %.3f ", sp.get(0), sp.get(1)));
 
+        }
+      } else {
+        ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(panel.height, depth, toothWidth, lastRole, nextRole);
+        double corner = edgeSpec.get(0);
+        double n = edgeSpec.get(1);
+      }
+      
+
+      
+    }
     return "";
   }
 
