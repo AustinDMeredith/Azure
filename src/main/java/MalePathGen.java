@@ -31,9 +31,15 @@ public class MalePathGen {
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
       final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
 
+      // calls edge spec to get the number of teeth (n) and the corner length (corner)
       ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
       double corner = edgeSpec.get(0);
       double n = edgeSpec.get(1);
+
+      // calls the kerf service to the toothkerf and the corner kerf
+      ArrayList<Double> kerf = KerfService.getKerf(n);
+      double toothKerf = kerf.get(0);
+      double cornerKerf = kerf.get(1);
 
       // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0);
@@ -52,7 +58,7 @@ public class MalePathGen {
       StringBuilder sb = new StringBuilder();
 
       // ---- left corner offset ----
-      sb.append(rel(dx * leftCornerTravel, dy * leftCornerTravel));
+      sb.append(rel(dx * (leftCornerTravel - cornerKerf), dy * (leftCornerTravel - cornerKerf)));
 
       // ---- slots pattern ----
       // Pattern for each slot i in [0..n-1]:
@@ -62,18 +68,18 @@ public class MalePathGen {
         // go OUT by 'depth'
         sb.append(rel(px * depth, py * depth));
         // half step along the edge baseline
-        sb.append(rel(dx * (toothWidth), dy * (toothWidth)));
+        sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
         // return to baseline
         sb.append(rel(px * -depth, py * -depth));
 
         // land between slots (except after the last slot)
         if (i < n - 1) {
-          sb.append(rel(dx * toothWidth, dy * toothWidth));
+          sb.append(rel(dx * (toothWidth - toothKerf), dy * (toothWidth - toothKerf)));
         }
       }
 
       // ---- right corner offset ----
-      sb.append(rel(dx * rightCornerTravel, dy * rightCornerTravel));
+      sb.append(rel(dx * (rightCornerTravel - cornerKerf), dy * (rightCornerTravel - cornerKerf)));
 
       final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
       setFinalLength(panel, corner, patternFootprint);
