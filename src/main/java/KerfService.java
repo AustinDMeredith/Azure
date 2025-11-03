@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class KerfService {
-  static double kerf = .16;
+  static double kerf = .7;
   public static ArrayList<Double> getKerf (double n) {
     ArrayList<Double> settings = new ArrayList<>();
     double toothKerf = kerf / 2;
