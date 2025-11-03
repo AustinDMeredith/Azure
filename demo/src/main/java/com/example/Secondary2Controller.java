@@ -1,10 +1,9 @@
 package com.example;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
+import java.io.IOException;
 
-public class SecondaryController {
-
+public class Secondary2Controller {
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");

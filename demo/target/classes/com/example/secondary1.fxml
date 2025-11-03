@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller"
+      alignment="CENTER" spacing="20">
+    <Label text="You selected the regular box!" style="-fx-font-size: 20px;"/>
+    <Button text="Back to Main Menu" onAction="#switchToPrimary"/>
+</VBox>
