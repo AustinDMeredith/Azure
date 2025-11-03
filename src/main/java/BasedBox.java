@@ -1,3 +1,9 @@
+/* Author: Austin Meredith
+ * Date Created: 10.29.25
+ * Last Changed: 11.3.25
+ * Description: This class inharets the box spec class to construct a based box.
+ * */
+
 public class BasedBox extends BoxSpec{
     public BasedBox (double height, double width, double depth, double tolerance, double teethWidth) {
     this.height = height;

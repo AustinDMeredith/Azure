@@ -1,5 +1,6 @@
 /* Author: Austin Meredith
- * Date: 10.27.25
+ * Date Created: 10.27.25
+ * Last Changed: 11.3.25
  * Description: Inherates box spec to generate a simple box 
  * */
 

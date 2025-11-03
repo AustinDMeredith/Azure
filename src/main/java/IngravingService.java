@@ -1,3 +1,9 @@
+/* Author: Austin Meredith
+ * Date Created: 10.29.25
+ * Last Changed: 11.3.25
+ * Description: This class holds two functions, one to add personalized engravings to the side, and one to add default ingravings which name the sides
+ * */
+
 import java.util.ArrayList;
 
 public class IngravingService {
