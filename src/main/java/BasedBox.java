@@ -17,9 +17,11 @@ public class BasedBox extends BoxSpec{
     // set roles and find startpoints for panels
     SetEdgeRoles.setRoles(this.panels);
     LayoutService.findStartPoint(this.panels);
-  
+
+    
     for (Panel panel : this.panels) {
       PathGen.generatePanelPath(panel, this.teethWidth);
     }
+    //IngravingService.addEngravings("AZ", panels);
   }
 }

@@ -37,11 +37,11 @@ public class SvgGen {
       writer.write(prefix);
       writer.write(viewBox);
       writer.write(urls);
-      
+      //writer.write("<rect height=\"100%\" width=\"100%\" fill=\"rgba(255, 255, 255, 1)\"/>\n");
       // writes paths for panels
       for (Panel panel : panels) {
         writer.write("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
-        writer.write("  <path d = \"" + panel.path + "\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\" />\n");
+        writer.write("  <path d = \"" + panel.path);
         writer.write("</g>\n");
       }
 
