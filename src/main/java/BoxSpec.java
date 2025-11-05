@@ -12,6 +12,7 @@ public class BoxSpec {
   double depth;
   double tolerance;
   double teethWidth;
+  String engraving;
   ArrayList<Panel> panels = new ArrayList<Panel>();
 
   // constructor

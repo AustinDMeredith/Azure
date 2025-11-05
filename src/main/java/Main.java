@@ -4,9 +4,72 @@
  * Description: This class is incharge of calling constuctors for boxes and calling the function to generate svg files
  */
 
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Main {
   public static void main (String args[]) {
-    BoxSpec box = new BasedBox(50, 50, 50, 2, 6);
-    SvgGen.generateFile(box.panels);
+    Scanner in = new Scanner(System.in);
+    boolean running = true;
+
+    while(running) {
+      // Prompt for generating boxes or quiting
+      clearConsole();
+      System.out.print("Welcome To Azure Box Creations (Enter Number)\n 1. Generate A Box\n 2. Quit\n ABC>");
+      String firstSTR = in.nextLine();
+      int first = Integer.parseInt(firstSTR);
+
+      if (first == 1) {
+        // Grab the type of box the user wants 
+        clearConsole();
+        System.out.print("What Type of Box Would you Like? (Enter Number)\n 1. BasedBox\n 2. SimpleBox\n ABC>");
+        String typeSTR = in.nextLine();
+        int type = Integer.parseInt(typeSTR);
+
+        // Grab the specs for the box the user wants
+        clearConsole();
+        System.out.print("Please Enter Your specifications In a Comma Seperated List (<Height>, <Width>, <Depth>, <ToothWidth>)\n ABC>");
+        String specsSTR = in.nextLine();
+
+        System.out.print("\nWould You Like An Engraving?\n 1. Yes\n 2.No");
+
+        String[] parts = specsSTR.split(", "); 
+        double h = Integer.parseInt(parts[0]);
+        double w = Integer.parseInt(parts[1]);
+        double d = Integer.parseInt(parts[2]);
+        double tW = Integer.parseInt(parts[3]);
+        double t = Integer.parseInt(parts[4]);
+
+
+        if (type == 1) {
+          
+        }
+      } else {
+        clearConsole();
+        running = false;
+        break;
+      }
+    }
+
+
   }  
+
+  private void basedGen (int h, int w, int d, int tol, int toothWidth, String engraving) {
+    BoxSpec box = new BasedBox(h, w, d, tol, toothWidth, engraving);
+    SvgGen.generateFile(box.panels);
+
+  }
+
+  public static void clearConsole() {
+      try {
+          if (System.getProperty("os.name").contains("Windows")) {
+              new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+          } else {
+              System.out.print("\033[H\033[2J");
+              System.out.flush();
+          }
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
 }

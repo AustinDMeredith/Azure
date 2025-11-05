@@ -5,12 +5,13 @@
  * */
 
 public class BasedBox extends BoxSpec{
-    public BasedBox (double height, double width, double depth, double tolerance, double teethWidth) {
+    public BasedBox (double height, double width, double depth, double tolerance, double teethWidth, String engraving) {
     this.height = height;
     this.width = width;
     this.depth = depth;
     this.tolerance = tolerance;
     this.teethWidth = teethWidth;
+    this.engraving = engraving;
 
     // add all the panels to the array
     this.panels.add(new Panel("p-0", Panel.PanelRole.front, this.height, this.width));
@@ -28,6 +29,6 @@ public class BasedBox extends BoxSpec{
     for (Panel panel : this.panels) {
       PathGen.generatePanelPath(panel, this.teethWidth);
     }
-    //IngravingService.addEngravings("AZ", panels);
+    IngravingService.addEngravings(engraving, panels);
   }
 }
