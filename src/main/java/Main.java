@@ -5,7 +5,6 @@
  */
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
   public static void main (String args[]) {
@@ -31,18 +30,31 @@ public class Main {
         System.out.print("Please Enter Your specifications In a Comma Seperated List (<Height>, <Width>, <Depth>, <ToothWidth>)\n ABC>");
         String specsSTR = in.nextLine();
 
-        System.out.print("\nWould You Like An Engraving?\n 1. Yes\n 2.No");
-
         String[] parts = specsSTR.split(", "); 
         double h = Integer.parseInt(parts[0]);
         double w = Integer.parseInt(parts[1]);
         double d = Integer.parseInt(parts[2]);
         double tW = Integer.parseInt(parts[3]);
-        double t = Integer.parseInt(parts[4]);
 
+        System.out.print("\nWould You Like An Engraving?\n 1. Yes\n 2.No\n ABC>");
+        String doEngraveSTR = in.nextLine();
+        int doEngrave = Integer.parseInt(doEngraveSTR);
+        String engraving;
 
+        if (doEngrave == 1) {
+          System.out.print("\nWhat Whould You Like To Engrave? (Must Be Two Characters)\n ABC>");
+          engraving = in.nextLine();
+        } else {
+          engraving = "";
+        }
         if (type == 1) {
-          
+          BoxSpec box = new BasedBox(h, w, d, 0, tW, engraving);
+          SvgGen.generateFile(box.panels);
+          System.out.print("Successfully Generated SVG!");
+        } else {
+          BoxSpec box = new SimpleBox(h, w, d, 0, tW, engraving);
+          SvgGen.generateFile(box.panels);
+          System.out.print("Successfully Generated SVG!");
         }
       } else {
         clearConsole();
@@ -53,12 +65,6 @@ public class Main {
 
 
   }  
-
-  private void basedGen (int h, int w, int d, int tol, int toothWidth, String engraving) {
-    BoxSpec box = new BasedBox(h, w, d, tol, toothWidth, engraving);
-    SvgGen.generateFile(box.panels);
-
-  }
 
   public static void clearConsole() {
       try {
