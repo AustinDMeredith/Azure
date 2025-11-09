@@ -1,9 +1,12 @@
+package com.azure.util.services;
 /* Author: Austin Meredith
  * Date: 10.22.25
  * Description: Determines corner offset and number of teeth for any given edge. returns an array list, index 0 = corner width, index 1 = number of teeth
  * */
 
 import java.util.ArrayList;
+
+import com.azure.objects.Panel;
 
 public class EdgeSpec {
   public static ArrayList<Double> getEdgeSpec (

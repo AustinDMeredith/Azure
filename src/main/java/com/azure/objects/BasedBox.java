@@ -1,8 +1,15 @@
+package com.azure.objects;
 /* Author: Austin Meredith
  * Date Created: 10.29.25
  * Last Changed: 11.3.25
  * Description: This class inharets the box spec class to construct a based box.
  * */
+
+import com.azure.util.pathGen.PathGen;
+import com.azure.util.services.IngravingService;
+import com.azure.util.services.LayoutService;
+import com.azure.util.services.SetEdgeRoles;
+
 
 public class BasedBox extends BoxSpec{
     public BasedBox (double height, double width, double depth, double tolerance, double teethWidth, String engraving) {

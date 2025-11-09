@@ -1,8 +1,14 @@
+package com.azure.objects;
 /* Author: Austin Meredith
  * Date Created: 10.27.25
  * Last Changed: 11.3.25
  * Description: Inherates box spec to generate a simple box 
  * */
+
+import com.azure.util.pathGen.PathGen;
+import com.azure.util.services.IngravingService;
+import com.azure.util.services.LayoutService;
+import com.azure.util.services.SetEdgeRoles;
 
 public class SimpleBox extends BoxSpec {
   

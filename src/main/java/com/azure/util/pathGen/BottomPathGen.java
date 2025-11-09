@@ -1,3 +1,4 @@
+package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Created: 10.29.25
  * Last Changed: 11.3.25
@@ -5,6 +6,9 @@
  * */
 
 import java.util.ArrayList;
+
+import com.azure.objects.Panel;
+import com.azure.util.services.EdgeSpec;
 
 public class BottomPathGen {
   // This function generates edge path

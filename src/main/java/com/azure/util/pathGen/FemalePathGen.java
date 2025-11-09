@@ -1,20 +1,25 @@
+package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Created: 10.13.25
  * Last Changed: 11.3.25
- * Description: Scrpit for generating male edge paths
+ * Description: Script for generating female edge paths
  * */
 
 import java.util.ArrayList;
 
-public class MalePathGen {
+import com.azure.objects.Panel;
+import com.azure.util.services.EdgeSpec;
+import com.azure.util.services.KerfService;
+
+public class FemalePathGen {
   public static String gen(
-        double length,
-        double toothWidth,
-        double depth,
-        int dx, int dy,
-        Panel.EdgeRole lastRole,
-        Panel.EdgeRole nextRole,
-        Panel panel
+      double length,
+      double toothWidth,
+      double depth,
+      int dx, int dy,
+      Panel.EdgeRole lastRole,
+      Panel.EdgeRole nextRole,
+      Panel panel
     ) {
       // ---- basic validation ----
       if (length <= 0 || toothWidth <= 0 || depth <= 0) {
@@ -41,7 +46,7 @@ public class MalePathGen {
       ArrayList<Double> kerf = KerfService.getKerf(n);
       double toothKerf = kerf.get(0);
       double cornerKerf = kerf.get(1);
-
+      
       // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0);
       double rightCornerTravel = corner - (nextIsMale ? depth : 0.0);
@@ -59,28 +64,28 @@ public class MalePathGen {
       StringBuilder sb = new StringBuilder();
 
       // ---- left corner offset ----
-      sb.append(rel(dx * (leftCornerTravel - cornerKerf), dy * (leftCornerTravel - cornerKerf)));
+      sb.append(rel(dx * (leftCornerTravel + cornerKerf), dy * (leftCornerTravel + cornerKerf)));
 
       // ---- slots pattern ----
       // Pattern for each slot i in [0..n-1]:
       //   in by depth, along baseline by toothWidth, out by depth,
       //   AND if not last slot: advance another toothWidth baseline before next slot.
       for (int i = 0; i < n; i++) {
-        // go OUT by 'depth'
-        sb.append(rel(px * depth, py * depth));
-        // half step along the edge baseline
-        sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
-        // return to baseline
+        // go in by 'depth'
         sb.append(rel(px * -depth, py * -depth));
+        // along baseline (slot width)
+        sb.append(rel(dx * (toothWidth - toothKerf), dy * (toothWidth - toothKerf)));
+        // out by 'depth'
+        sb.append(rel(px * depth, py * depth));
 
         // land between slots (except after the last slot)
         if (i < n - 1) {
-          sb.append(rel(dx * (toothWidth - toothKerf), dy * (toothWidth - toothKerf)));
+          sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
         }
       }
 
       // ---- right corner offset ----
-      sb.append(rel(dx * (rightCornerTravel - cornerKerf), dy * (rightCornerTravel - cornerKerf)));
+      sb.append(rel(dx * (rightCornerTravel + cornerKerf), dy * (rightCornerTravel + cornerKerf)));
 
       final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
       setFinalLength(panel, corner, patternFootprint);
@@ -89,10 +94,11 @@ public class MalePathGen {
     }
 
   private static void setFinalLength(Panel panel, double corner, double patternFootprint) {
+    // 2*corner + (2n - 1)*toothWidth == length
     double finalLength = (2 * corner) + patternFootprint;
     panel.finalEdgeLengths.add(finalLength);
   }
-  
+
   // helper for relative "l" segment
   private static String rel(double rx, double ry) {
     return String.format("l%.3f %.3f ", rx, ry);

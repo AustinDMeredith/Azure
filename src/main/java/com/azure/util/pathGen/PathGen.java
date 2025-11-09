@@ -1,8 +1,11 @@
+package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Changed: 10.7.25
  * Last Changed: 11.3.25
  * Description: Generate SVG path strings with finger-joint teeth for a rectangular panel.
  */
+
+import com.azure.objects.Panel;
 
 public class PathGen {
 
@@ -13,7 +16,6 @@ public class PathGen {
     double toothDepth = 3.175;
     double w = panel.width;
     double h = panel.height;
-    boolean isBased = false;
 
     // Build path with a StringBuilder; use absolute M then relative l segments
     StringBuilder d = new StringBuilder(); // used for edges

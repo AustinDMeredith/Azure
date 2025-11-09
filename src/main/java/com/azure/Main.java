@@ -1,3 +1,4 @@
+package com.azure;
 /* Author: Austin Meredith
  * Date Created: 10.3.25
  * Last Changed: 11.3.25
@@ -5,6 +6,12 @@
  */
 
 import java.util.Scanner;
+
+import com.azure.objects.BasedBox;
+import com.azure.objects.BoxSpec;
+import com.azure.objects.SimpleBox;
+import com.azure.util.services.SvgGen;
+
 
 public class Main {
   public static void main (String args[]) {
@@ -27,7 +34,7 @@ public class Main {
 
         // Grab the specs for the box the user wants
         clearConsole();
-        System.out.print("Please Enter Your specifications In a Comma Seperated List (<Height>, <Width>, <Depth>, <ToothWidth>)\n ABC>");
+        System.out.print("Please Enter Your specifications In a Comma Seperated List (units = mm) (<Height>, <Width>, <Depth>, <ToothWidth>)\n ABC>");
         String specsSTR = in.nextLine();
 
         String[] parts = specsSTR.split(", "); 

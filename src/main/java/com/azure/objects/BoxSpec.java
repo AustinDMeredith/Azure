@@ -1,3 +1,4 @@
+package com.azure.objects;
 /* Author: Austin Meredith
  * Date: 10/4/25
  * Last Changed: 11.3.25
@@ -7,13 +8,13 @@ import java.util.ArrayList;
 
 public class BoxSpec {
   // class atributes
-  double height;
-  double width;
-  double depth;
-  double tolerance;
-  double teethWidth;
-  String engraving;
-  ArrayList<Panel> panels = new ArrayList<Panel>();
+  public double height;
+  public double width;
+  public double depth;
+  public double tolerance;
+  public double teethWidth;
+  public String engraving;
+  public ArrayList<Panel> panels = new ArrayList<Panel>();
 
   // constructor
   public BoxSpec () {};
