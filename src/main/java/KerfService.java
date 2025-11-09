@@ -1,3 +1,9 @@
+/* Author: Austin Meredith
+ * Date Created: 11.3.25
+ * Last Change: 11.3.25
+ * Descrition: This class handels setting and returning kerf values so that teeth fit tightly.
+ * */
+
 import java.util.ArrayList;
 
 public class KerfService {
@@ -9,7 +15,10 @@ public class KerfService {
     settings.add(toothKerf);
     settings.add(cornerKerf);
 
-
     return settings;
+  }
+
+  public static void setKerf (double newKerf) {
+    kerf = newKerf;
   }
 }

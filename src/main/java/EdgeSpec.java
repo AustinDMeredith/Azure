@@ -1,7 +1,6 @@
 /* Author: Austin Meredith
  * Date: 10.22.25
- * Description: Determines corner offset and number of teeth for any given edge
- * Return: Json object {"corner": corner,"n": n}
+ * Description: Determines corner offset and number of teeth for any given edge. returns an array list, index 0 = corner width, index 1 = number of teeth
  * */
 
 import java.util.ArrayList;

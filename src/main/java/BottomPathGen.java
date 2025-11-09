@@ -1,5 +1,6 @@
 /* Author: Austin Meredith
- * Date: 10.29.25
+ * Date Created: 10.29.25
+ * Last Changed: 11.3.25
  * Description: Class holds 2 functions, 1 to make the flat edge and 1 to make the holes for the teeth to slot into.
  * */
 

@@ -1,5 +1,6 @@
 /* Author: Austin Meredith
- * Date: 10.9.25 (updated)
+ * Date Created: 10.9.25 
+ * Last Changed: 11.3.25
  * Description: Layout panels in a 2-column grid. Each grid cell is sized using
  *              the max width (for its column) and max height (for its row).
  *              Panels are centered inside their cells to avoid overlap even

@@ -7,8 +7,8 @@ public class AzureTest
   public void firstTest()
   {
     assertTrue(true);
-    BoxSpec box1 = new SimpleBox(200, 250, 250, 2, 14);
-    BoxSpec box2 = new SimpleBox(40, 40, 40, 2, 7);
+    BoxSpec box1 = new SimpleBox(200, 250, 250, 2, 14, "");
+    BoxSpec box2 = new SimpleBox(40, 40, 40, 2, 7, "");
 
     // 
     for (int i = 0; i < 6; i++) {

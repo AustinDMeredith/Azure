@@ -1,6 +1,6 @@
-/*
- * Author: Austin Meredith
+/* Author: Austin Meredith
  * Date: 10/4/25
+ * Last Changed: 11.3.25
  * Description: This file holds all the basic data that we get from the ui and a list of the panels
  * */
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class BoxSpec {
   double depth;
   double tolerance;
   double teethWidth;
+  String engraving;
   ArrayList<Panel> panels = new ArrayList<Panel>();
 
   // constructor
