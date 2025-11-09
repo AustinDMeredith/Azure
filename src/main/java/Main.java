@@ -44,7 +44,7 @@ public class Main {
         if (doEngrave == 1) {
           System.out.print("\nWhat Whould You Like To Engrave? (Must Be Two Characters)\n ABC>");
           engraving = in.nextLine();
-        } else {
+        } else {  
           engraving = "";
         }
         if (type == 1) {
@@ -62,8 +62,9 @@ public class Main {
         break;
       }
     }
-
-
+    
+    // close scanner 
+    in.close();
   }  
 
   public static void clearConsole() {
