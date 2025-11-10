@@ -5,7 +5,7 @@
 <?import javafx.scene.web.WebView?>
 <?import javafx.geometry.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller"  style="-fx-background-color: #4470b8;">
 
     <top>
         <Label text="Regular Box" style="-fx-font-size: 22px; -fx-font-weight: bold;" 
@@ -37,9 +37,9 @@
             </GridPane>
 
             <HBox spacing="20" alignment="CENTER">
-                <Button text="Update Preview" onAction="#updatePreview"/>
-                <Button text="Generate SVG File" onAction="#generateSVGFile"/>
-                <Button text="Back to Main Menu" onAction="#switchToPrimary"/>
+                <Button text="Update Preview" onAction="#updatePreview" style="-fx-background-color: #233a5e; -fx-text-fill: white;"/>
+                <Button text="Generate SVG File" onAction="#generateSVGFile" style="-fx-background-color: #233a5e; -fx-text-fill: white;"/>
+                <Button text="Back to Main Menu" onAction="#switchToPrimary" style="-fx-background-color: #233a5e; -fx-text-fill: white;"/>
             </HBox>
         </VBox>
     </bottom>

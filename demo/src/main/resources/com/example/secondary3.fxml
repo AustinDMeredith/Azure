@@ -5,7 +5,7 @@
 <?import javafx.scene.web.WebView?>
 <?import javafx.geometry.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller"  style="-fx-background-color: #4470b8;">
 
     <top>
         <Label text="Die Box" style="-fx-font-size: 22px; -fx-font-weight: bold;" 

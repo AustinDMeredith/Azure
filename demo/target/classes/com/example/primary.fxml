@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController" style="-fx-background-color: #4470b8;">
+
+    <top>
+        <Label text="Azure Box Creations" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;" BorderPane.alignment="CENTER"/>
+    </top>
+
     <center>
-        <VBox alignment="CENTER" spacing="30">
-            <Label text="Select a Box Type" style="-fx-font-size: 26px;"/>
-            <HBox spacing="40" alignment="CENTER">
-                <Button text="Regular Box" onAction="#handleBox1Click" prefWidth="150" prefHeight="150"/>
-                <Button text="Base Box" onAction="#handleBox2Click" prefWidth="150" prefHeight="150"/>
-                <Button text="Die Box" onAction="#handleBox3Click" prefWidth="150" prefHeight="150"/>
-            </HBox>
+        <VBox alignment="CENTER" spacing="20">
+        <Label text="Select a box!" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+        <HBox alignment="CENTER" spacing="60">
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fx:id="regularBox" fitWidth="150" fitHeight="150" onMouseClicked="#handleRegularBoxClick" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@images/regularBox.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Regular Box" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fx:id="basedBox" fitWidth="150" fitHeight="150" onMouseClicked="#handleBasedBoxClick" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@images/basedBox.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Based Box" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            </VBox>
+
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fx:id="dieBox" fitWidth="150" fitHeight="150" onMouseClicked="#handleDieBoxClick" style="-fx-cursor: hand;">
+                    <image>
+                        <Image url="@images/dieBox.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Die Box" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+            </VBox>
+        </HBox>
         </VBox>
     </center>
+
 </BorderPane>
