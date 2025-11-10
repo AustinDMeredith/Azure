@@ -1,9 +1,61 @@
 package com.example;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.web.WebView;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Secondary2Controller {
+
+    @FXML private WebView svgPreview;
+    @FXML private TextField widthField, heightField, depthField, teethField;
+
+
+    //once the fxml is loaded this is called
+    @FXML
+    private void initialize() {
+        updatePreview(); 
+    }
+
+
+    //svg (generation and) update 
+    @FXML
+    private void updatePreview() {
+        try {
+            double w = Double.parseDouble(widthField.getText());
+            double h = Double.parseDouble(heightField.getText());
+            String svg = generateBoxSVG(w, h);
+            svgPreview.getEngine().loadContent(svg, "text/html");
+        } catch (NumberFormatException e) {
+            svgPreview.getEngine().loadContent("<html><body><h3 style='color:red'>Invalid input</h3></body></html>");
+        }
+    }
+
+    //this is the placeholder of the svg. right now it is just a box 
+    private String generateBoxSVG(double w, double h) {
+        return """
+            <html><body style='margin:0;'>
+            <svg width='%f' height='%f' xmlns='http://www.w3.org/2000/svg'>
+                <rect x='10' y='10' width='%f' height='%f' stroke='black' fill='none' stroke-width='2'/>
+            </svg>
+            </body></html>
+        """.formatted(w + 20, h + 20, w, h);
+    }
+
+
+    //generates svg and puts it in your file. not working right now 
+    @FXML
+    private void generateSVGFile() throws IOException {
+        //double w = Double.parseDouble(widthField.getText());
+        //double h = Double.parseDouble(heightField.getText());
+        //String svg = generateBoxSVG(w, h);
+        //Files.writeString(Path.of("regular_box.svg"), svg);
+    }
+
+
+    //goes back to main menu 
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
