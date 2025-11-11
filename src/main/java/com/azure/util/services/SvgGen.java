@@ -50,7 +50,7 @@ public class SvgGen {
       }
 
       writer.write("</svg>");
-      System.out.println("Successfully wrote to box.svg");
+      //System.out.println("Successfully wrote to box.svg");
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
