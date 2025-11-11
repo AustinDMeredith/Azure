@@ -1,3 +1,4 @@
+package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.5.25
  * Last Changed: 11.3.25
@@ -5,6 +6,8 @@
  *              that will look like right now tho.
  * */
 import java.util.ArrayList;
+
+import com.azure.objects.Panel;
 
 public class SetEdgeRoles {
   public static void setRoles (ArrayList<Panel> panels) {

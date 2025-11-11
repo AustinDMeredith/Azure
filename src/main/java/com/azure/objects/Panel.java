@@ -1,3 +1,4 @@
+package com.azure.objects;
 /* Author: Austin Meredith
  * Date Created: 10.4.25
  * Last Changed: 11.3.25
@@ -6,13 +7,13 @@
 import java.util.ArrayList;
 
 public class Panel {
-  String id;
-  PanelRole role;
-  String path;
-  double height, width;
-  ArrayList<Double> startPoint = new ArrayList<Double>();
-  ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
-  ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
+  public String id;
+  public PanelRole role;
+  public String path;
+  public double height, width;
+  public ArrayList<Double> startPoint = new ArrayList<Double>();
+  public ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
+  public ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
 
   public enum PanelRole {lid, front, back, right, left, bottom, basedBottom}
   public enum EdgeRole {male, female, top, bottom, slide}

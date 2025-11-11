@@ -1,3 +1,4 @@
+package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.29.25
  * Last Changed: 11.3.25
@@ -5,6 +6,8 @@
  * */
 
 import java.util.ArrayList;
+
+import com.azure.objects.Panel;
 
 public class IngravingService {
   public static void addEngravings (String engraving, ArrayList<Panel> panels) {

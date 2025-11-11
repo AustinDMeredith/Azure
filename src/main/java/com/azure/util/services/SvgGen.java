@@ -1,3 +1,4 @@
+package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.5.25
  * Last Changed: 11.3.25
@@ -7,6 +8,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.azure.objects.Panel;
 
 public class SvgGen {
   static double x = 250;
@@ -47,7 +50,7 @@ public class SvgGen {
       }
 
       writer.write("</svg>");
-      System.out.println("Successfully wrote to box.svg");
+      //System.out.println("Successfully wrote to box.svg");
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
