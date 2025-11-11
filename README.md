@@ -33,11 +33,11 @@ cd Azure
 Build the package 
 
 ```
-mvn clean package -DskipTests
+mvn clean package
 ```
 
 Run the package
 
 ```
-java -cp target/azure-test-1.0-SNAPSHOT.jar Main
+java -jar target/azure-boxes-1.0-SNAPSHOT.jar
 ```
