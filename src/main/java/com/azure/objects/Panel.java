@@ -15,8 +15,8 @@ public class Panel {
   public ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
   public ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
 
-  public static enum PanelRole {slidingLid, liftingLid, top, front, back, right, left, bottom, basedBottom}
-  public static enum EdgeRole {male, female, top, bottom, slide}
+  public static enum PanelRole {slidingLid, liftingLid, top, front, back, right, left, bottom, basedBottom, slidableFront, slidableLeft, slidableRight, slidableBack, bottomLeftRail, bottomRightRail, topLeftRail, topRightRail, backRail}
+  public static enum EdgeRole {male, female, top, bottom, slidableSide, slidableBack, slidableFront, flat}
 
   // constructor
   public Panel (String id, PanelRole role, double height, double width) {

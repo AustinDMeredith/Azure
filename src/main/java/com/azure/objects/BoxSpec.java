@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class BoxSpec {
   // class atributes
+  public BoxType boxType;
   public double height;
   public double width;
   public double depth;
@@ -18,6 +19,8 @@ public class BoxSpec {
 
   // constructor
   public BoxSpec () {};
+
+  public static enum BoxType {based, hinged, simple};
 
   // getters
   public double getHeight() {return height;}

@@ -9,10 +9,12 @@ import com.azure.util.pathGen.PathGen;
 import com.azure.util.services.IngravingService;
 import com.azure.util.services.LayoutService;
 import com.azure.util.services.SetEdgeRoles;
+import com.azure.util.services.AddPanels;
 
 
 public class BasedBox extends BoxSpec{
-    public BasedBox (double height, double width, double depth, Panel.PanelRole lidType, double teethWidth, String engraving) {
+  public BasedBox (double height, double width, double depth, Panel.PanelRole lidType, double teethWidth, String engraving) {
+    this.boxType = BoxSpec.BoxType.based;
     this.height = height;
     this.width = width;
     this.depth = depth;
@@ -21,13 +23,8 @@ public class BasedBox extends BoxSpec{
     this.engraving = engraving;
 
     // add all the panels to the array
-    this.panels.add(new Panel("p-0", Panel.PanelRole.front, this.height, this.width));
-    this.panels.add(new Panel("p-1", Panel.PanelRole.front, this.height, this.width));
-    this.panels.add(new Panel("p-2", Panel.PanelRole.right, this.height, this.depth));
-    this.panels.add(new Panel("p-3", Panel.PanelRole.left, this.height, this.depth));
-    this.panels.add(new Panel("p-4", Panel.PanelRole.bottom, this.width, this.depth));
-    this.panels.add(new Panel("p-5", Panel.PanelRole.basedBottom, this.width, this.depth));
-
+    AddPanels.Set(height, width, depth, lidType, boxType, this.panels);
+    
     // set roles and find startpoints for panels
     SetEdgeRoles.setRoles(this.panels);
     LayoutService.findStartPoint(this.panels);

@@ -7,9 +7,7 @@ public class AzureTest {
 
   /******* This test verifys that the generated edge length equals the entered length for said edge *******/
   @Test 
-  public void verifyLengths()
-  {
-    assertTrue(true);
+  public void verifyLengths() {
     BoxSpec box1 = new SimpleBox(200, 250, 250, Panel.PanelRole.top, 14, "");
     BoxSpec box2 = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "");
     BoxSpec box3 = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "");
@@ -34,5 +32,123 @@ public class AzureTest {
     }
   }
   
-  // add more tests here
+  // test to varify Slidable panel holes are placed correctly
+  @Test
+  public void verifySlidablePanelHoles() {
+    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
+    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+
+    //assertEquals(BasedBox.panels., 0);
+
+
+
+  }
+
+  // test to make sure boxes get correct panel roles
+  @Test
+  public void verifyPanelRoles () {
+    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
+    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+
+    BoxSpec BasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "");
+    BoxSpec SimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "");
+
+    // test based box panel roles
+    assertEquals(BasedBox.panels.get(0).role, Panel.PanelRole.front);
+    assertEquals(BasedBox.panels.get(1).role, Panel.PanelRole.back);
+    assertEquals(BasedBox.panels.get(2).role, Panel.PanelRole.right);
+    assertEquals(BasedBox.panels.get(3).role, Panel.PanelRole.left);
+    assertEquals(BasedBox.panels.get(4).role, Panel.PanelRole.top);
+    assertEquals(BasedBox.panels.get(5).role, Panel.PanelRole.basedBottom);
+
+    //test simple box panel roles
+    assertEquals(SimpleBox.panels.get(0).role, Panel.PanelRole.front);
+    assertEquals(SimpleBox.panels.get(1).role, Panel.PanelRole.back);
+    assertEquals(SimpleBox.panels.get(2).role, Panel.PanelRole.right);
+    assertEquals(SimpleBox.panels.get(3).role, Panel.PanelRole.left);
+    assertEquals(SimpleBox.panels.get(4).role, Panel.PanelRole.top);
+    assertEquals(SimpleBox.panels.get(5).role, Panel.PanelRole.bottom);
+
+    // Test sliding lid based box panel roles
+    assertEquals(slidingLidBasedBox.panels.get(0).role, Panel.PanelRole.slidableFront);
+    assertEquals(slidingLidBasedBox.panels.get(1).role, Panel.PanelRole.slidableBack);
+    assertEquals(slidingLidBasedBox.panels.get(2).role, Panel.PanelRole.slidableRight);
+    assertEquals(slidingLidBasedBox.panels.get(3).role, Panel.PanelRole.slidableLeft);
+    assertEquals(slidingLidBasedBox.panels.get(4).role, Panel.PanelRole.slidingLid);
+    assertEquals(slidingLidBasedBox.panels.get(5).role, Panel.PanelRole.basedBottom);
+    assertEquals(slidingLidBasedBox.panels.get(6).role, Panel.PanelRole.bottomLeftRail);
+    assertEquals(slidingLidBasedBox.panels.get(7).role, Panel.PanelRole.bottomRightRail);
+    assertEquals(slidingLidBasedBox.panels.get(8).role, Panel.PanelRole.topLeftRail);
+    assertEquals(slidingLidBasedBox.panels.get(9).role, Panel.PanelRole.topRightRail);
+    assertEquals(slidingLidBasedBox.panels.get(10).role, Panel.PanelRole.backRail);
+    
+    // Test sliding lid simple box panel roles
+    assertEquals(slidingLidSimpleBox.panels.get(0).role, Panel.PanelRole.slidableFront);
+    assertEquals(slidingLidSimpleBox.panels.get(1).role, Panel.PanelRole.slidableBack);
+    assertEquals(slidingLidSimpleBox.panels.get(2).role, Panel.PanelRole.slidableRight);
+    assertEquals(slidingLidSimpleBox.panels.get(3).role, Panel.PanelRole.slidableLeft);
+    assertEquals(slidingLidSimpleBox.panels.get(4).role, Panel.PanelRole.slidingLid);
+    assertEquals(slidingLidSimpleBox.panels.get(5).role, Panel.PanelRole.bottom);
+    assertEquals(slidingLidSimpleBox.panels.get(6).role, Panel.PanelRole.bottomLeftRail);
+    assertEquals(slidingLidSimpleBox.panels.get(7).role, Panel.PanelRole.bottomRightRail);
+    assertEquals(slidingLidSimpleBox.panels.get(8).role, Panel.PanelRole.topLeftRail);
+    assertEquals(slidingLidSimpleBox.panels.get(9).role, Panel.PanelRole.topRightRail);
+    assertEquals(slidingLidSimpleBox.panels.get(10).role, Panel.PanelRole.backRail);
+  }
+
+
+  // test to make sure panels for sliding lid boxes get correct edge roles
+  @Test
+  public void verifyEdgeRoles () {
+    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
+    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+
+    // sliding lid Based Box
+    // front panel
+    assertEquals(Panel.EdgeRole.slidableFront, slidingLidBasedBox.panels.get(0).edges.get(0));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(0).edges.get(1));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(0).edges.get(2));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(0).edges.get(3));
+
+    // back panel
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(0));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(1));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(2));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(3));
+
+    // right panel
+    assertEquals(Panel.EdgeRole.slidableSide, slidingLidBasedBox.panels.get(2).edges.get(0));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(2).edges.get(1));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(2).edges.get(2));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(2).edges.get(3));
+
+    // left panel
+    assertEquals(Panel.EdgeRole.slidableSide, slidingLidBasedBox.panels.get(3).edges.get(0));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(3).edges.get(1));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(3).edges.get(2));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(3).edges.get(3));
+
+    // lid panel
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(0));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(1));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(2));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(3));
+
+
+
+    
+
+  }
+
+
+  // test to make sure engraving isnt too big
+
+
+  // test to make sure panels dont overlap in svg
+
+
+  // test to make sure tolerance service adjusts path correctly
+
+
+  // test to make sure kerf service adjusts path correctly
 }

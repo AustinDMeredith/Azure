@@ -37,6 +37,16 @@ public class SetEdgeRoles {
         panel.edges.add(1, Panel.EdgeRole.bottom);
         panel.edges.add(2, Panel.EdgeRole.bottom);
         panel.edges.add(3, Panel.EdgeRole.bottom);
+      } else if (panel.role == Panel.PanelRole.top) {
+        panel.edges.add(0, Panel.EdgeRole.female);
+        panel.edges.add(1, Panel.EdgeRole.female);
+        panel.edges.add(2, Panel.EdgeRole.female);
+        panel.edges.add(3, Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.back) {
+        panel.edges.add(0, Panel.EdgeRole.male);
+        panel.edges.add(1, Panel.EdgeRole.male);
+        panel.edges.add(2, Panel.EdgeRole.male);
+        panel.edges.add(3, Panel.EdgeRole.male);
       }
     }
   }
