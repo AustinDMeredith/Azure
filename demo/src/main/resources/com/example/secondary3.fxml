@@ -8,7 +8,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller"  style="-fx-background-color: #4470b8;">
 
     <top>
-        <Label text="Die Box" style="-fx-font-size: 22px; -fx-font-weight: bold;" 
+        <Label text="Hin git branchge Box" style="-fx-font-size: 22px; -fx-font-weight: bold;" 
                BorderPane.alignment="CENTER"/>
     </top>
 
