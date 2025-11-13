@@ -5,9 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.effect.DropShadow?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.PrimaryController" 
-            style="-fx-background-color: #4470b8;" fx:id="rootPane">
+<BorderPane xmlns:fx="http://javafx.com/fxml" 
+            fx:controller="com.example.PrimaryController" 
+            fx:id="rootPane"
+            style="-fx-background-color: #4470b8;
+                   -fx-background-image: url('images/background.png');
+                   -fx-background-size: cover;
+                   -fx-background-position: center center;
+                   -fx-background-repeat: no-repeat;">
+
 
     <top>
         <!--azure box creations text -->
@@ -24,14 +32,23 @@
 
             <!-- Title "choose your design"-->
             <Label fx:id="titleLabel" text="Choose Your Design" 
-                   style="-fx-font-size: 75px;-fx-font-weight: bold; -fx-text-fill: white;"/>
+                style="-fx-font-size: 75px; -fx-font-weight: bold; -fx-text-fill: white;">
+                <effect>
+                    <DropShadow radius="4" offsetX="4" offsetY="4" color="rgba(0,0,0,0.3)"/>
+                </effect>
+            </Label>
+
 
             <!-- Flexible space between title and subtitle -->
             <Region fx:id="middleSpacer" minHeight="5" prefHeight="10" maxHeight="15"/>
 
             <!-- Subtitle "which box fits your needs" -->
             <Label fx:id="subtitleLabel" text="Which box fits your needs?" 
-                   style="-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                   style="-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <effect>
+                    <DropShadow radius="4" offsetX="4" offsetY="4" color="rgba(0,0,0,0.3)"/>
+                </effect>
+            </Label>
 
             <!-- Flexible space between subtitle and images -->
             <Region fx:id="bottomSpacer" VBox.vgrow="ALWAYS" minHeight="10" prefHeight="25"/>
@@ -79,17 +96,29 @@
                 <VBox>
                     <Label fx:id="regularLabel" text="Regular Box" 
                            style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"
-                           translateX="-80"/>
+                           translateX="-80">
+                           <effect>
+                    <DropShadow radius="2" offsetX="4" offsetY="4" color="rgba(0,0,0,0.3)"/>
+                </effect>
+            </Label>
                 </VBox>
                 <VBox>
                     <Label fx:id="basedLabel" text="Based Box" 
                            style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"
-                           translateX="-10"/>
+                           translateX="-10">
+                           <effect>
+                    <DropShadow radius="2" offsetX="4" offsetY="4" color="rgba(0,0,0,0.3)"/>
+                </effect>
+            </Label>
                 </VBox>
                 <VBox>
                     <Label fx:id="hingeLabel" text="Hinge Box" 
                            style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;"
-                           translateX="70"/>
+                           translateX="70">
+                           <effect>
+                    <DropShadow radius="2" offsetX="4" offsetY="4" color="rgba(0,0,0,0.3)"/>
+                </effect>
+            </Label>
                 </VBox>
             </HBox>
 
