@@ -12,11 +12,11 @@ import com.azure.util.services.SetEdgeRoles;
 
 public class SimpleBox extends BoxSpec {
   
-  public SimpleBox (double height, double width, double depth, double tolerance, double teethWidth, String engraving) {
+  public SimpleBox (double height, double width, double depth, Panel.PanelRole lidType, double teethWidth, String engraving) {
     this.height = height;
     this.width = width;
     this.depth = depth;
-    this.tolerance = tolerance;
+    this.lidType = lidType;
     this.teethWidth = teethWidth;
     this.engraving = engraving;
 

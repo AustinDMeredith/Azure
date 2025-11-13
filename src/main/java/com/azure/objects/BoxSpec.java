@@ -11,7 +11,7 @@ public class BoxSpec {
   public double height;
   public double width;
   public double depth;
-  public double tolerance;
+  public Panel.PanelRole lidType;
   public double teethWidth;
   public String engraving;
   public ArrayList<Panel> panels = new ArrayList<Panel>();
@@ -23,7 +23,6 @@ public class BoxSpec {
   public double getHeight() {return height;}
   public double getWidth() {return width;}
   public double getDepth() {return depth;}
-  public double getTolerance() {return tolerance;}
   public double getTeethWidth() {return teethWidth;}
 
   public ArrayList<Panel> getPanels() {return panels;}

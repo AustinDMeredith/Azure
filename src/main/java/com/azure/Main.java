@@ -7,9 +7,7 @@ package com.azure;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import com.azure.objects.BasedBox;
-import com.azure.objects.BoxSpec;
-import com.azure.objects.SimpleBox;
+import com.azure.objects.*;
 import com.azure.util.services.SvgGen;
 import com.azure.util.services.ValidationService;
 
@@ -96,11 +94,11 @@ public class Main {
         }
         clearConsole();
         if (type == 1) {
-          BoxSpec box = new BasedBox(h, w, d, 0, tW, engraving);
+          BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, tW, engraving);
           SvgGen.generateFile(box.panels);
           System.out.print("Successfully Generated SVG!\n");
         } else {
-          BoxSpec box = new SimpleBox(h, w, d, 0, tW, engraving);
+          BoxSpec box = new SimpleBox(h, w, d, Panel.PanelRole.top, tW, engraving);
           SvgGen.generateFile(box.panels);
           System.out.print("Successfully Generated SVG!\n");
         }
