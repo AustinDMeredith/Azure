@@ -13,7 +13,6 @@ public class AzureTest {
     BoxSpec box3 = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "");
     BoxSpec box4 = new BasedBox(40, 40, 40, Panel.PanelRole.top, 7, "");
 
-
     // Run through each edge and test if it equals the required length
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 4; j++) {
@@ -111,7 +110,7 @@ public class AzureTest {
     assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(0).edges.get(3));
 
     // back panel
-    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(0));
+    assertEquals(Panel.EdgeRole.slidableBack, slidingLidBasedBox.panels.get(1).edges.get(0));
     assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(1));
     assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(2));
     assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(1).edges.get(3));
@@ -134,10 +133,38 @@ public class AzureTest {
     assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(2));
     assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(4).edges.get(3));
 
+    // bottom left rail
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(6).edges.get(0));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(6).edges.get(1));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(6).edges.get(2));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(6).edges.get(3));
+
+    // bottom right rail
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(7).edges.get(0));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(7).edges.get(1));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(7).edges.get(2));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(7).edges.get(3));
 
 
+    // top left rail
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(8).edges.get(0));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(8).edges.get(1));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(8).edges.get(2));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(8).edges.get(3));
     
 
+    // top right rail
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(9).edges.get(0));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(9).edges.get(1));
+    assertEquals(Panel.EdgeRole.male, slidingLidBasedBox.panels.get(9).edges.get(2));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(9).edges.get(3));
+
+
+    // back rail
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(10).edges.get(0));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(10).edges.get(1));
+    assertEquals(Panel.EdgeRole.female, slidingLidBasedBox.panels.get(10).edges.get(2));
+    assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(10).edges.get(3));
   }
 
 

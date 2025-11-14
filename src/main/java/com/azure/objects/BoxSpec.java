@@ -1,7 +1,7 @@
 package com.azure.objects;
 /* Author: Austin Meredith
  * Date: 10/4/25
- * Last Changed: 11.3.25
+ * Last Changed: 11.13.25
  * Description: This file holds all the basic data that we get from the ui and a list of the panels
  * */
 import java.util.ArrayList;

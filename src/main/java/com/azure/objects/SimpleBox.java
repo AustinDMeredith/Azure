@@ -1,7 +1,7 @@
 package com.azure.objects;
 /* Author: Austin Meredith
  * Date Created: 10.27.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.13.25
  * Description: Inherates box spec to generate a simple box 
  * */
 

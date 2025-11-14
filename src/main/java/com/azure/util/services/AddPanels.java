@@ -1,4 +1,9 @@
 package com.azure.util.services;
+/* Author: Austin Meredith
+ * Date Created: 11.13.25
+ * Last Changed: 11.13.25
+ * Description: Adds the required panels to the box from which it was called 
+ * */
 
 import java.util.ArrayList;
 
