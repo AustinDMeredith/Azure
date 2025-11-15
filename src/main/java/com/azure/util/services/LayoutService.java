@@ -1,7 +1,7 @@
 package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.9.25 
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: Layout panels in a 2-column grid. Each grid cell is sized using
  *              the max width (for its column) and max height (for its row).
  *              Panels are centered inside their cells to avoid overlap even
@@ -18,10 +18,10 @@ public class LayoutService {
   private static final int NUM_COLS = 2;
 
   // Margins/gaps (mm)
-  private static final double LEFT_MARGIN = 5.0;
+  private static final double LEFT_MARGIN = 10.0;
   private static final double TOP_MARGIN  = 10.0;
-  private static final double COL_GAP     = 5.0;
-  private static final double ROW_GAP     = 5.0;
+  private static final double COL_GAP     = 10.0;
+  private static final double ROW_GAP     = 10.0;
 
   // Offset applied when the first edge is male (downward only)
   private static final double MALE_Y_OFFSET = 3.175;

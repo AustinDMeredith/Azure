@@ -1,7 +1,7 @@
 package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Created: 10.13.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: Scrpit for generating male edge paths
  * */
 
@@ -37,6 +37,7 @@ public class MalePathGen {
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
       final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
 
+
       // calls edge spec to get the number of teeth (n) and the corner length (corner)
       ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
       double corner = edgeSpec.get(0);
@@ -55,6 +56,16 @@ public class MalePathGen {
       final double EPS = 1e-9;
       if (leftCornerTravel  < 0 && leftCornerTravel  > -EPS)  leftCornerTravel  = 0;
       if (rightCornerTravel < 0 && rightCornerTravel > -EPS)  rightCornerTravel = 0;
+
+      Boolean isTopRightRail = (panel.role == Panel.PanelRole.topRightRail);
+      Boolean isTopLeftRail = (panel.role == Panel.PanelRole.topLeftRail);
+      Boolean isBottomRightRail = (panel.role == Panel.PanelRole.bottomRightRail);
+      Boolean isBottomLeftRail = (panel.role == Panel.PanelRole.bottomLeftRail);
+      Boolean isBackRail = (panel.role == Panel.PanelRole.backRail);
+      leftCornerTravel = isBackRail ? leftCornerTravel - 8 : leftCornerTravel;
+      rightCornerTravel = isBackRail ? rightCornerTravel - 8 : rightCornerTravel;
+      leftCornerTravel = isTopLeftRail || isBottomRightRail || isBottomLeftRail ? leftCornerTravel - depth : leftCornerTravel;
+      rightCornerTravel = isTopRightRail || isBottomLeftRail || isBottomRightRail ? rightCornerTravel - depth : rightCornerTravel;
 
       if (leftCornerTravel < 0 || rightCornerTravel < 0) {
         // As a last resort (pathological tiny edges), fall back to a straight edge.

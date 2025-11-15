@@ -1,7 +1,7 @@
 package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 11.13.25
- * Last Changed: 11.13.25
+ * Last Changed: 11.15.25
  * Description: Adds the required panels to the box from which it was called 
  * */
 
@@ -33,13 +33,13 @@ public class AddPanels {
       panels.add(new Panel("p-1", Panel.PanelRole.slidableBack, height, width));
       panels.add(new Panel("p-2", Panel.PanelRole.slidableRight, height, depth));
       panels.add(new Panel("p-3", Panel.PanelRole.slidableLeft, height, depth));
-      panels.add(new Panel("p-4", lidType, width, depth));
+      panels.add(new Panel("p-4", lidType, depth - 3.175, width - 3.175 * 2));
       panels.add(new Panel("p-5", bottom, width, depth));
-      panels.add(new Panel("p-6", Panel.PanelRole.bottomLeftRail, depth, 6));
-      panels.add(new Panel("p-7", Panel.PanelRole.bottomRightRail, depth, 6));
-      panels.add(new Panel("p-8", Panel.PanelRole.topLeftRail, depth, 6));
-      panels.add(new Panel("p-9", Panel.PanelRole.topRightRail, depth, 6));
-      panels.add(new Panel("p-10", Panel.PanelRole.backRail, depth, 6));
+      panels.add(new Panel("p-6", Panel.PanelRole.bottomLeftRail, 8, depth));
+      panels.add(new Panel("p-7", Panel.PanelRole.bottomRightRail, 8, depth));
+      panels.add(new Panel("p-8", Panel.PanelRole.topLeftRail, 8, depth));
+      panels.add(new Panel("p-9", Panel.PanelRole.topRightRail, 8, depth));
+      panels.add(new Panel("p-10", Panel.PanelRole.backRail, 8, width));
     }
   }
 }

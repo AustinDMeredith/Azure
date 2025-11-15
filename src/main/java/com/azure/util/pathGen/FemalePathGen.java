@@ -1,7 +1,7 @@
 package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Created: 10.13.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: Script for generating female edge paths
  * */
 
@@ -35,7 +35,9 @@ public class FemalePathGen {
       final int px = dy, py = -dx;
 
       final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
-      final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
+      final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);      
+      final boolean lastIsSlidingFront = (lastRole == Panel.EdgeRole.slidableFront);
+      final boolean nextIsSlidingFront = (nextRole == Panel.EdgeRole.slidableFront);
 
       // calls edge spec to get the number of teeth (n) and the corner length (corner)
       ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
@@ -48,8 +50,8 @@ public class FemalePathGen {
       double cornerKerf = kerf.get(1);
       
       // Effective corner travel on each side after accounting for neighbor male-depth retraction.
-      double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0);
-      double rightCornerTravel = corner - (nextIsMale ? depth : 0.0);
+      double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0) - (lastIsSlidingFront ? depth * 2 : 0.0);
+      double rightCornerTravel = corner - (nextIsMale ? depth : 0.0) - (nextIsSlidingFront ? depth * 2 : 0.0);
 
       // These should be >= 0 by construction; clamp tiny negatives caused by FP error.
       final double EPS = 1e-9;

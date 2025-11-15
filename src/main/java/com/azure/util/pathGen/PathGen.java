@@ -1,7 +1,7 @@
 package com.azure.util.pathGen;
 /* Author: Austin Meredith
  * Date Changed: 10.7.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: Generate SVG path strings with finger-joint teeth for a rectangular panel.
  */
 
@@ -37,7 +37,7 @@ public class PathGen {
         } else { // Call male path gen with panel width for right and left edges
           d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));    
         }
-      } else if (edgeRole == Panel.EdgeRole.female) {
+      } else if (edgeRole == Panel.EdgeRole.female || edgeRole == Panel.EdgeRole.slidableSide || edgeRole == Panel.EdgeRole.slidableBack) {
         if (i % 2 == 0) { // Call female path gen with panel width for top and bottom edges
           d.append(FemalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
         } else { // Call female path gen with panel width for right and left edges
@@ -49,7 +49,20 @@ public class PathGen {
         } else { // Call bottom path gen with panel width for right and left edges
           d.append(BottomPathGen.edgeGen(h, toothDepth, dx, dy, panel));
         }
+      } else if (edgeRole == Panel.EdgeRole.flat) {
+        if (i % 2 == 0) { // Call bottom path gen with panel width for top and bottom edges
+          d.append(FlatPathGen.railGen(w, dx, dy, panel, panel.edges.get(last), panel.edges.get(next)));
+        } else { // Call bottom path gen with panel width for right and left edges
+          d.append(FlatPathGen.railGen(h, dx, dy, panel, panel.edges.get(last), panel.edges.get(next)));
+        } 
+      } else if (edgeRole == Panel.EdgeRole.flatLid || edgeRole == Panel.EdgeRole.slidableFront) { 
+        if (i % 2 == 0) { // Call bottom path gen with panel width for top and bottom edges
+          d.append(FlatPathGen.gen(w, dx, dy, panel));
+        } else { // Call bottom path gen with panel width for right and left edges
+          d.append(FlatPathGen.gen(h, dx, dy, panel));
+        }
       }
+
       i++;
     }
     
@@ -58,6 +71,11 @@ public class PathGen {
 
     if (panel.role == Panel.PanelRole.basedBottom) {
       d.append(BottomPathGen.holeGen(toothWidth, toothDepth, panel, true));
+    }
+
+    if (panel.role == Panel.PanelRole.slidableLeft || panel.role == Panel.PanelRole.slidableRight) {
+      int dx = 1; int dy = 0; int next = 1; int last = 3;
+      d.append(RailHoleGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
     }
     // Assign back to the panel 
     panel.path = d.toString();

@@ -1,7 +1,7 @@
 package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.5.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: This class will generate the svg. We will probably have a .svg that has all the boilerplate that we just manipulate
  *              the stuff we need to change.
  * */
@@ -13,7 +13,7 @@ import com.azure.objects.Panel;
 
 public class SvgGen {
   static double x = 250;
-  static double y = 350;
+  static double y = 700;
   
   // prefix and viewbox data
   static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";
