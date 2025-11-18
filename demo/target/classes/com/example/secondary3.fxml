@@ -4,43 +4,79 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.web.WebView?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.effect.DropShadow?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.Secondary1Controller"  style="-fx-background-color: #4470b8;">
-
-    <top>
-        <Label text="Hin git branchge Box" style="-fx-font-size: 22px; -fx-font-weight: bold;" 
-               BorderPane.alignment="CENTER"/>
-    </top>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.Secondary3Controller"
+            style="-fx-background-color: #4470b8;"
+            prefWidth="800" prefHeight="600">
 
     <center>
-        <WebView fx:id="svgPreview" prefHeight="400" prefWidth="700"/>
-    </center>
-
-    <bottom>
-        <VBox spacing="10.0">
+        <VBox fx:id="mainVBox" spacing="10" alignment="TOP_LEFT">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <GridPane hgap="10" vgap="10" alignment="CENTER">
-                <Label text="Width:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="widthField" text="200" prefWidth="80" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <!-- Top controls: teeth + dimensions label + dimensions inputs -->
+            <VBox fx:id="topControls" spacing="10">
 
-                <Label text="Height:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-                <TextField fx:id="heightField" text="150" prefWidth="80" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                <!-- Teeth size -->
+                <HBox fx:id="teethHBox" spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Teeth Size per mm" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <effect>
+                            <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Label>
+                    <TextField fx:id="teethField" text="5" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                </HBox>
 
-                <Label text="Depth:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <TextField fx:id="depthField" text="100" prefWidth="80" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <!-- Dimensions label -->
+                <Label fx:id="dimensionsLabel" text="Dimensions:" 
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <effect>
+                        <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                    </effect>
+                </Label>
 
-                <Label text="Teeth Size:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
-                <TextField fx:id="teethField" text="10" prefWidth="80" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
-            </GridPane>
+                <!-- Dimensions inputs -->
+                <HBox fx:id="dimensionsHBox" spacing="10" alignment="CENTER_LEFT">
+                    <Label text="X:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="widthField" text="200" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                    <Label text="Y:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="heightField" text="150" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                    <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="depthField" text="100" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                </HBox>
+            </VBox>
 
-            <HBox spacing="20" alignment="CENTER">
-                <Button text="Update Preview" onAction="#updatePreview"/>
-                <Button text="Generate SVG File" onAction="#generateSVGFile"/>
-                <Button text="Back to Main Menu" onAction="#switchToPrimary"/>
+            <!-- Fullscreen button (shown only in normal mode, above preview) -->
+            <HBox fx:id="fullscreenBtnContainer" alignment="CENTER_LEFT">
+                <Button fx:id="fullscreenBtn" text="Fullscreen SVG View" onAction="#fullscreenSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
             </HBox>
+
+            <!-- SVG Preview -->
+            <WebView fx:id="svgPreview" VBox.vgrow="ALWAYS"/>
+
+            <!-- Bottom buttons -->
+            <HBox fx:id="buttonHBox" spacing="10" alignment="CENTER_LEFT">
+                <Button text="Back to Main Menu" onAction="#switchToPrimary"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button text="Update Preview" onAction="#updatePreview"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button text="Generate SVG File" onAction="#generateSVGFile"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button text="Download" onAction="#downloadSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button fx:id="exitFullscreenBtn" text="Exit Fullscreen" onAction="#exitFullscreenSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);" visible="false"/>
+            </HBox>
+
         </VBox>
-    </bottom>
+    </center>
 </BorderPane>
