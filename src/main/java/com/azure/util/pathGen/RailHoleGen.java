@@ -7,7 +7,7 @@ import com.azure.util.services.KerfService;
 
 public class RailHoleGen {
   public static String gen (double length, double toothWidth, double depth, int dx, int dy, Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, Panel panel) {
-    final double edgeInset = 3.175 * 2;      
+    final double edgeInset = 3.2 * 2;      
     final int px = -dy, py = dx;
     ArrayList<Double> sp = panel.startPoint; // MUST be top-left of this panel in SVG coords
     StringBuilder sb = new StringBuilder();

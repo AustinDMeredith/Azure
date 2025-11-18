@@ -7,11 +7,14 @@ package com.azure;
 
 import com.azure.objects.*;
 import com.azure.util.services.SvgGen;
+import com.azure.util.services.ToleranceService;
 
 public class Main {
  
   public static void main (String args[]) {
-    BoxSpec slidingLidSimpleBox = new SimpleBox(50, 50, 50, Panel.PanelRole.slidingLid, 6, "");
+
+    ToleranceService.setGlobalCurrent("medium");
+    BoxSpec slidingLidSimpleBox = new BasedBox(50, 50, 70, Panel.PanelRole.slidingLid, 6, "");
     SvgGen.generateFile(slidingLidSimpleBox.panels);
     //BoxSpec box1 = new SimpleBox(50, 50, 50, Panel.PanelRole.top, 6, "");
     //SvgGen.generateFile(box1.panels);
