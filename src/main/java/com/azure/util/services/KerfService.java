@@ -8,11 +8,15 @@ package com.azure.util.services;
 import java.util.ArrayList;
 
 public class KerfService {
-  static double kerf = .7;
+  static double smallKerf = .3;
+  static double mediumKerf = .5;
+  static double largeKerf = .7;
+  static double currentKerf = largeKerf;
+
   public static ArrayList<Double> getKerf (double n) {
     ArrayList<Double> settings = new ArrayList<>();
-    double toothKerf = kerf / 2;
-    double cornerKerf = kerf / 4;    
+    double toothKerf = currentKerf / 2;
+    double cornerKerf = currentKerf / 4;    
     settings.add(toothKerf);
     settings.add(cornerKerf);
 
@@ -20,6 +24,6 @@ public class KerfService {
   }
 
   public static void setKerf (double newKerf) {
-    kerf = newKerf;
+    currentKerf = newKerf;
   }
 }

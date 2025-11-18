@@ -11,7 +11,7 @@ import com.azure.util.services.SvgGen;
 public class Main {
  
   public static void main (String args[]) {
-    BoxSpec slidingLidSimpleBox = new SimpleBox(100, 100, 100, Panel.PanelRole.slidingLid, 14, "");
+    BoxSpec slidingLidSimpleBox = new SimpleBox(50, 50, 50, Panel.PanelRole.slidingLid, 6, "");
     SvgGen.generateFile(slidingLidSimpleBox.panels);
     //BoxSpec box1 = new SimpleBox(50, 50, 50, Panel.PanelRole.top, 6, "");
     //SvgGen.generateFile(box1.panels);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.azure.objects.Panel;
 import com.azure.util.services.EdgeSpec;
 import com.azure.util.services.KerfService;
+import com.azure.util.services.ToleranceService;
 
 public class FemalePathGen {
   public static String gen(
@@ -48,6 +49,10 @@ public class FemalePathGen {
       ArrayList<Double> kerf = KerfService.getKerf(n);
       double toothKerf = kerf.get(0);
       double cornerKerf = kerf.get(1);
+
+      double tol = ToleranceService.getGlobalCurrent();
+      toothKerf -= tol;
+      cornerKerf -= tol;
       
       // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       double leftCornerTravel  = corner - (lastIsMale ? depth : 0.0) - (lastIsSlidingFront ? depth * 2 : 0.0);
