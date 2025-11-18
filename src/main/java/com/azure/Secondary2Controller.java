@@ -1,4 +1,4 @@
-package com.example;
+package com.azure;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

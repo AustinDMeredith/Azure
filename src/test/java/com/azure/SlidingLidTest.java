@@ -1,6 +1,7 @@
-import static org.junit.Assert.assertTrue;
+package com.azure;
+
 import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+//import org.junit.Test;
 
 import com.azure.objects.*;
 

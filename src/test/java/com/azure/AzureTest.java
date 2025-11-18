@@ -1,6 +1,5 @@
 package com.azure;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -36,8 +35,8 @@ public class AzureTest {
   // test to varify Slidable panel holes are placed correctly
   @Test
   public void verifySlidablePanelHoles() {
-    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
-    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+    //BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
+    //BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
 
     //assertEquals(BasedBox.panels., 0);
 
@@ -102,7 +101,7 @@ public class AzureTest {
   @Test
   public void verifyEdgeRoles () {
     BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
-    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+    //BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
 
     // sliding lid Based Box
     // front panel
