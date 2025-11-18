@@ -35,6 +35,8 @@ public class Secondary1Controller {
 
     //this is the placeholder of the svg. right now it is just a box 
     private String generateBoxSVG(double w, double h) {
+
+        
         return """
             <html><body style='margin:0;'>
             <svg width='%f' height='%f' xmlns='http://www.w3.org/2000/svg'>
