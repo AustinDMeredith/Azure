@@ -10,8 +10,8 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" 
             fx:controller="com.example.PrimaryController" 
             fx:id="rootPane"
-            style="
-                   -fx-background-image: url('images/background.png');
+            style="-fx-background-color: #4470b8;
+                   -fx-background-image: url('@images/background.png');
                    -fx-background-size: cover;
                    -fx-background-position: center center;
                    -fx-background-repeat: no-repeat;">
