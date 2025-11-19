@@ -1,19 +1,26 @@
 package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.5.25
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: This class will generate the svg. We will probably have a .svg that has all the boilerplate that we just manipulate
  *              the stuff we need to change.
  * */
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.azure.objects.Panel;
 
 public class SvgGen {
-  static double x = 250;
-  static double y = 350;
+  static ArrayList<Double> viewBoxSize = LayoutService.getVeiwBoxSize();
+
+  static double x = viewBoxSize.get(0);
+  static double y = viewBoxSize.get(1);
+
+  static Path svgPath = Paths.get("src", "main", "resources", "com", "azure", "box.svg");
+
   
   // prefix and viewbox data
   static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";
@@ -26,9 +33,30 @@ public class SvgGen {
     """;  
 
   // function to generate file
-  static public void generateFile (ArrayList<Panel> panels) {
+  static public String generateFile (ArrayList<Panel> panels) {
+    
+      StringBuilder sb = new StringBuilder();
+
+      sb.append(prefix);
+      sb.append(viewBox);
+      sb.append(urls);
+      //writer.write("<rect height=\"100%\" width=\"100%\" fill=\"rgba(255, 255, 255, 1)\"/>\n");
+      // writes paths for panels
+      for (Panel panel : panels) {
+        sb.append("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
+        sb.append("  <path d = \"" + panel.path);
+        sb.append("</g>\n");
+      }
+
+      sb.append("</svg>");
+
+      return sb.toString();
+  }
+
+  // function to write to file
+  static public void writeFile (ArrayList<Panel> panels) {
     try { // clears the box.svg, later we'll make new files and name them
-      FileWriter clear = new FileWriter("box.svg");
+      FileWriter clear = new FileWriter(svgPath.toFile());
       clear.write("");
       clear.close();
     } catch (IOException e) {
@@ -37,7 +65,7 @@ public class SvgGen {
     }
     
     // appends data to the cleared file
-    try (FileWriter writer = new FileWriter("box.svg", true)) {
+    try (FileWriter writer = new FileWriter(svgPath.toFile(), true)) {
       writer.write(prefix);
       writer.write(viewBox);
       writer.write(urls);

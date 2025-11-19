@@ -1,7 +1,7 @@
 package com.azure.util.services;
 /* Author: Austin Meredith
  * Date Created: 10.9.25 
- * Last Changed: 11.3.25
+ * Last Changed: 11.15.25
  * Description: Layout panels in a 2-column grid. Each grid cell is sized using
  *              the max width (for its column) and max height (for its row).
  *              Panels are centered inside their cells to avoid overlap even
@@ -14,14 +14,17 @@ import com.azure.objects.Panel;
 
 public class LayoutService {
 
+  private static double svgX, svgY;
+
+
   // Grid config
   private static final int NUM_COLS = 2;
 
   // Margins/gaps (mm)
-  private static final double LEFT_MARGIN = 5.0;
+  private static final double LEFT_MARGIN = 10.0;
   private static final double TOP_MARGIN  = 10.0;
-  private static final double COL_GAP     = 5.0;
-  private static final double ROW_GAP     = 5.0;
+  private static final double COL_GAP     = 10.0;
+  private static final double ROW_GAP     = 10.0;
 
   // Offset applied when the first edge is male (downward only)
   private static final double MALE_Y_OFFSET = 3.175;
@@ -76,6 +79,9 @@ public class LayoutService {
     for (Item it : items) {
       Panel p = it.panel;
 
+      if (p.width > svgX) svgX = p.width;
+      if (p.height > svgY) svgY = p.height;
+
       double cellLeft   = colX[it.col];
       double cellTop    = rowY[it.row];
       double cellWidth  = colWidths[it.col];
@@ -90,6 +96,10 @@ public class LayoutService {
         x += MALE_Y_OFFSET;
       }
 
+      // find the size of the svg viewBox
+      svgX = (svgX * NUM_COLS) + (LEFT_MARGIN * 2) + ROW_GAP;
+      svgY = (svgY * numRows) + (TOP_MARGIN * 2) + COL_GAP;
+      
       // Write deterministically as [x, y]
       if (p.startPoint == null) {
         p.startPoint = new ArrayList<>();
@@ -123,5 +133,12 @@ public class LayoutService {
       this.row = row;
       this.col = col;
     }
+  }
+
+  public static ArrayList<Double> getVeiwBoxSize () {
+    ArrayList<Double> veiwBoxSize = new ArrayList<Double>();
+    veiwBoxSize.add(svgX);
+    veiwBoxSize.add(svgY);
+    return veiwBoxSize;
   }
 }

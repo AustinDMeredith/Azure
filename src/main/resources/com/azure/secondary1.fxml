@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.WebView?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.azure.Secondary1Controller"
+            style="-fx-background-color: #4470b8;"
+            prefWidth="800" prefHeight="600">
+
+    <center>
+        <VBox fx:id="mainVBox" spacing="10" alignment="TOP_LEFT">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Top controls: teeth + dimensions label + dimensions inputs -->
+            <VBox fx:id="topControls" spacing="10">
+
+                <!-- Teeth size -->
+                <HBox fx:id="teethHBox" spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Teeth Size per mm" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                        <effect>
+                            <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                        </effect>
+                    </Label>
+                    <TextField fx:id="teethField" text="8" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                </HBox>
+
+                <!-- Dimensions label -->
+                <Label fx:id="dimensionsLabel" text="Dimensions:" 
+                       style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <effect>
+                        <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                    </effect>
+                </Label>
+
+                <!-- Dimensions inputs -->
+                <HBox fx:id="dimensionsHBox" spacing="10" alignment="CENTER_LEFT">
+
+                    <Label text="X:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="widthField" text="100" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                    <Label text="Y:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="heightField" text="100" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                    <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="depthField" text="100" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+
+                    <!-- for the drop down box -->
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <!-- DROPDOWN -->
+                    <HBox spacing="6" alignment="CENTER_LEFT" >
+                        <Label text="Lid type:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+
+                        <ComboBox fx:id="dimensionTypeCombo" prefWidth="150">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Regular Lid" />
+                                    <String fx:value="Sliding Lid" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                </HBox>
+            </VBox>
+
+            <!-- Fullscreen button (shown only in normal mode, above preview) -->
+            <HBox fx:id="fullscreenBtnContainer" alignment="CENTER_LEFT">
+                <Button fx:id="fullscreenBtn" text="Fullscreen SVG View" onAction="#fullscreenSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+            </HBox>
+
+            <!-- SVG Preview -->
+            <WebView fx:id="svgPreview" VBox.vgrow="ALWAYS"/>
+
+            <!-- Bottom buttons -->
+            <HBox fx:id="buttonHBox" spacing="10" alignment="CENTER_LEFT">
+                <Button text="Back to Main Menu" onAction="#switchToPrimary"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button text="Download" onAction="#downloadSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
+                <Button fx:id="exitFullscreenBtn" text="Exit Fullscreen" onAction="#exitFullscreenSVG"
+                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);" visible="false"/>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>

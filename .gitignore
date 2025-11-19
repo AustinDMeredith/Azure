@@ -6,6 +6,7 @@ target/
 .mvn/
 mvnw
 mvnw.cmd
+maven-status/
 
 # Eclipse project files
 .classpath
