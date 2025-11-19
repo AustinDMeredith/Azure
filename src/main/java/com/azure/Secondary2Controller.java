@@ -56,10 +56,12 @@ public class Secondary2Controller {
 
     @FXML
     private void initialize() {
+        dimensionTypeCombo.getSelectionModel().select(0);
         teethField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
         widthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
         heightField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
         depthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        dimensionTypeCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
 
         updatePreview(); 
     }
@@ -109,12 +111,13 @@ public class Secondary2Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
+        Panel.PanelRole lid = returnLidType(dimensionTypeCombo.getSelectionModel().getSelectedIndex());
         double w = Double.parseDouble(widthField.getText());
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
 
-        BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, t, "");
+        BoxSpec box = new BasedBox(h, w, d, lid, t, "");
 
         try {
             svgPreview.getEngine().loadContent(box.svg, "text/html");
@@ -133,5 +136,10 @@ public class Secondary2Controller {
     @FXML
     private void downloadSVG() {
         
+    }
+
+    private Panel.PanelRole returnLidType (int index) {
+        if (index == 0) return Panel.PanelRole.top;
+        return Panel.PanelRole.slidingLid;
     }
 }
