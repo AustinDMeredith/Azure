@@ -6,6 +6,8 @@ package com.azure.util.services;
  *              the stuff we need to change.
  * */
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,6 +16,9 @@ import com.azure.objects.Panel;
 public class SvgGen {
   static double x = 250;
   static double y = 700;
+
+  static Path svgPath = Paths.get("src", "main", "resources", "com", "azure", "box.svg");
+
   
   // prefix and viewbox data
   static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";
@@ -28,7 +33,7 @@ public class SvgGen {
   // function to generate file
   static public void generateFile (ArrayList<Panel> panels) {
     try { // clears the box.svg, later we'll make new files and name them
-      FileWriter clear = new FileWriter("box.svg");
+      FileWriter clear = new FileWriter(svgPath.toFile());
       clear.write("");
       clear.close();
     } catch (IOException e) {
@@ -37,7 +42,7 @@ public class SvgGen {
     }
     
     // appends data to the cleared file
-    try (FileWriter writer = new FileWriter("box.svg", true)) {
+    try (FileWriter writer = new FileWriter(svgPath.toFile(), true)) {
       writer.write(prefix);
       writer.write(viewBox);
       writer.write(urls);

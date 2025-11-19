@@ -8,9 +8,15 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import java.io.IOException;
+
+import com.azure.objects.BasedBox;
+import com.azure.objects.BoxSpec;
+import com.azure.objects.Panel;
+import com.azure.util.services.SvgGen;
 
 public class Secondary2Controller {
 
@@ -90,7 +96,23 @@ public class Secondary2Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
-        
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+
+        BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, t, "");
+        SvgGen.generateFile(box.panels);
+
+        WebEngine engine = svgPreview.getEngine();
+        String svgPath = "/com/azure/box.svg";
+        var url = getClass().getResource(svgPath);
+
+        if (url != null) {
+            engine.load(url.toExternalForm());
+        } else {
+            System.err.println("SVG not found at " + svgPath);
+        }
     }
 
     // Generate SVG file (placeholder)
