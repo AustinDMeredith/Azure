@@ -1,22 +1,22 @@
 package com.azure;
 
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-
 import java.io.IOException;
 
 import com.azure.objects.BasedBox;
 import com.azure.objects.BoxSpec;
 import com.azure.objects.Panel;
+import com.azure.objects.SimpleBox;
 import com.azure.util.services.SvgGen;
+
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class Secondary2Controller {
 
@@ -50,6 +50,16 @@ public class Secondary2Controller {
     private Button exitFullscreenBtn;
 
     private boolean isFullscreen = false;
+
+    @FXML
+    private void initialize() {
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+
+        updatePreview(); 
+    }
 
     // Go fullscreen and hide top controls, expand WebView, toggle buttons 
     @FXML
@@ -102,18 +112,13 @@ public class Secondary2Controller {
         double t = Double.parseDouble(teethField.getText());
 
         BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, t, "");
-        SvgGen.generateFile(box.panels);
 
-        WebEngine engine = svgPreview.getEngine();
-        String svgPath = "/com/azure/box.svg";
-        var url = getClass().getResource(svgPath);
-
-        if (url != null) {
-            engine.load(url.toExternalForm());
-        } else {
-            System.err.println("SVG not found at " + svgPath);
+        try {
+            svgPreview.getEngine().loadContent(box.svg, "text/html");
         }
+        catch (NumberFormatException e) {}
     }
+
 
     // Generate SVG file (placeholder)
     @FXML

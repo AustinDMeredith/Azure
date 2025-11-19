@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import com.azure.objects.Panel;
 
 public class SvgGen {
-  static double x = 250;
-  static double y = 700;
+  static ArrayList<Double> viewBoxSize = LayoutService.getVeiwBoxSize();
+
+  static double x = viewBoxSize.get(0);
+  static double y = viewBoxSize.get(1);
 
   static Path svgPath = Paths.get("src", "main", "resources", "com", "azure", "box.svg");
 
@@ -31,7 +33,28 @@ public class SvgGen {
     """;  
 
   // function to generate file
-  static public void generateFile (ArrayList<Panel> panels) {
+  static public String generateFile (ArrayList<Panel> panels) {
+    
+      StringBuilder sb = new StringBuilder();
+
+      sb.append(prefix);
+      sb.append(viewBox);
+      sb.append(urls);
+      //writer.write("<rect height=\"100%\" width=\"100%\" fill=\"rgba(255, 255, 255, 1)\"/>\n");
+      // writes paths for panels
+      for (Panel panel : panels) {
+        sb.append("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
+        sb.append("  <path d = \"" + panel.path);
+        sb.append("</g>\n");
+      }
+
+      sb.append("</svg>");
+
+      return sb.toString();
+  }
+
+  // function to write to file
+  static public void writeFile (ArrayList<Panel> panels) {
     try { // clears the box.svg, later we'll make new files and name them
       FileWriter clear = new FileWriter(svgPath.toFile());
       clear.write("");

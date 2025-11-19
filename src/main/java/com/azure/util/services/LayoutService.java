@@ -14,6 +14,9 @@ import com.azure.objects.Panel;
 
 public class LayoutService {
 
+  private static double svgX, svgY;
+
+
   // Grid config
   private static final int NUM_COLS = 2;
 
@@ -76,6 +79,9 @@ public class LayoutService {
     for (Item it : items) {
       Panel p = it.panel;
 
+      if (p.width > svgX) svgX = p.width;
+      if (p.height > svgY) svgY = p.height;
+
       double cellLeft   = colX[it.col];
       double cellTop    = rowY[it.row];
       double cellWidth  = colWidths[it.col];
@@ -90,6 +96,10 @@ public class LayoutService {
         x += MALE_Y_OFFSET;
       }
 
+      // find the size of the svg viewBox
+      svgX = (svgX * NUM_COLS) + (LEFT_MARGIN * 2) + ROW_GAP;
+      svgY = (svgY * numRows) + (TOP_MARGIN * 2) + COL_GAP;
+      
       // Write deterministically as [x, y]
       if (p.startPoint == null) {
         p.startPoint = new ArrayList<>();
@@ -123,5 +133,12 @@ public class LayoutService {
       this.row = row;
       this.col = col;
     }
+  }
+
+  public static ArrayList<Double> getVeiwBoxSize () {
+    ArrayList<Double> veiwBoxSize = new ArrayList<Double>();
+    veiwBoxSize.add(svgX);
+    veiwBoxSize.add(svgY);
+    return veiwBoxSize;
   }
 }

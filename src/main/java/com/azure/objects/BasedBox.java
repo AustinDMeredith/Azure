@@ -9,6 +9,7 @@ import com.azure.util.pathGen.PathGen;
 import com.azure.util.services.IngravingService;
 import com.azure.util.services.LayoutService;
 import com.azure.util.services.SetEdgeRoles;
+import com.azure.util.services.SvgGen;
 import com.azure.util.services.AddPanels;
 
 
@@ -34,5 +35,7 @@ public class BasedBox extends BoxSpec{
       PathGen.generatePanelPath(panel, this.teethWidth);
     }
     IngravingService.addEngravings(engraving, panels);
+
+    this.svg = SvgGen.generateFile(this.panels);
   }
 }

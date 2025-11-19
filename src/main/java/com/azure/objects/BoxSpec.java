@@ -15,6 +15,7 @@ public class BoxSpec {
   public Panel.PanelRole lidType;
   public double teethWidth;
   public String engraving;
+  public String svg;
   public ArrayList<Panel> panels = new ArrayList<Panel>();
 
   // constructor

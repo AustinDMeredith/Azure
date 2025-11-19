@@ -52,6 +52,16 @@ public class Secondary1Controller {
 
     private boolean isFullscreen = false;
 
+    @FXML
+    private void initialize() {
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
+
+        updatePreview(); 
+    }
+
     // Go fullscreen and hide top controls, expand WebView, toggle buttons 
     @FXML
     private void fullscreenSVG() {
@@ -103,17 +113,11 @@ public class Secondary1Controller {
         double t = Double.parseDouble(teethField.getText());
 
         BoxSpec box = new SimpleBox(h, w, d, Panel.PanelRole.top, t, "");
-        SvgGen.generateFile(box.panels);
 
-        WebEngine engine = svgPreview.getEngine();
-        String svgPath = "/com/azure/box.svg";
-        var url = getClass().getResource(svgPath);
-
-        if (url != null) {
-            engine.load(url.toExternalForm());
-        } else {
-            System.err.println("SVG not found at " + svgPath);
+        try {
+            svgPreview.getEngine().loadContent(box.svg, "text/html");
         }
+        catch (NumberFormatException e) {}
     }
 
     // Generate SVG file (placeholder)
