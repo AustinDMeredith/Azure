@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 module com.azure{
+=======
+module com.azure {
+>>>>>>> frontend
     requires transitive javafx.controls;
     requires javafx.fxml;
     requires javafx.web; 

@@ -6,7 +6,10 @@ target/
 .mvn/
 mvnw
 mvnw.cmd
+<<<<<<< HEAD
 maven-status/
+=======
+>>>>>>> frontend
 
 # Eclipse project files
 .classpath
