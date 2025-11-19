@@ -7,7 +7,7 @@
 <?import javafx.scene.effect.DropShadow?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.Secondary3Controller"
+            fx:controller="com.azure.Secondary2Controller"
             style="-fx-background-color: #4470b8;"
             prefWidth="800" prefHeight="600">
 

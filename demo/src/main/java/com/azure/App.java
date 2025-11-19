@@ -1,4 +1,4 @@
-package com.example;
+package com.azure;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,6 +1,6 @@
-com/example/App.class
-com/example/Secondary1Controller.class
-com/example/Secondary2Controller.class
-com/example/PrimaryController.class
+com/azure/PrimaryController.class
+com/azure/Secondary1Controller.class
 module-info.class
-com/example/Secondary3Controller.class
+com/azure/App.class
+com/azure/Secondary2Controller.class
+com/azure/Secondary3Controller.class
