@@ -5,6 +5,8 @@
 <?import javafx.scene.web.WebView?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.azure.Secondary3Controller"
@@ -42,6 +44,7 @@
 
                 <!-- Dimensions inputs -->
                 <HBox fx:id="dimensionsHBox" spacing="10" alignment="CENTER_LEFT">
+
                     <Label text="X:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="widthField" text="200" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
@@ -51,6 +54,22 @@
                     <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="depthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+
+                    <!-- for the drop down box -->
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <!-- DROPDOWN -->
+                    <HBox spacing="6" alignment="CENTER_LEFT" translateY="-65">
+                        <Label text="Lid type:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+
+                        <ComboBox fx:id="dimensionTypeCombo" prefWidth="150">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Regular Lid" />
+                                    <String fx:value="Sliding Lid" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
                 </HBox>
             </VBox>
 

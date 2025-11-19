@@ -17,6 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.scene.control.ComboBox;
 
 public class Secondary2Controller {
 
@@ -32,6 +33,8 @@ public class Secondary2Controller {
     private HBox dimensionsHBox;
     @FXML
     private TextField teethField, widthField, heightField, depthField;
+    @FXML
+    private ComboBox<String> dimensionTypeCombo;  
 
     // Fullscreen button container
     @FXML

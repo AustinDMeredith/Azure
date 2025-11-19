@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.scene.control.ComboBox;
 
 import com.azure.objects.SimpleBox;
 import com.azure.util.services.SvgGen;
@@ -33,6 +34,8 @@ public class Secondary1Controller {
     private HBox dimensionsHBox;
     @FXML
     private TextField teethField, widthField, heightField, depthField;
+    @FXML
+    private ComboBox<String> dimensionTypeCombo;    
 
     // Fullscreen button container
     @FXML
