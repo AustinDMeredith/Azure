@@ -5,6 +5,9 @@ package com.azure.util.services;
  * Description: This class will return a tolerance either in a global sense or a per-panel (ArrayList) sense
  * */
 
+import com.azure.objects.Panel;
+import java.util.ArrayList;
+
 
 public class ToleranceService {
   // Class atributes
@@ -22,6 +25,13 @@ public class ToleranceService {
       globalCurrent = medium;
     } else {
       globalCurrent = high;
+    }
+  }
+
+  public static void setPerPanelTolerance (ArrayList<Panel> panels, ArrayList<Double> tolerances) {
+    for (Panel panel : panels) {
+      
+
     }
   }
 
