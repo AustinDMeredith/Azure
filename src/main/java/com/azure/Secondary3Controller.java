@@ -12,6 +12,10 @@ import javafx.scene.web.WebView;
 import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import com.azure.objects.BoxSpec;
+import com.azure.objects.HingedBox;
 
 public class Secondary3Controller {
 
@@ -26,9 +30,7 @@ public class Secondary3Controller {
     @FXML
     private HBox dimensionsHBox;
     @FXML
-    private TextField teethField, widthField, heightField, depthField;
-    @FXML
-    private ComboBox<String> dimensionTypeCombo;  
+    private TextField teethField, widthField, heightField, depthField, radiusField;
 
     // Fullscreen button container
     @FXML
@@ -47,6 +49,16 @@ public class Secondary3Controller {
     private Button exitFullscreenBtn;
 
     private boolean isFullscreen = false;
+    
+    @FXML
+    private void initialize() {
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        radiusField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        updatePreview(); 
+    }
 
     // Go fullscreen and hide top controls, expand WebView, toggle buttons 
     @FXML
@@ -93,6 +105,18 @@ public class Secondary3Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+        double r = Double.parseDouble(radiusField.getText());
+        ArrayList<Double> tols = getTol();
+        
+        BoxSpec box = new HingedBox(h, w, d, r, t, "", tols);
+
+        try {
+            svgPreview.getEngine().loadContent(box.svg, "text/html");
+        } catch (NumberFormatException e) {}
         
     }
 
@@ -106,5 +130,23 @@ public class Secondary3Controller {
     @FXML
     private void downloadSVG() {
         
+    }
+
+    @FXML
+    private ArrayList<Double> getTol() {
+        ArrayList<Double> tols = new ArrayList<Double>();
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        return tols;
     }
 }

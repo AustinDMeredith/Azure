@@ -100,7 +100,47 @@ public class SetEdgeRoles {
         panel.edges.add(Panel.EdgeRole.flat);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.flat);
-      }
-    }
+      } else if (panel.role == Panel.PanelRole.frontTop) {
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.female);
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.frontBottom) {
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.female);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.female);
+      } else if (panel.role == Panel.PanelRole.backTop) {
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.femaleConnector);
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.femaleConnector);
+      } else if (panel.role == Panel.PanelRole.backBottom) {
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.femaleBack);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.femaleBack);
+      } else if (panel.role == Panel.PanelRole.rightTop) {
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.maleCutOut);
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.male);
+      } else if (panel.role == Panel.PanelRole.rightBottom) {
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.maleHinge);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.male);
+      } else if (panel.role == Panel.PanelRole.leftTop) {
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.maleCutOut);
+      } else if (panel.role == Panel.PanelRole.leftBottom) {
+        panel.edges.add(Panel.EdgeRole.flat);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.male);
+        panel.edges.add(Panel.EdgeRole.maleHinge);
+      }    
+    } 
   }
 }

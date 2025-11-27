@@ -30,7 +30,7 @@
                             <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
                         </effect>
                     </Label>
-                    <TextField fx:id="teethField" text="5" prefWidth="60"
+                    <TextField fx:id="teethField" text="8" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                 </HBox>
 
@@ -46,30 +46,17 @@
                 <HBox fx:id="dimensionsHBox" spacing="10" alignment="CENTER_LEFT">
 
                     <Label text="X:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
-                    <TextField fx:id="widthField" text="200" prefWidth="60"
+                    <TextField fx:id="widthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                     <Label text="Y:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
-                    <TextField fx:id="heightField" text="150" prefWidth="60"
+                    <TextField fx:id="heightField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                     <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="depthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
-
-                    <!-- for the drop down box -->
-                    <Region HBox.hgrow="ALWAYS"/>
-                    <!-- DROPDOWN -->
-                    <HBox spacing="6" alignment="CENTER_LEFT" translateY="-65">
-                        <Label text="Lid type:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
-
-                        <ComboBox fx:id="dimensionTypeCombo" prefWidth="150">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Regular Lid" />
-                                    <String fx:value="Sliding Lid" />
-                                </FXCollections>
-                            </items>
-                        </ComboBox>
-                    </HBox>
+                    <Label text="Radius:" style="-fx-font-weight: bold; -fx-text-fill: white;"/> 
+                    <TextField fx:id="radiusField" text="5" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                 </HBox>
             </VBox>
 

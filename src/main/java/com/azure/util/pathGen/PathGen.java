@@ -61,6 +61,14 @@ public class PathGen {
         } else { // Call bottom path gen with panel width for right and left edges
           d.append(FlatPathGen.gen(h, dx, dy, panel));
         }
+      } else if (edgeRole == Panel.EdgeRole.maleHinge) {
+
+      } else if (edgeRole == Panel.EdgeRole.maleCutOut) {
+
+      } else if (edgeRole == Panel.EdgeRole.femaleConnector) {
+
+      } else if (edgeRole == Panel.EdgeRole.femaleBack) {
+
       }
 
       i++;
@@ -77,6 +85,7 @@ public class PathGen {
       int dx = 1; int dy = 0; int next = 1; int last = 3;
       d.append(RailHoleGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
     }
+
     // Assign back to the panel 
     panel.path = d.toString();
   }

@@ -10,19 +10,31 @@ public class Panel {
   public String id;
   public PanelRole role;
   public String path;
-  public double height, width;
+  public double height, width, radius;
   public ArrayList<Double> startPoint = new ArrayList<Double>();
   public ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
   public ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
 
-  public static enum PanelRole {slidingLid, liftingLid, top, front, back, right, left, bottom, basedBottom, slidableFront, slidableLeft, slidableRight, slidableBack, bottomLeftRail, bottomRightRail, topLeftRail, topRightRail, backRail, frontTop, frontBottom, backTop, backBottom, rightTop, rightBottom, leftTop, leftBottom, hingeRight, hingeLeft}
-  public static enum EdgeRole {male, female, top, bottom, slidableSide, slidableBack, slidableFront, flat, flatLid, connecting}
+  public static enum PanelRole {slidingLid, liftingLid, top, front, back, right, left, bottom, basedBottom, 
+    slidableFront, slidableLeft, slidableRight, slidableBack, bottomLeftRail, bottomRightRail, topLeftRail, topRightRail, backRail, 
+    frontTop, frontBottom, backTop, backBottom, rightTop, rightBottom, leftTop, leftBottom, hingeRight, hingeLeft}
+  
+  public static enum EdgeRole {male, female, top, bottom, 
+    slidableSide, slidableBack, slidableFront, flat, flatLid,
+    maleHinge, maleCutOut, femaleConnector, femaleBack}
 
-  // constructor
+  // constructor for normal panels
   public Panel (String id, PanelRole role, double height, double width) {
     this.id = id;
     this.role = role;
     this.height = height;
     this.width = width;
+  }
+
+  // constructor for hinge panels (the circle)
+  public Panel (String id, PanelRole role, double radius) {
+    this.id = id;
+    this.role = role;
+    this.radius = radius;
   }
 }
