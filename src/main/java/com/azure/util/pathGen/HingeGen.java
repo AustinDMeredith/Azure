@@ -1,11 +1,43 @@
 package com.azure.util.pathGen;
 
+import java.util.ArrayList;
+
+import com.azure.objects.Panel;
+import com.azure.util.services.KerfService;
+import com.azure.util.services.ToleranceService;
+
 public class HingeGen {
-  public static String gen(double radius, double cx, double cy) {
-    double stroke = .1;
-    cx += 5;
-    cy += 5;
-    return String.format("<circle cx=\"%f\" cy=\"%f\" r=\"%f\" stroke=\"%s\" />",
-        cx, cy, radius, stroke);
+  public static String genHinge (double x0, double y0) {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("<path d=\" M %.3f %.3f ", x0, y0));
+    sb.append("a 5 5 0 0 1 10 0 ");
+    sb.append("a 5 5 0 0 1 -10 0 ");
+    sb.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
+    return sb.toString();
+  }
+
+  public static String genHole (double x0, double y0, double depth) {
+    double toothWidth = 3;
+    int dx = 0, dy = 1;
+    final int px = dy, py = -dx;
+    ArrayList<Double> kerf = KerfService.getKerf(1);
+    double toothKerf = kerf.get(0);
+    double cornerKerf = kerf.get(1);
+
+    double tol = ToleranceService.getGlobalCurrent();
+    toothKerf -= tol;
+    cornerKerf -= tol;
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("<path d= \" M %.3f %.3f ", x0, y0));
+    sb.append(rel(px * depth, py * depth));
+    sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
+    sb.append(rel(px * -depth, py * -depth));
+    sb.append(rel(dx * (-toothWidth - toothKerf), dy * (-toothWidth - toothKerf)));
+    sb.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
+    return sb.toString();
+  }
+
+  private static String rel(double rx, double ry) {
+    return String.format("l%.3f %.3f ", rx, ry);
   }
 }

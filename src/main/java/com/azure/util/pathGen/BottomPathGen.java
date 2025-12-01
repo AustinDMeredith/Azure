@@ -53,7 +53,7 @@ public class BottomPathGen {
       final double edgeLen = (i % 2 == 0) ? panel.width + depth * 2 : panel.height + depth * 2;
 
       // Get corner offset and slot count for this edge
-      ArrayList<Double> spec = EdgeSpec.getEdgeSpec(edgeLen - depth * 2, depth, toothWidth, panel.edges.get(last), panel.edges.get(next));
+      ArrayList<Double> spec = EdgeSpec.getEdgeSpec(edgeLen - depth * 2, depth, toothWidth, panel.edges.get(last), panel.edges.get(next), false);
       final double corner = spec.get(0);
       final int n = (int)Math.round(spec.get(1));
 

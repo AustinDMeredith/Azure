@@ -54,9 +54,6 @@
                     <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="depthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
-                    <Label text="Radius:" style="-fx-font-weight: bold; -fx-text-fill: white;"/> 
-                    <TextField fx:id="radiusField" text="5" prefWidth="60"
-                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                 </HBox>
             </VBox>
 

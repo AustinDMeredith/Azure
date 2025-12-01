@@ -13,9 +13,9 @@ public class HingedBoxTest {
   public void verifyPanelRoles () {
 
     ArrayList<Double> tols = new ArrayList<Double>();
-    for (int i = 0; i < 12; i++) tols.add(1.0);
+    for (int i = 0; i < 10; i++) tols.add(1.0);
 
-    BoxSpec box1 = new HingedBox(100, 100, 100, 15, 5, "", tols);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
 
     assertEquals(Panel.PanelRole.frontTop, box1.panels.get(0).role);
     assertEquals(Panel.PanelRole.frontBottom, box1.panels.get(1).role);
@@ -27,17 +27,15 @@ public class HingedBoxTest {
     assertEquals(Panel.PanelRole.leftBottom, box1.panels.get(7).role);
     assertEquals(Panel.PanelRole.top, box1.panels.get(8).role);
     assertEquals(Panel.PanelRole.bottom, box1.panels.get(9).role);
-    assertEquals(Panel.PanelRole.hingeRight, box1.panels.get(10).role);
-    assertEquals(Panel.PanelRole.hingeLeft, box1.panels.get(11).role);
   }
 
   @Test
   public void verifyEdgeRoles () {
     
     ArrayList<Double> tols = new ArrayList<Double>();
-    for (int i = 0; i < 12; i++) tols.add(1.0);
+    for (int i = 0; i < 10; i++) tols.add(1.0);
 
-    BoxSpec box1 = new HingedBox(100, 100, 100, 15, 5, "", tols);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
 
     // front top panel
     assertEquals(Panel.EdgeRole.male, box1.panels.get(0).edges.get(0));
@@ -100,4 +98,44 @@ public class HingedBoxTest {
     assertEquals(Panel.EdgeRole.female, box1.panels.get(9).edges.get(3));
   }
 
+  @Test
+  public void verifyStartPoints() {
+    ArrayList<Double> tols = new ArrayList<Double>();
+    for (int i = 0; i < 10; i++) tols.add(1.0);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
+ 
+    assertEquals(10, box1.panels.get(0).startPoint.get(0), 0);
+    assertEquals(20, box1.panels.get(0).startPoint.get(1), 0);
+    
+    assertEquals(120, box1.panels.get(1).startPoint.get(0), 0);
+    assertEquals(10, box1.panels.get(1).startPoint.get(1), 0);
+    
+    assertEquals(10, box1.panels.get(2).startPoint.get(0), 0);
+    assertEquals(90, box1.panels.get(2).startPoint.get(1), 0);
+    
+    assertEquals(10, box1.panels.get(2).startPoint.get(0), 0);
+    assertEquals(90, box1.panels.get(2).startPoint.get(1), 0);
+    
+    assertEquals(120, box1.panels.get(3).startPoint.get(0), 0);
+    assertEquals(80, box1.panels.get(3).startPoint.get(1), 0);
+    
+    assertEquals(13.175, box1.panels.get(4).startPoint.get(0), 0);
+    assertEquals(160, box1.panels.get(4).startPoint.get(1), 0);
+    
+    assertEquals(123.175, box1.panels.get(5).startPoint.get(0), 0);
+    assertEquals(150, box1.panels.get(5).startPoint.get(1), 0);
+    
+    assertEquals(10, box1.panels.get(6).startPoint.get(0), 0);
+    assertEquals(230, box1.panels.get(6).startPoint.get(1), 0);
+    
+    assertEquals(120, box1.panels.get(7).startPoint.get(0), 0);
+    assertEquals(220, box1.panels.get(7).startPoint.get(1), 0);
+    
+    assertEquals(10, box1.panels.get(8).startPoint.get(0), 0);
+    assertEquals(290, box1.panels.get(8).startPoint.get(1), 0);
+    
+    assertEquals(120, box1.panels.get(9).startPoint.get(0), 0);
+    assertEquals(290, box1.panels.get(9).startPoint.get(1), 0);
+    
+  }
 }

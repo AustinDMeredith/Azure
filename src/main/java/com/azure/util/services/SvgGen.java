@@ -13,11 +13,12 @@ import java.util.ArrayList;
 
 import com.azure.objects.Panel;
 
+
 public class SvgGen {
   static ArrayList<Double> viewBoxSize = LayoutService.getVeiwBoxSize();
 
-  static double x = viewBoxSize.get(0);
-  static double y = viewBoxSize.get(1);
+  static double x = 1000;
+  static double y = 1000;
 
   static Path svgPath = Paths.get("src", "main", "resources", "com", "azure", "box.svg");
 

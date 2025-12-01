@@ -27,11 +27,19 @@ public class FlatPathGen {
   }
 
   public static String gen (double length, double dx, double dy, Panel panel) {
-
-
     StringBuilder sb = new StringBuilder();
     sb.append(rel(dx * length, dy * length));
   
+    return sb.toString();
+  }
+
+  public static String hingedGen (double length, double dx, double dy, Panel panel) {
+    StringBuilder sb = new StringBuilder();
+    double hingedRM = (panel.role == Panel.PanelRole.frontTop || panel.role == Panel.PanelRole.frontBottom 
+        || panel.role == Panel.PanelRole.backTop || panel.role == Panel.PanelRole.backBottom) ? 0 : 8 + 3.175;
+    hingedRM = (panel.role == Panel.PanelRole.backBottom) ? 3.175 * 2 : hingedRM;
+    sb.append(rel(dx * (length - hingedRM), dy * (length - hingedRM)));
+
     return sb.toString();
   }
   

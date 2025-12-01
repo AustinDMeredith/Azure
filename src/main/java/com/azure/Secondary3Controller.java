@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import com.azure.objects.BoxSpec;
 import com.azure.objects.HingedBox;
+import com.azure.objects.BasedBox;
+import com.azure.objects.Panel;
 
 public class Secondary3Controller {
 
@@ -30,7 +32,7 @@ public class Secondary3Controller {
     @FXML
     private HBox dimensionsHBox;
     @FXML
-    private TextField teethField, widthField, heightField, depthField, radiusField;
+    private TextField teethField, widthField, heightField, depthField;
 
     // Fullscreen button container
     @FXML
@@ -56,7 +58,6 @@ public class Secondary3Controller {
         widthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
         heightField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
         depthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
-        radiusField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
         updatePreview(); 
     }
 
@@ -109,10 +110,11 @@ public class Secondary3Controller {
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
-        double r = Double.parseDouble(radiusField.getText());
         ArrayList<Double> tols = getTol();
         
-        BoxSpec box = new HingedBox(h, w, d, r, t, "", tols);
+
+        //BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, t, "");
+        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
 
         try {
             svgPreview.getEngine().loadContent(box.svg, "text/html");

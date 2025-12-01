@@ -42,23 +42,21 @@ public class AddPanels {
       panels.add(new Panel("p-8", Panel.PanelRole.topLeftRail, 8, depth));
       panels.add(new Panel("p-9", Panel.PanelRole.topRightRail, 8, depth));
       panels.add(new Panel("p-10", Panel.PanelRole.backRail, 8, width));
-    } else if (isHinged) {
-    }
+    } 
   }
 
-  public static void setHinged (double height, double width, double depth, double radius, ArrayList<Panel> panels){
-      panels.add(new Panel("p-0", Panel.PanelRole.frontTop, height * .33, width));
-      panels.add(new Panel("p-1", Panel.PanelRole.frontBottom, height * .66, width));
-      panels.add(new Panel("p-2", Panel.PanelRole.backTop, height * .33, width));
-      panels.add(new Panel("p-3", Panel.PanelRole.backBottom, height * .66, width));
-      panels.add(new Panel("p-4", Panel.PanelRole.rightTop, height * .33, depth));
-      panels.add(new Panel("p-5", Panel.PanelRole.rightBottom, height * .66, depth));
-      panels.add(new Panel("p-6", Panel.PanelRole.leftTop, height * .33, depth));
-      panels.add(new Panel("p-7", Panel.PanelRole.leftBottom, height * .66, depth));
+  public static void setHinged (double height, double width, double depth, ArrayList<Panel> panels){
+      panels.add(new Panel("p-0", Panel.PanelRole.frontTop, height * .40, width));
+      panels.add(new Panel("p-1", Panel.PanelRole.frontBottom, height * .60, width));
+      panels.add(new Panel("p-2", Panel.PanelRole.backTop, height * .40, width));
+      panels.add(new Panel("p-3", Panel.PanelRole.backBottom, height * .60, width));
+      panels.add(new Panel("p-4", Panel.PanelRole.rightTop, height * .40, depth));
+      panels.add(new Panel("p-5", Panel.PanelRole.rightBottom, height * .60, depth));
+      panels.add(new Panel("p-6", Panel.PanelRole.leftTop, height * .40, depth));
+      panels.add(new Panel("p-7", Panel.PanelRole.leftBottom, height * .60, depth));
       panels.add(new Panel("p-8", Panel.PanelRole.top, depth, width));
-      panels.add(new Panel("p-9", Panel.PanelRole.bottom, width, depth));
-      panels.add(new Panel("p-10", Panel.PanelRole.hingeRight, radius));
-      panels.add(new Panel("p-11", Panel.PanelRole.hingeLeft, radius));
+      panels.add(new Panel("p-9", Panel.PanelRole.bottom, depth, width));
+
     
   }
 }

@@ -12,7 +12,6 @@ public class BoxSpec {
   public double height;
   public double width;
   public double depth;
-  public double radius;
   public Panel.PanelRole lidType;
   public double teethWidth;
   public String engraving;
