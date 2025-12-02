@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.azure.DownloadController"
+            prefWidth="400.0" prefHeight="200.0"
+            style="-fx-background-color: #4470b8;">
+
+    <top>
+      <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
+        <Button text="Exit" onAction="#handleClose" />
+      </HBox>
+    </top>
+    
+    <center>
+        <VBox alignment="CENTER" spacing="10.0">
+            <children>
+                <Label text="Select a folder"
+                       style="-fx-text-fill: white; -fx-font-size: 18;" />
+
+                <Button text="Save File"
+                        onAction="#handleSaveSvg" />
+
+                <Label fx:id="selectedFileLabel"
+                       text="No file selected"
+                       style="-fx-text-fill: white;" />
+
+            </children>
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+        </VBox>
+    </center>
+
+</BorderPane>

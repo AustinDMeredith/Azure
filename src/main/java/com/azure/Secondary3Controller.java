@@ -5,19 +5,15 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
-import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import com.azure.objects.BoxSpec;
 import com.azure.objects.HingedBox;
-import com.azure.objects.BasedBox;
-import com.azure.objects.Panel;
 
 public class Secondary3Controller {
 
@@ -112,8 +108,6 @@ public class Secondary3Controller {
         double t = Double.parseDouble(teethField.getText());
         ArrayList<Double> tols = getTol();
         
-
-        //BoxSpec box = new BasedBox(h, w, d, Panel.PanelRole.top, t, "");
         BoxSpec box = new HingedBox(h, w, d, t, "", tols);
 
         try {
@@ -122,18 +116,26 @@ public class Secondary3Controller {
         
     }
 
-    // Generate SVG file (placeholder)
+    // Generate SVG file 
     @FXML
-    private void generateSVGFile() {
-       
-    }
-
-    //
-    @FXML
-    private void downloadSVG() {
+    private String generateSVGFile() {
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+        ArrayList<Double> tols = getTol();
         
+        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
+
+        return box.svg;
     }
 
+    // Saves the svg file
+    @FXML
+    private void downloadSVG() throws IOException {
+       App.openDownloadPopup("downloadPopup", generateSVGFile());
+    }
+    
     @FXML
     private ArrayList<Double> getTol() {
         ArrayList<Double> tols = new ArrayList<Double>();

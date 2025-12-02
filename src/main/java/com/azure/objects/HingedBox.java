@@ -8,7 +8,6 @@ import com.azure.util.services.AddPanels;
 import com.azure.util.services.IngravingService;
 import com.azure.util.services.SvgGen;
 import com.azure.util.pathGen.PathGen;
-import com.azure.util.pathGen.HingeGen;
 
 public class HingedBox extends BoxSpec {
   public HingedBox (double height, double width, double depth, double teethWidth, String engraving, ArrayList<Double> tolerances) {

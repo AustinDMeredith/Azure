@@ -70,10 +70,6 @@
             <HBox fx:id="buttonHBox" spacing="10" alignment="CENTER_LEFT">
                 <Button text="Back to Main Menu" onAction="#switchToPrimary"
                         style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
-                <Button text="Update Preview" onAction="#updatePreview"
-                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
-                <Button text="Generate SVG File" onAction="#generateSVGFile"
-                        style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
                 <Button text="Download" onAction="#downloadSVG"
                         style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 2, 2);"/>
                 <Button fx:id="exitFullscreenBtn" text="Exit Fullscreen" onAction="#exitFullscreenSVG"

@@ -5,8 +5,11 @@ package com.azure.util.pathGen;
  * Description: Generate SVG path strings with finger-joint teeth for a rectangular panel.
  */
 
+import java.util.ArrayList;
+
 import com.azure.objects.Panel;
 import com.azure.objects.BoxSpec;
+import com.azure.util.services.KerfService;
 
 public class PathGen {
 
@@ -63,11 +66,7 @@ public class PathGen {
       } else if (edgeRole == Panel.EdgeRole.femaleBack) {
         d.append(FemalePathGen.backGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
       } else if (edgeRole == Panel.EdgeRole.femaleConnector) {
-        if (i % 2 == 0) { // Call female path gen with panel width for top and bottom edges
-          d.append(FemalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
-        } else { // Call female path gen with panel width for right and left edges
-          d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
-        }
+        d.append(FemalePathGen.connectorGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
       }
 
       i++;
@@ -75,20 +74,24 @@ public class PathGen {
     
     // Close
     d.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
-
+ 
+    ArrayList<Double> kerf = KerfService.getKerf(1);
+    double toothKerf = kerf.get(0);
     if (panel.role == Panel.PanelRole.rightBottom) {
       w -= 8.175;
       x0 += w; 
       d.append(HingeGen.genHinge(x0, y0));
+
       x0 += 1.825;
-      y0 -= 3;
+      y0 -= 3 + toothKerf;
       d.append(HingeGen.genHole(x0, y0, toothDepth));
     }
     if (panel.role == Panel.PanelRole.leftBottom) {
       x0 -= 13;
       d.append(HingeGen.genHinge(x0, y0));
-      x0 += 5;
-      y0 -= 3;
+
+      x0 += 5 + toothKerf;
+      y0 -= 3 + toothKerf;
       d.append(HingeGen.genHole(x0, y0, toothDepth));
     }
 

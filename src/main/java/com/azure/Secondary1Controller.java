@@ -1,20 +1,16 @@
 package com.azure;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.scene.control.ComboBox;
 
 import com.azure.objects.SimpleBox;
-import com.azure.util.services.SvgGen;
 import com.azure.objects.BoxSpec;
 import com.azure.objects.Panel;
 
@@ -127,14 +123,22 @@ public class Secondary1Controller {
 
     // Generate SVG file (placeholder)
     @FXML
-    private void generateSVGFile() {
-       
+    private String generateSVGFile() {
+        Panel.PanelRole lid = returnLidType(dimensionTypeCombo.getSelectionModel().getSelectedIndex());
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+
+        BoxSpec box = new SimpleBox(h, w, d, lid, t, "");
+    
+        return box.svg;
     }
 
     //
     @FXML
-    private void downloadSVG() {
-        
+    private void downloadSVG() throws IOException {
+       App.openDownloadPopup("downloadPopup", generateSVGFile());
     }
 
     private Panel.PanelRole returnLidType (int index) {

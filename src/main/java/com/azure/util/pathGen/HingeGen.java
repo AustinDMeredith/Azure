@@ -2,7 +2,6 @@ package com.azure.util.pathGen;
 
 import java.util.ArrayList;
 
-import com.azure.objects.Panel;
 import com.azure.util.services.KerfService;
 import com.azure.util.services.ToleranceService;
 
@@ -22,17 +21,15 @@ public class HingeGen {
     final int px = dy, py = -dx;
     ArrayList<Double> kerf = KerfService.getKerf(1);
     double toothKerf = kerf.get(0);
-    double cornerKerf = kerf.get(1);
 
     double tol = ToleranceService.getGlobalCurrent();
     toothKerf -= tol;
-    cornerKerf -= tol;
     StringBuilder sb = new StringBuilder();
     sb.append(String.format("<path d= \" M %.3f %.3f ", x0, y0));
-    sb.append(rel(px * depth, py * depth));
+    sb.append(rel(px * (depth - toothKerf), py * (depth - toothKerf)));
     sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
-    sb.append(rel(px * -depth, py * -depth));
-    sb.append(rel(dx * (-toothWidth - toothKerf), dy * (-toothWidth - toothKerf)));
+    sb.append(rel(px * -(depth - toothKerf), py * -(depth - toothKerf)));
+    sb.append(rel(dx * -(toothWidth - toothKerf), dy * -(toothWidth - toothKerf)));
     sb.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
     return sb.toString();
   }
