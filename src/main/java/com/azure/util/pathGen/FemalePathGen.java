@@ -255,7 +255,7 @@ public class FemalePathGen {
       StringBuilder sb = new StringBuilder();
 
       if (lastIsFlat) {
-        sb.append(rel(dx * (3 + toothKerf), dy * (3 + toothKerf)));
+        sb.append(rel(dx * (3 + (2*toothKerf)), dy * (3 + (2*toothKerf))));
         sb.append(rel(px * -depth, py * -depth));
         sb.append(rel(dx * (5 - toothKerf), dy * (5 - toothKerf)));
         sb.append(rel(px * depth, py * depth));
@@ -289,7 +289,7 @@ public class FemalePathGen {
         sb.append(rel(px * -depth, py * -depth));
         sb.append(rel(dx * (5 - toothKerf), dy * (5 - toothKerf)));
         sb.append(rel(px * depth, py * depth));
-        sb.append(rel(dx * (3 + toothKerf), dy * (3 + toothKerf)));
+        sb.append(rel(dx * (3 + (2*toothKerf)), dy * (3 + (2*toothKerf))));
       }
 
       final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
