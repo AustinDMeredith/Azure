@@ -31,7 +31,7 @@ public class SimpleBox extends BoxSpec {
     LayoutService.findStartPoint(this.panels);
   
     for (Panel panel : this.panels) {
-      PathGen.generatePanelPath(panel, this.teethWidth);
+      PathGen.generatePanelPath(panel, this.teethWidth, this.boxType);
     }
     IngravingService.addEngravings(engraving, panels);
 

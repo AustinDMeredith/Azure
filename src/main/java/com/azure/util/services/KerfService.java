@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class KerfService {
   static double smallKerf = .3;
-  static double mediumKerf = .5;
+  static double mediumKerf = .6;
   static double largeKerf = .7;
-  static double currentKerf = largeKerf;
+  static double currentKerf = mediumKerf;
 
   public static ArrayList<Double> getKerf (double n) {
     ArrayList<Double> settings = new ArrayList<>();

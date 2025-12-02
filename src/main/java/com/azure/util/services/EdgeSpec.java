@@ -14,22 +14,22 @@ public class EdgeSpec {
     double depth, 
     double toothWidth, 
     Panel.EdgeRole lastRole, 
-    Panel.EdgeRole nextRole
+    Panel.EdgeRole nextRole,
+    boolean isHingedBottom
     ) {
     // ---- corner policy ----
     // Minimum corner offset for structural integrity.
     final double baseMinCorner = Math.max(depth * 2, 0.5 * toothWidth);
 
-    final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
-    final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);
-
+    final boolean lastIsMale = (lastRole == Panel.EdgeRole.male || lastRole == Panel.EdgeRole.maleHinge || lastRole == Panel.EdgeRole.maleCutOut);
+    final boolean nextIsMale = (nextRole == Panel.EdgeRole.male || nextRole == Panel.EdgeRole.maleHinge || nextRole == Panel.EdgeRole.maleCutOut);
     // If neighbor is male, we retract by 'depth' at that corner, so ensure corner >= depth there.
     double requiredLeftCorner  = lastIsMale ? depth : 0.0;
     double requiredRightCorner = nextIsMale ? depth : 0.0;
 
     // Global minimum that satisfies structure + neighbors
-    final double minCorner = Math.max(baseMinCorner, Math.max(requiredLeftCorner, requiredRightCorner));
-
+    double minCorner = Math.max(baseMinCorner, Math.max(requiredLeftCorner, requiredRightCorner));
+    minCorner = isHingedBottom ? minCorner + depth : minCorner;
     // ---- choose number of slots n so corners can be >= minCorner ----
     // For n slots, baseline footprint inside the pattern is (2n - 1) * toothWidth.
     // Remaining baseline is shared by the two corners: corner = (length - (2n - 1)*toothWidth)/2.

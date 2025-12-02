@@ -5,13 +5,15 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
-import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import com.azure.objects.BoxSpec;
+import com.azure.objects.HingedBox;
 
 public class Secondary3Controller {
 
@@ -27,8 +29,6 @@ public class Secondary3Controller {
     private HBox dimensionsHBox;
     @FXML
     private TextField teethField, widthField, heightField, depthField;
-    @FXML
-    private ComboBox<String> dimensionTypeCombo;  
 
     // Fullscreen button container
     @FXML
@@ -47,6 +47,15 @@ public class Secondary3Controller {
     private Button exitFullscreenBtn;
 
     private boolean isFullscreen = false;
+    
+    @FXML
+    private void initialize() {
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        updatePreview(); 
+    }
 
     // Go fullscreen and hide top controls, expand WebView, toggle buttons 
     @FXML
@@ -93,18 +102,55 @@ public class Secondary3Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+        ArrayList<Double> tols = getTol();
+        
+        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
+
+        try {
+            svgPreview.getEngine().loadContent(box.svg, "text/html");
+        } catch (NumberFormatException e) {}
         
     }
 
-    // Generate SVG file (placeholder)
+    // Generate SVG file 
     @FXML
-    private void generateSVGFile() {
-       
+    private String generateSVGFile() {
+        double w = Double.parseDouble(widthField.getText());
+        double h = Double.parseDouble(heightField.getText());
+        double d = Double.parseDouble(depthField.getText());
+        double t = Double.parseDouble(teethField.getText());
+        ArrayList<Double> tols = getTol();
+        
+        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
+
+        return box.svg;
     }
 
-    //
+    // Saves the svg file
     @FXML
-    private void downloadSVG() {
-        
+    private void downloadSVG() throws IOException {
+       App.openDownloadPopup("downloadPopup", generateSVGFile());
+    }
+    
+    @FXML
+    private ArrayList<Double> getTol() {
+        ArrayList<Double> tols = new ArrayList<Double>();
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        tols.add(.01);
+        return tols;
     }
 }

@@ -32,7 +32,7 @@ public class BasedBox extends BoxSpec{
 
     
     for (Panel panel : this.panels) {
-      PathGen.generatePanelPath(panel, this.teethWidth);
+      PathGen.generatePanelPath(panel, this.teethWidth, this.boxType);
     }
     IngravingService.addEngravings(engraving, panels);
 

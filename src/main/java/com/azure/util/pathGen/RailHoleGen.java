@@ -12,7 +12,7 @@ public class RailHoleGen {
     ArrayList<Double> sp = panel.startPoint; // MUST be top-left of this panel in SVG coords
     StringBuilder sb = new StringBuilder();
     
-    ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole);
+    ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole, false);
     double corner = edgeSpec.get(0);
     double n = edgeSpec.get(1);
 
