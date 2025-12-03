@@ -47,9 +47,9 @@ public class PathGen {
 
       if (edgeRole == Panel.EdgeRole.male) {
         if (i % 2 == 0) { // Call male path gen with panel width for top and bottom edges
-          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel)); 
+          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole)); 
         } else { // Call male path gen with panel width for right and left edges
-          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));    
+          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole));    
         }
       } else if (edgeRole == Panel.EdgeRole.female) {
         if (i % 2 == 0) { // Call female path gen with panel width for top and bottom edges
@@ -58,15 +58,15 @@ public class PathGen {
           d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
         }
       } else if (edgeRole == Panel.EdgeRole.maleHinge) {
-        d.append(MalePathGen.hingedGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
+        d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole));
       } else if (edgeRole == Panel.EdgeRole.flat) {
         d.append(FlatPathGen.hingedGen(w, dx, dy, panel));
       } else if (edgeRole == Panel.EdgeRole.maleCutOut) { 
-        d.append(MalePathGen.cutOutGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
+        d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole));
       } else if (edgeRole == Panel.EdgeRole.femaleBack) {
-        d.append(FemalePathGen.backGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
+        d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
       } else if (edgeRole == Panel.EdgeRole.femaleConnector) {
-        d.append(FemalePathGen.connectorGen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
+        d.append(FemalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
       }
 
       i++;
@@ -122,9 +122,9 @@ public class PathGen {
 
       if (edgeRole == Panel.EdgeRole.male) {
         if (i % 2 == 0) { // Call male path gen with panel width for top and bottom edges
-          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel)); 
+          d.append(MalePathGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole)); 
         } else { // Call male path gen with panel width for right and left edges
-          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));    
+          d.append(MalePathGen.gen(h, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel, edgeRole));    
         }
       } else if (edgeRole == Panel.EdgeRole.female || edgeRole == Panel.EdgeRole.slidableSide || edgeRole == Panel.EdgeRole.slidableBack) {
         if (i % 2 == 0) { // Call female path gen with panel width for top and bottom edges

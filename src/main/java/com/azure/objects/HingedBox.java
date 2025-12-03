@@ -34,7 +34,5 @@ public class HingedBox extends BoxSpec {
     IngravingService.addEngravings(engraving, panels);
 
     this.svg = SvgGen.generateFile(this.panels);
-  
-    SvgGen.writeFile(this.panels);
   }
 }

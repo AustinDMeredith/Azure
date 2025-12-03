@@ -5,14 +5,11 @@ package com.azure.util.services;
  * Description: This class will generate the svg. We will probably have a .svg that has all the boilerplate that we just manipulate
  *              the stuff we need to change.
  * */
-import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import com.azure.objects.Panel;
-
 
 public class SvgGen {
   static ArrayList<Double> viewBoxSize = LayoutService.getVeiwBoxSize();
@@ -53,39 +50,4 @@ public class SvgGen {
 
       return sb.toString();
   }
-
-  // function to write to file
-  static public void writeFile (ArrayList<Panel> panels) {
-    try { // clears the box.svg, later we'll make new files and name them
-      FileWriter clear = new FileWriter(svgPath.toFile());
-      clear.write("");
-      clear.close();
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-    
-    // appends data to the cleared file
-    try (FileWriter writer = new FileWriter(svgPath.toFile(), true)) {
-      writer.write(prefix);
-      writer.write(viewBox);
-      writer.write(urls);
-      //writer.write("<rect height=\"100%\" width=\"100%\" fill=\"rgba(255, 255, 255, 1)\"/>\n");
-      // writes paths for panels
-      for (Panel panel : panels) {
-        writer.write("<g id=\"" + panel.id + "\" style=\"fill:none;stroke-linecap:round;stroke-linejoin:round;\">\n");
-        writer.write("  <path d = \"" + panel.path);
-        writer.write("</g>\n");
-      }
-
-      writer.write("</svg>");
-      //System.out.println("Successfully wrote to box.svg");
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
-      e.printStackTrace();
-    }
-  }
-  
 }
-
-
