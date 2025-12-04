@@ -143,6 +143,8 @@ public class Secondary1Controller {
 
     private Panel.PanelRole returnLidType (int index) {
         if (index == 0) return Panel.PanelRole.top;
-        return Panel.PanelRole.slidingLid;
+        else if (index == 1) return Panel.PanelRole.slidingLid;
+        return Panel.PanelRole.liftingLid;
+        
     }
 }

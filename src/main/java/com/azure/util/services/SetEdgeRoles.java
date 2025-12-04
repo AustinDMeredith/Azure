@@ -70,7 +70,7 @@ public class SetEdgeRoles {
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
-      } else if (panel.role == Panel.PanelRole.slidingLid) {
+      } else if (panel.role == Panel.PanelRole.slidingLid || panel.role == Panel.PanelRole.liftingLid || panel.role == Panel.PanelRole.innerLid) {
         panel.edges.add(Panel.EdgeRole.flatLid);
         panel.edges.add(Panel.EdgeRole.flatLid);
         panel.edges.add(Panel.EdgeRole.flatLid);

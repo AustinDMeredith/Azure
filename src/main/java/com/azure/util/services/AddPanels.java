@@ -42,6 +42,15 @@ public class AddPanels {
       panels.add(new Panel("p-8", Panel.PanelRole.topLeftRail, 8, depth));
       panels.add(new Panel("p-9", Panel.PanelRole.topRightRail, 8, depth));
       panels.add(new Panel("p-10", Panel.PanelRole.backRail, 8, width));
+    } else {
+      panels.add(new Panel("p-0", Panel.PanelRole.front, height, width));
+      panels.add(new Panel("p-1", Panel.PanelRole.back, height, width));
+      panels.add(new Panel("p-2", Panel.PanelRole.right, height, depth));
+      panels.add(new Panel("p-3", Panel.PanelRole.left, height, depth));
+      panels.add(new Panel("p-4", lidType, width, depth));
+      panels.add(new Panel("p-5", bottom, width, depth));
+      panels.add(new Panel("p-6", Panel.PanelRole.innerLid, width, depth));
+      panels.add(new Panel("p-7", Panel.PanelRole.handle, 20, width * .20));
     } 
   }
 

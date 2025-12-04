@@ -66,6 +66,7 @@
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Regular Lid" />
                                     <String fx:value="Sliding Lid" />
+                                    <String fx:value="Lifting Lid" />
                                 </FXCollections>
                             </items>
                         </ComboBox>

@@ -40,7 +40,7 @@ public class MalePathGen {
  // helper to define the specifications for the edge
   private static ArrayList<Double> getEdgeSpecs (Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, double length, double toothWidth, double depth, Panel.PanelRole role, Panel.EdgeRole edgeRole) {
     // ---- basic validation ----
-    if (length <= 0 || toothWidth <= 0 || depth <= 0) {
+    if (length <= 10 || toothWidth <= 0 || depth <= 0) {
       throw new IllegalArgumentException("length, toothWidth, and depth must be > 0");
     }
     // Keep "slot" depth reasonable relative to tooth width
@@ -56,12 +56,12 @@ public class MalePathGen {
 
     final boolean lastIsMale = (lastRole == Panel.EdgeRole.male || lastRole == Panel.EdgeRole.maleHinge || lastRole == Panel.EdgeRole.maleCutOut);
     final boolean nextIsMale = (nextRole == Panel.EdgeRole.male || nextRole == Panel.EdgeRole.maleHinge || nextRole == Panel.EdgeRole.maleCutOut);      
-    Boolean isTopRightRail = (role == Panel.PanelRole.topRightRail);
-    Boolean isTopLeftRail = (role == Panel.PanelRole.topLeftRail);
-    Boolean isBottomRightRail = (role == Panel.PanelRole.bottomRightRail);
-    Boolean isBottomLeftRail = (role == Panel.PanelRole.bottomLeftRail);
-    Boolean isHinged = (edgeRole == Panel.EdgeRole.maleHinge || edgeRole == Panel.EdgeRole.maleCutOut);
-    Boolean isBackRail = (role == Panel.PanelRole.backRail);
+    final boolean isTopRightRail = (role == Panel.PanelRole.topRightRail);
+    final boolean isTopLeftRail = (role == Panel.PanelRole.topLeftRail);
+    final boolean isBottomRightRail = (role == Panel.PanelRole.bottomRightRail);
+    final boolean isBottomLeftRail = (role == Panel.PanelRole.bottomLeftRail);
+    final boolean isBackRail = (role == Panel.PanelRole.backRail);
+    final boolean isHinged = (edgeRole == Panel.EdgeRole.maleHinge || edgeRole == Panel.EdgeRole.maleCutOut);
     
     length -= (edgeRole == Panel.EdgeRole.maleHinge) ? 4.825 : 0;
     
@@ -133,7 +133,7 @@ public class MalePathGen {
     hingeRM = (edgeRole == Panel.EdgeRole.maleHinge && role == Panel.PanelRole.leftBottom) ? 3.175 : 0;
 
     // ---- inner teeth gen ----
-    sb = innterTeethGen(sb, dx, dy, px, py, toothWidth, toothKerf, depth, n); 
+    sb = innerTeethGen(sb, dx, dy, px, py, toothWidth, toothKerf, depth, n); 
 
     // ---- right corner offset ----
     sb.append(rel(dx * (rightCornerTravel - hingeRM), dy * (rightCornerTravel - hingeRM)));
@@ -154,7 +154,7 @@ public class MalePathGen {
   }
 
   // helper to generate the inner teeth of the edge
-  private static StringBuilder innterTeethGen (StringBuilder sb, int dx, int dy, int px, int py, double toothWidth, double toothKerf, double depth, double n) {
+  private static StringBuilder innerTeethGen (StringBuilder sb, int dx, int dy, int px, int py, double toothWidth, double toothKerf, double depth, double n) {
     // ---- slots pattern ----
     // Pattern for each slot i in [0..n-1]:
     //   in by depth, along baseline by toothWidth, out by depth,

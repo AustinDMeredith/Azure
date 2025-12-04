@@ -15,7 +15,7 @@ public class Panel {
   public ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
   public ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();
 
-  public static enum PanelRole {slidingLid, liftingLid, top, front, back, right, left, bottom, basedBottom, 
+  public static enum PanelRole {slidingLid, liftingLid, innerLid, handle, top, front, back, right, left, bottom, basedBottom, 
     slidableFront, slidableLeft, slidableRight, slidableBack, bottomLeftRail, bottomRightRail, topLeftRail, topRightRail, backRail, 
     frontTop, frontBottom, backTop, backBottom, rightTop, rightBottom, leftTop, leftBottom, hingeRight, hingeLeft}
   

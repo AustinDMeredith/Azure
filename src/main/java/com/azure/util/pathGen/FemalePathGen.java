@@ -132,7 +132,7 @@ public class FemalePathGen {
     sb.append(rel(dx * leftCornerTravel, dy * leftCornerTravel));
 
     // ---- inner teeth gen ----
-    sb = innterTeethGen(sb, dx, dy, px, py, toothWidth, toothKerf, depth, n); 
+    sb = innerTeethGen(sb, dx, dy, px, py, toothWidth, toothKerf, depth, n); 
 
     // ---- right corner offset ----
     sb.append(rel(dx * rightCornerTravel, dy * rightCornerTravel));
@@ -153,7 +153,7 @@ public class FemalePathGen {
   }
 
   // helper to generate the inner teeth of the edge
-  private static StringBuilder innterTeethGen (StringBuilder sb, int dx, int dy, int px, int py, double toothWidth, double toothKerf, double depth, double n) {
+  private static StringBuilder innerTeethGen (StringBuilder sb, int dx, int dy, int px, int py, double toothWidth, double toothKerf, double depth, double n) {
     // ---- slots pattern ----
     // Pattern for each slot i in [0..n-1]:
     //   in by depth, along baseline by toothWidth, out by depth,
