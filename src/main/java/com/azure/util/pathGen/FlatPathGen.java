@@ -13,7 +13,6 @@ public class FlatPathGen {
     final boolean isBackRail = (panel.role == Panel.PanelRole.backRail);
     final boolean isTopRail = (panel.role == Panel.PanelRole.topRightRail || panel.role == Panel.PanelRole.topLeftRail);
     final boolean isBottomRail = (panel.role == Panel.PanelRole.bottomRightRail || panel.role == Panel.PanelRole.bottomLeftRail);
-    final boolean isInnerLid = (panel.role == Panel.PanelRole.innerLid);
     final boolean isHinged = (boxType == BoxSpec.BoxType.hinged);
 
     double hingedRM = 0;
@@ -27,7 +26,6 @@ public class FlatPathGen {
       hingedRM = (panel.role == Panel.PanelRole.frontTop || panel.role == Panel.PanelRole.frontBottom || panel.role == Panel.PanelRole.backTop || panel.role == Panel.PanelRole.backBottom) ? 0 : 8 + 3.175;
       hingedRM = (panel.role == Panel.PanelRole.backBottom) ? 3.175 * 2 : hingedRM;
     }
-    length -= (isInnerLid) ? 3.175 : 0;
     
     sb.append(rel(dx * (length - hingedRM), dy * (length - hingedRM)));
   

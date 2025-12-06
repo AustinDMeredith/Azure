@@ -11,6 +11,7 @@ public class Panel {
   public PanelRole role;
   public String path;
   public double height, width, radius;
+  public double tolerance = .03;
   public ArrayList<Double> startPoint = new ArrayList<Double>();
   public ArrayList<EdgeRole> edges = new ArrayList<EdgeRole>();
   public ArrayList<Double> finalEdgeLengths = new ArrayList<Double>();

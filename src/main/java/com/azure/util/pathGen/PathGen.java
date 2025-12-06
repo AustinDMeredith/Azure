@@ -93,7 +93,7 @@ public class PathGen {
       // places the hinge hole in the correct position
       x0 += 1.825;
       y0 -= 3 + toothKerf;
-      d.append(HingeGen.genHole(x0, y0, toothDepth));
+      d.append(HingeGen.genHole(x0, y0, toothDepth, panel));
     }
     
     if (panel.role == Panel.PanelRole.leftBottom) {
@@ -104,7 +104,7 @@ public class PathGen {
       // places the hinge hole in the correct position
       x0 += 5 + toothKerf;
       y0 -= 3 + toothKerf;
-      d.append(HingeGen.genHole(x0, y0, toothDepth));
+      d.append(HingeGen.genHole(x0, y0, toothDepth, panel));
     }
     
     // places holes on based bottom panel
@@ -116,6 +116,17 @@ public class PathGen {
     if (panel.role == Panel.PanelRole.slidableLeft || panel.role == Panel.PanelRole.slidableRight) {
       int dx = 1; int dy = 0; int next = 1; int last = 3;
       d.append(RailHoleGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
+    }
+    
+    if (panel.role == Panel.PanelRole.liftingLid || panel.role == Panel.PanelRole.innerLid) {
+      x0 += w * .4 + (toothKerf / 2);
+      y0 += (h / 2) - ((3.175 - toothKerf) / 2);
+      d.append(LidAccessoryGen.holeGen(w * .2, x0, y0, panel));
+    }
+
+    if (panel.role == Panel.PanelRole.handle) {
+      x0 += 5;
+      d.append(LidAccessoryGen.handleGen(w, x0, y0));
     }
 
     // Assign back to the panel 

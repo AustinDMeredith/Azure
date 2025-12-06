@@ -1,10 +1,13 @@
 package com.azure;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.azure.objects.BasedBox;
 import com.azure.objects.BoxSpec;
 import com.azure.objects.Panel;
+import com.azure.util.services.ToleranceService;
+import com.azure.util.services.KerfService;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -29,10 +32,25 @@ public class Secondary2Controller {
     @FXML
     private HBox dimensionsHBox;
     @FXML
-    private TextField teethField, widthField, heightField, depthField;
+    private TextField teethField, widthField, heightField, depthField, engravingField, engravingSizeField;
     @FXML
     private ComboBox<String> dimensionTypeCombo;  
-
+    @FXML
+    private ComboBox<String> globalTolCombo;  
+    @FXML
+    private ComboBox<String> frontTolCombo;  
+    @FXML
+    private ComboBox<String> backTolCombo;  
+    @FXML
+    private ComboBox<String> leftTolCombo;  
+    @FXML
+    private ComboBox<String> rightTolCombo;  
+    @FXML
+    private ComboBox<String> topTolCombo;  
+    @FXML
+    private ComboBox<String> bottomTolCombo;  
+    @FXML
+    private ComboBox<String> kerfCombo;  
     // Fullscreen button container
     @FXML
     private HBox fullscreenBtnContainer;
@@ -54,12 +72,28 @@ public class Secondary2Controller {
     @FXML
     private void initialize() {
         dimensionTypeCombo.getSelectionModel().select(0);
-        teethField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
-        widthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
-        heightField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
-        depthField.textProperty().addListener((obs, oldValue, newValue) -> { if (newValue != "")  updatePreview(); });
-        dimensionTypeCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        globalTolCombo.getSelectionModel().select(1);
+        changePerPanelCombo();
+        kerfCombo.getSelectionModel().select(1);
 
+        // add listeners
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { if(!teethField.getText().isEmpty()) updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { if(!widthField.getText().isEmpty()) updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { if(!heightField.getText().isEmpty()) updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        engravingField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        engravingSizeField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        dimensionTypeCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        globalTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changePerPanelCombo(); updatePreview(); });
+        frontTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        backTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        leftTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        rightTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        topTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        bottomTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { changeGlobalCombo(); updatePreview(); });
+        kerfCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+
+        // udates preview so there is a box already made when the page opens
         updatePreview(); 
     }
 
@@ -108,18 +142,24 @@ public class Secondary2Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
+      try {
+        resetFieldStyles(); 
         Panel.PanelRole lid = returnLidType(dimensionTypeCombo.getSelectionModel().getSelectedIndex());
         double w = Double.parseDouble(widthField.getText());
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
+        String en = engravingField.getText();
+        double enS = Double.parseDouble(engravingSizeField.getText());
 
-        BoxSpec box = new BasedBox(h, w, d, lid, t, "");
-
-        try {
-            svgPreview.getEngine().loadContent(box.svg, "text/html");
-        }
-        catch (NumberFormatException e) {}
+        KerfService.setKerf(kerfCombo.getSelectionModel().getSelectedIndex());
+        
+        BoxSpec box = new BasedBox(h, w, d, lid, t, en, enS, getTols());
+        
+        svgPreview.getEngine().loadContent(box.svg, "text/html");
+      } catch (Exception e) {
+        highlightInvalidInputs(e);
+      }
     }
 
 
@@ -131,8 +171,12 @@ public class Secondary2Controller {
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
+        String en = engravingField.getText();
+        double enS = Double.parseDouble(engravingSizeField.getText());
 
-        BoxSpec box = new BasedBox(h, w, d, lid, t, "");
+        KerfService.setKerf(kerfCombo.getSelectionModel().getSelectedIndex());
+        
+        BoxSpec box = new BasedBox(h, w, d, lid, t, en, enS, getTols());
        
         return box.svg;
     }
@@ -147,5 +191,58 @@ public class Secondary2Controller {
         if (index == 0) return Panel.PanelRole.top;
         else if (index == 1) return Panel.PanelRole.slidingLid;
         return Panel.PanelRole.liftingLid;
+    }
+    
+    private void highlightInvalidInputs(Exception e) {
+      String msg = e.getMessage();
+        if (msg.contains("height")) {
+            heightField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("width")) {
+            widthField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("depth")) {
+            depthField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("tooth")) {
+            teethField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("font")) {
+            engravingField.getStyleClass().add("text-field-error");
+            engravingSizeField.getStyleClass().add("text-field-error");
+        }
+    }
+
+
+    private void resetFieldStyles() {
+        widthField.getStyleClass().remove("text-field-error");
+        heightField.getStyleClass().remove("text-field-error");
+        depthField.getStyleClass().remove("text-field-error");
+        teethField.getStyleClass().remove("text-field-error");
+        engravingField.getStyleClass().remove("text-field-error");
+        engravingSizeField.getStyleClass().remove("text-field-error");
+    } 
+
+    private void changePerPanelCombo () {
+        int index = globalTolCombo.getSelectionModel().getSelectedIndex();
+        frontTolCombo.getSelectionModel().select(index);
+        backTolCombo.getSelectionModel().select(index);
+        leftTolCombo.getSelectionModel().select(index);
+        rightTolCombo.getSelectionModel().select(index);
+        topTolCombo.getSelectionModel().select(index);
+        bottomTolCombo.getSelectionModel().select(index);
+        globalTolCombo.getSelectionModel().select(index);
+    }
+
+    private void changeGlobalCombo () {
+        globalTolCombo.getSelectionModel().select(3);
+    }
+
+    private ArrayList<Double> getTols () {
+      ArrayList<Double> tols = new ArrayList<Double>();
+      tols.add(ToleranceService.getTolerance(frontTolCombo.getSelectionModel().getSelectedIndex()));
+      tols.add(ToleranceService.getTolerance(backTolCombo.getSelectionModel().getSelectedIndex()));
+      tols.add(ToleranceService.getTolerance(rightTolCombo.getSelectionModel().getSelectedIndex()));
+      tols.add(ToleranceService.getTolerance(leftTolCombo.getSelectionModel().getSelectedIndex()));
+      tols.add(ToleranceService.getTolerance(topTolCombo.getSelectionModel().getSelectedIndex()));
+      tols.add(ToleranceService.getTolerance(bottomTolCombo.getSelectionModel().getSelectedIndex()));
+
+      return tols;
     }
 }

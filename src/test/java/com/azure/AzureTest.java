@@ -2,31 +2,33 @@ package com.azure;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-
+import java.util.ArrayList;
 import com.azure.objects.*;
 public class AzureTest {
 
   /******* This test verifys that the generated edge length equals the entered length for said edge *******/
   @Test 
   public void verifyLengths() {
-    BoxSpec box1 = new SimpleBox(200, 250, 250, Panel.PanelRole.top, 14, "");
-    BoxSpec box2 = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "");
-    BoxSpec box3 = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "");
-    BoxSpec box4 = new BasedBox(40, 40, 40, Panel.PanelRole.top, 7, "");
+    ArrayList<Double> tols = new ArrayList<Double>();
+    for (int i = 0; i < 6; i++) tols.add(.03);
+    BoxSpec box1 = new SimpleBox(200, 250, 250, Panel.PanelRole.top, 14, "", 10, tols);
+    BoxSpec box2 = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "", 10, tols);
+    BoxSpec box3 = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "", 10, tols);
+    BoxSpec box4 = new BasedBox(40, 40, 40, Panel.PanelRole.top, 7, "", 10, tols);
 
     // Run through each edge and test if it equals the required length
     for (int i = 0; i < 6; i++) {
       for (int j = 0; j < 4; j++) {
         if (j % 2 == 0) {
-          assertEquals(box1.panels.get(i).width, box1.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box2.panels.get(i).width, box2.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box3.panels.get(i).width, box3.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box4.panels.get(i).width, box4.panels.get(i).finalEdgeLengths.get(j), 0);
+          assertEquals(box1.panels.get(i).width, box1.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box2.panels.get(i).width, box2.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box3.panels.get(i).width, box3.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box4.panels.get(i).width, box4.panels.get(i).finalEdgeLengths.get(j), .3);
         } else {
-          assertEquals(box1.panels.get(i).height, box1.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box2.panels.get(i).height, box2.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box3.panels.get(i).height, box3.panels.get(i).finalEdgeLengths.get(j), 0);
-          assertEquals(box4.panels.get(i).height, box4.panels.get(i).finalEdgeLengths.get(j), 0);
+          assertEquals(box1.panels.get(i).height, box1.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box2.panels.get(i).height, box2.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box3.panels.get(i).height, box3.panels.get(i).finalEdgeLengths.get(j), .3);
+          assertEquals(box4.panels.get(i).height, box4.panels.get(i).finalEdgeLengths.get(j), .3);
         }
       }
     }
@@ -47,11 +49,13 @@ public class AzureTest {
   // test to make sure boxes get correct panel roles
   @Test
   public void verifyPanelRoles () {
-    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
-    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
+    ArrayList<Double> tols = new ArrayList<Double>();
+    for (int i = 0; i < 6; i++) tols.add(.03);
+    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "", 10, tols);
+    BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "", 10, tols);
 
-    BoxSpec BasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "");
-    BoxSpec SimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "");
+    BoxSpec BasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "", 10, tols);
+    BoxSpec SimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "", 10, tols);
 
     // test based box panel roles
     assertEquals(BasedBox.panels.get(0).role, Panel.PanelRole.front);
@@ -100,7 +104,9 @@ public class AzureTest {
   // test to make sure panels for sliding lid boxes get correct edge roles
   @Test
   public void verifyEdgeRoles () {
-    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "");
+    ArrayList<Double> tols = new ArrayList<Double>();
+    for (int i = 0; i < 6; i++) tols.add(.03);
+    BoxSpec slidingLidBasedBox = new BasedBox(200, 250, 250, Panel.PanelRole.slidingLid, 14, "", 10, tols);
     //BoxSpec slidingLidSimpleBox = new SimpleBox(40, 40, 40, Panel.PanelRole.slidingLid, 7, "");
 
     // sliding lid Based Box

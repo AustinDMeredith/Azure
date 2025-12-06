@@ -8,12 +8,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
+import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.azure.objects.BoxSpec;
 import com.azure.objects.HingedBox;
+import com.azure.util.services.ToleranceService;
+import com.azure.util.services.KerfService;
 
 public class Secondary3Controller {
 
@@ -28,8 +30,11 @@ public class Secondary3Controller {
     @FXML
     private HBox dimensionsHBox;
     @FXML
-    private TextField teethField, widthField, heightField, depthField;
-
+    private TextField teethField, widthField, heightField, depthField, engravingField, engravingSizeField;
+    @FXML
+    private ComboBox<String> globalTolCombo;  
+    @FXML
+    private ComboBox<String> kerfCombo;  
     // Fullscreen button container
     @FXML
     private HBox fullscreenBtnContainer;
@@ -49,11 +54,17 @@ public class Secondary3Controller {
     private boolean isFullscreen = false;
     
     @FXML
-    private void initialize() {
-        teethField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
-        widthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
-        heightField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
-        depthField.textProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+    private void initialize() {        
+        globalTolCombo.getSelectionModel().select(1);
+        kerfCombo.getSelectionModel().select(1);
+        teethField.textProperty().addListener((obs, oldValue, newValue) -> { if(!teethField.getText().isEmpty()) updatePreview(); });
+        widthField.textProperty().addListener((obs, oldValue, newValue) -> { if(!widthField.getText().isEmpty()) updatePreview(); });
+        heightField.textProperty().addListener((obs, oldValue, newValue) -> { if(!heightField.getText().isEmpty()) updatePreview(); });
+        depthField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        engravingField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        engravingSizeField.textProperty().addListener((obs, oldValue, newValue) -> { if(!depthField.getText().isEmpty()) updatePreview(); });
+        globalTolCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
+        kerfCombo.getSelectionModel().selectedIndexProperty().addListener((obs, oldValue, newValue) -> { updatePreview(); });
         updatePreview(); 
     }
 
@@ -102,18 +113,23 @@ public class Secondary3Controller {
     // update SVG preview (placeholder)
     @FXML
     private void updatePreview() {
+      try {
+        resetFieldStyles(); 
         double w = Double.parseDouble(widthField.getText());
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
-        ArrayList<Double> tols = getTol();
+        String en = engravingField.getText();
+        double enS = Double.parseDouble(engravingSizeField.getText());
         
-        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
-
-        try {
-            svgPreview.getEngine().loadContent(box.svg, "text/html");
-        } catch (NumberFormatException e) {}
+        KerfService.setKerf(kerfCombo.getSelectionModel().getSelectedIndex());
         
+        BoxSpec box = new HingedBox(h, w, d, t, en, enS, ToleranceService.getTolerance(globalTolCombo.getSelectionModel().getSelectedIndex()));
+        
+        svgPreview.getEngine().loadContent(box.svg, "text/html");
+      } catch (Exception e) {
+        highlightInvalidInputs(e);
+      }
     }
 
     // Generate SVG file 
@@ -123,9 +139,12 @@ public class Secondary3Controller {
         double h = Double.parseDouble(heightField.getText());
         double d = Double.parseDouble(depthField.getText());
         double t = Double.parseDouble(teethField.getText());
-        ArrayList<Double> tols = getTol();
+        String en = engravingField.getText();
+        double enS = Double.parseDouble(engravingSizeField.getText());
         
-        BoxSpec box = new HingedBox(h, w, d, t, "", tols);
+        KerfService.setKerf(kerfCombo.getSelectionModel().getSelectedIndex());
+        
+        BoxSpec box = new HingedBox(h, w, d, t, en, enS, ToleranceService.getTolerance(globalTolCombo.getSelectionModel().getSelectedIndex()));
 
         return box.svg;
     }
@@ -136,21 +155,29 @@ public class Secondary3Controller {
        App.openDownloadPopup("downloadPopup", generateSVGFile());
     }
     
-    @FXML
-    private ArrayList<Double> getTol() {
-        ArrayList<Double> tols = new ArrayList<Double>();
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        tols.add(.01);
-        return tols;
+    private void highlightInvalidInputs(Exception e) {
+      String msg = e.getMessage();
+        if (msg.contains("height")) {
+            heightField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("width")) {
+            widthField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("depth")) {
+            depthField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("tooth")) {
+            teethField.getStyleClass().add("text-field-error");
+        } else if (msg.contains("font")) {
+            engravingField.getStyleClass().add("text-field-error");
+            engravingSizeField.getStyleClass().add("text-field-error");
+        }
+    }
+
+
+    private void resetFieldStyles() {
+        widthField.getStyleClass().remove("text-field-error");
+        heightField.getStyleClass().remove("text-field-error");
+        depthField.getStyleClass().remove("text-field-error");
+        teethField.getStyleClass().remove("text-field-error");
+        engravingField.getStyleClass().remove("text-field-error");
+        engravingSizeField.getStyleClass().remove("text-field-error");
     }
 }

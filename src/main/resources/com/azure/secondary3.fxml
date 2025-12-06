@@ -11,6 +11,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.azure.Secondary3Controller"
             style="-fx-background-color: #4470b8;"
+            stylesheets="@styles.css"
             prefWidth="800" prefHeight="600">
 
     <center>
@@ -19,6 +20,7 @@
                 <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
+            <HBox>
             <!-- Top controls: teeth + dimensions label + dimensions inputs -->
             <VBox fx:id="topControls" spacing="10">
 
@@ -54,9 +56,90 @@
                     <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="depthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
-                </HBox>
+
+
+                </HBox>                  
+              </VBox>
+
+            <VBox fx:id="advancedSettingVBox" alignment="TOP_LEFT">
+                <padding>
+                    <Insets left="20"/>
+                </padding>
+                <Label text="Advanced Settings" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                    <effect>
+                        <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                    </effect>
+                </Label>
+
+                <HBox>
+                <VBox> 
+                  <padding>
+                      <Insets left="40" top="15"/>
+                    </padding>
+
+                  <Label text="Tolerance Settings" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                      <effect>
+                          <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                      </effect>
+                  </Label>
+                  
+                  <HBox fx:id="GlobalTolereanceHBox" spacing="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="15"/>
+                    </padding>
+                      <Label text="Global Tolerance:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                      <ComboBox fx:id="globalTolCombo" prefWidth="150">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="High" />
+                                  <String fx:value="Medium" />
+                                  <String fx:value="Low" />
+                                  <String fx:value="Custom" />
+                              </FXCollections>
+                          </items>  
+                      </ComboBox>
+                      
+                      <Label text="Lazer Burn-Off:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                      <ComboBox fx:id="kerfCombo" prefWidth="150">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="High" />
+                                    <String fx:value="Medium" />
+                                    <String fx:value="Low" />
+                                </FXCollections>
+                            </items>
+                      </ComboBox>
+                  </HBox>
+
+                </VBox>
+
+                <VBox>
+                  <padding>
+                      <Insets left="20" top="15"/>
+                    </padding>
+
+                  <Label text="Engraving Settings" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;">
+                      <effect>
+                          <DropShadow radius="2" offsetX="2" offsetY="2" color="rgba(0,0,0,0.3)"/>
+                      </effect>
+                  </Label>
+                  <HBox fx:id="EngravingHBox" spacing="10" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="15"/>
+                    </padding>
+                    <Label text="Engraving:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="engravingField" text="AZ" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+                    <Label text="Font Size:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <TextField fx:id="engravingSizeField" text="20" prefWidth="60"
+                               style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
+
+                  </HBox>
+                </VBox>
+              </HBox>
             </VBox>
 
+            </HBox>
             <!-- Fullscreen button (shown only in normal mode, above preview) -->
             <HBox fx:id="fullscreenBtnContainer" alignment="CENTER_LEFT">
                 <Button fx:id="fullscreenBtn" text="Fullscreen SVG View" onAction="#fullscreenSVG"

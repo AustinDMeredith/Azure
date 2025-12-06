@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import com.azure.objects.Panel;
 import com.azure.util.services.EdgeSpec;
 import com.azure.util.services.KerfService;
-import com.azure.util.services.ToleranceService;
 
 public class MalePathGen {
   public static String gen(double length, double toothWidth, double depth, int dx, int dy, Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, Panel panel, Panel.EdgeRole edgeRole) {
     // Perpendicular (flip) to the edge direction for "in/out" moves
     final int px = dy, py = -dx;
 
-    ArrayList<Double> specs = getEdgeSpecs (lastRole, nextRole, length,toothWidth, depth, panel.role, edgeRole);
+    ArrayList<Double> specs = getEdgeSpecs (lastRole, nextRole, length,toothWidth, depth, panel.role, edgeRole, panel);
     double n = specs.get(0);
     double toothKerf = specs.get(1);
     double leftCornerTravel = specs.get(2);
     double rightCornerTravel = specs.get(3);
     double corner = specs.get(4);
+    double cornerKerf = specs.get(5);
 
     if (leftCornerTravel < 0 || rightCornerTravel < 0) {
       // As a last resort (pathological tiny edges), fall back to a straight edge.
@@ -32,23 +32,15 @@ public class MalePathGen {
     String path = genEdge(lastRole, nextRole, dx, dy, px, py, toothWidth, toothKerf, depth, n, leftCornerTravel, rightCornerTravel, panel.role, edgeRole);
 
     final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
-    setFinalLength(panel, corner, patternFootprint);
+    final double kerfAdded = ((n / 2) + 1) * toothKerf;
+    final double kerfSubtracted = (n / 2) * toothKerf + cornerKerf * 2;
+    setFinalLength(panel, corner, patternFootprint, kerfAdded, kerfSubtracted);
 
     return path;
     }
 
  // helper to define the specifications for the edge
-  private static ArrayList<Double> getEdgeSpecs (Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, double length, double toothWidth, double depth, Panel.PanelRole role, Panel.EdgeRole edgeRole) {
-    // ---- basic validation ----
-    if (length <= 10 || toothWidth <= 0 || depth <= 0) {
-      throw new IllegalArgumentException("length, toothWidth, and depth must be > 0");
-    }
-    // Keep "slot" depth reasonable relative to tooth width
-    if (depth >= toothWidth) {
-      // You can choose to clamp instead of throw; throwing is safer.
-      throw new IllegalArgumentException("depth must be < toothWidth to keep material between slots.");
-    }
-
+  private static ArrayList<Double> getEdgeSpecs (Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, double length, double toothWidth, double depth, Panel.PanelRole role, Panel.EdgeRole edgeRole, Panel panel) {
     double corner;
     double n;
     double leftCornerTravel;
@@ -88,11 +80,11 @@ public class MalePathGen {
     double toothKerf = kerf.get(0);
     double cornerKerf = kerf.get(1);
 
-    double tol = ToleranceService.getGlobalCurrent();
+    double tol = panel.tolerance;
     toothKerf -= tol;
-    cornerKerf -= tol;
+    cornerKerf += (n * tol) / 2;
     
-    leftCornerTravel  -=  cornerKerf;
+    leftCornerTravel  -= cornerKerf;
     rightCornerTravel -= cornerKerf;
 
     // These should be >= 0 by construction; clamp tiny negatives caused by FP error.
@@ -106,6 +98,7 @@ public class MalePathGen {
     specs.add(leftCornerTravel);
     specs.add(rightCornerTravel);
     specs.add(corner);
+    specs.add(cornerKerf);
 
     return specs;
   }
@@ -175,8 +168,8 @@ public class MalePathGen {
     return sb;
   }
 
-  private static void setFinalLength(Panel panel, double corner, double patternFootprint) {
-    double finalLength = (2 * corner) + patternFootprint;
+  private static void setFinalLength(Panel panel, double corner, double patternFootprint, double kerfAdded, double kerfSubtracted) {
+    double finalLength = (2 * corner) + patternFootprint + (kerfAdded - kerfSubtracted);
     panel.finalEdgeLengths.add(finalLength);
   }
   
