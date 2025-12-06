@@ -1,6 +1,5 @@
 package com.azure.objects;
 
-import java.util.ArrayList;
 
 import com.azure.util.services.SetEdgeRoles;
 import com.azure.util.services.LayoutService;
@@ -8,9 +7,10 @@ import com.azure.util.services.AddPanels;
 import com.azure.util.services.IngravingService;
 import com.azure.util.services.SvgGen;
 import com.azure.util.pathGen.PathGen;
+import com.azure.util.services.ValidationService;
 
 public class HingedBox extends BoxSpec {
-  public HingedBox (double height, double width, double depth, double teethWidth, String engraving, ArrayList<Double> tolerances) {
+  public HingedBox (double height, double width, double depth, double teethWidth, String engraving, double engravingSize, double tolerance) {
     this.boxType = BoxSpec.BoxType.hinged;
     this.height = height;
     this.width = width;
@@ -18,8 +18,14 @@ public class HingedBox extends BoxSpec {
     this.lidType = Panel.PanelRole.top;
     this.teethWidth = teethWidth;
     this.engraving = engraving;
+    
+    ValidationService.verifyInput(height, width, depth, teethWidth, engraving, engravingSize, this.boxType, lidType);
 
     AddPanels.setHinged(height, width, depth, this.panels);
+
+    for (Panel panel : this.panels) {
+      panel.tolerance = tolerance;
+    }
     
     // set roles and find startpoints for panels
     SetEdgeRoles.setRoles(this.panels);
@@ -31,10 +37,8 @@ public class HingedBox extends BoxSpec {
     }
     
 
-    IngravingService.addEngravings(engraving, panels);
+    IngravingService.addEngravings(engraving, engravingSize, panels, boxType);
 
     this.svg = SvgGen.generateFile(this.panels);
-  
-    SvgGen.writeFile(this.panels);
   }
 }

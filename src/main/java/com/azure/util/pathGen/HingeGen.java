@@ -2,8 +2,8 @@ package com.azure.util.pathGen;
 
 import java.util.ArrayList;
 
+import com.azure.objects.Panel;
 import com.azure.util.services.KerfService;
-import com.azure.util.services.ToleranceService;
 
 public class HingeGen {
   public static String genHinge (double x0, double y0) {
@@ -15,14 +15,14 @@ public class HingeGen {
     return sb.toString();
   }
 
-  public static String genHole (double x0, double y0, double depth) {
+  public static String genHole (double x0, double y0, double depth, Panel panel) {
     double toothWidth = 3;
     int dx = 0, dy = 1;
     final int px = dy, py = -dx;
     ArrayList<Double> kerf = KerfService.getKerf(1);
     double toothKerf = kerf.get(0);
 
-    double tol = ToleranceService.getGlobalCurrent();
+    double tol = panel.tolerance;
     toothKerf -= tol;
     StringBuilder sb = new StringBuilder();
     sb.append(String.format("<path d= \" M %.3f %.3f ", x0, y0));

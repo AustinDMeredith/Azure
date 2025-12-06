@@ -28,20 +28,29 @@ public class AddPanels {
       panels.add(new Panel("p-1", Panel.PanelRole.back, height, width));
       panels.add(new Panel("p-2", Panel.PanelRole.right, height, depth));
       panels.add(new Panel("p-3", Panel.PanelRole.left, height, depth));
-      panels.add(new Panel("p-4", lidType, width, depth));
-      panels.add(new Panel("p-5", bottom, width, depth));
+      panels.add(new Panel("p-4", lidType, depth, width));
+      panels.add(new Panel("p-5", bottom, depth, width));
     } else if (isSlidingLid) {
       panels.add(new Panel("p-0", Panel.PanelRole.slidableFront, height, width));
       panels.add(new Panel("p-1", Panel.PanelRole.slidableBack, height, width));
       panels.add(new Panel("p-2", Panel.PanelRole.slidableRight, height, depth));
       panels.add(new Panel("p-3", Panel.PanelRole.slidableLeft, height, depth));
       panels.add(new Panel("p-4", lidType, depth - 3.175, width - 3.175 * 2));
-      panels.add(new Panel("p-5", bottom, width, depth));
+      panels.add(new Panel("p-5", bottom, depth, width));
       panels.add(new Panel("p-6", Panel.PanelRole.bottomLeftRail, 8, depth));
       panels.add(new Panel("p-7", Panel.PanelRole.bottomRightRail, 8, depth));
       panels.add(new Panel("p-8", Panel.PanelRole.topLeftRail, 8, depth));
       panels.add(new Panel("p-9", Panel.PanelRole.topRightRail, 8, depth));
       panels.add(new Panel("p-10", Panel.PanelRole.backRail, 8, width));
+    } else {
+      panels.add(new Panel("p-0", Panel.PanelRole.front, height, width));
+      panels.add(new Panel("p-1", Panel.PanelRole.back, height, width));
+      panels.add(new Panel("p-2", Panel.PanelRole.right, height, depth));
+      panels.add(new Panel("p-3", Panel.PanelRole.left, height, depth));
+      panels.add(new Panel("p-4", lidType, depth, width));
+      panels.add(new Panel("p-5", bottom, depth, width));
+      panels.add(new Panel("p-6", Panel.PanelRole.innerLid, depth - 3.175, width - 3.175));
+      panels.add(new Panel("p-7", Panel.PanelRole.handle, 20, width * .20));
     } 
   }
 

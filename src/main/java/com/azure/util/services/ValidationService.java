@@ -5,71 +5,55 @@ package com.azure.util.services;
  * Description: This class validates user input and repromts for CLI version or clamps value for GUI version
  */
 
-import java.util.ArrayList;
-
+import com.azure.objects.BoxSpec;
+import com.azure.objects.Panel;
 public class ValidationService {
-
-  /************* Validation for cli interface *************/
-  
-  // returns true if the entered specifications are valid
-  public static ArrayList<Double> validateSpecs (String specsSTR) {
-    String[] parts = specsSTR.split(", ");
-    boolean changed = false;
-    ArrayList<Double> specs = new ArrayList<Double>();
-
-    try {
-      double h = Integer.parseInt(parts[0]);
-      double w = Integer.parseInt(parts[1]);
-      double d = Integer.parseInt(parts[2]);
-      double tW = Integer.parseInt(parts[3]);
-
-      if (h < 20.0) h = 20; changed = true;
-      if (h > 200.0) h = 200; changed = true;
-      if (w < 20.0) w = 20; changed = true;
-      if (w > 200.0) w = 200; changed = true;
-      if (d < 20.0) d = 20; changed = true;
-      if (d > 200.0) d = 200; changed = true;
-      if (tW < 4.0) tW = 4; changed = true;
-      if (tW > 10.0) tW = 10; changed = true;
-
-      specs.add(h);
-      specs.add(w);
-      specs.add(d);
-      specs.add(tW);
-
-      if (changed) System.out.print("Entered values were out of bounds, new values --> Height: " + h + ", Width: " + w + ", Depth: " + d + ", Tooth Width: " + tW + "\n");
-      changed = false;
-
-    } catch (NumberFormatException e) {
-      System.out.print("Please enter a comma seperated list of numbers, e.g. 100, 100, 100, 8\n ABC>");
-      specs.add(-1.0);
-    }
-    
-    return specs;
+  public static void verifyInput (double height, double width, double depth, double toothWidth, String engraving, double fontSize, BoxSpec.BoxType boxType, Panel.PanelRole lidType) {
+    if (!isValidHeigth(height, boxType)) throw new IllegalArgumentException("Entered height is not valid");
+    else if (!isValidWidth(width, lidType)) throw new IllegalArgumentException("Entered width is not valid");
+    else if (!isValidDepth(depth, lidType)) throw new IllegalArgumentException("Entered depth is not valid");
+    else if (!isValidToothWidth(toothWidth, height)) throw new IllegalArgumentException("Entered tooth size is not valid");
+    else if (!isValidToothWidth(toothWidth, width)) throw new IllegalArgumentException("Entered tooth size is not valid");
+    else if (!isValidToothWidth(toothWidth, depth)) throw new IllegalArgumentException("Entered tooth size is not valid");
+    else if (!isValidEngraving(engraving, fontSize, width, height, depth, boxType)) throw new IllegalArgumentException("Entered font size or engraving is not valid");
   }
 
-  public static int validateChoice (String inputSTR) {
-    int choice;
-    try {
-      choice = Integer.parseInt(inputSTR);
-
-      if (choice != 1 && choice != 2) choice = -1; System.out.print("Please enter a number listed on the screen \n ABC>");
-
-    } catch (NumberFormatException e) {
-      System.out.print("Please enter a number listed on the screen \n ABC>");
-      choice = -1;
-    }
-
-    return choice;
+  public static boolean isValidToothWidth (double toothWidth, double length) {
+    if (toothWidth < 3 && toothWidth >= 0) return false;
+    else if (length / toothWidth < 3) return false;
+    return true;
   }
 
-  public static String validateEngraving (String engraving) {
-    int length = engraving.length();
-    if (length > 2) {
-      engraving = "false";
-      System.out.print("Please enter a two letter engraving e.g. AZ\n");
-    }
+  public static boolean isValidHeigth (double height, BoxSpec.BoxType boxType) {
+    boolean isHinged = (boxType == BoxSpec.BoxType.hinged);
+    if (isHinged && height < 60) return false;
+    else if (height < 20 || height > 300) return false;
+    return true;
+  }
 
-    return engraving;
+  public static boolean isValidWidth (double width, Panel.PanelRole lidType) {
+    boolean isLiftingLid = (lidType == Panel.PanelRole.liftingLid);
+    if (isLiftingLid && width < 50) return false;
+    else if (width < 20 || width > 300) return false;
+    return true;
+  }
+
+  public static boolean isValidDepth (double depth, Panel.PanelRole lidType) {
+    boolean isSlidingLid = (lidType == Panel.PanelRole.slidingLid);
+    if (isSlidingLid && depth < 30) return false;
+    else if (depth < 20 || depth > 300) return false;
+    return true;
+  }
+
+  public static boolean isValidEngraving (String engraving, double size, double width, double height, double depth, BoxSpec.BoxType boxType) {
+    final double AVG_CHAR_WIDTH_FACTOR = 0.6;   // width per char in "fontSize units"
+    final double LINE_HEIGHT_FACTOR    = 1.2;   // line height in "fontSize units"
+    double length = engraving.length();
+    boolean isHinged = (boxType == BoxSpec.BoxType.hinged);
+    if (isHinged && size * LINE_HEIGHT_FACTOR > height * .60 - 4) return false;
+    else if (length * AVG_CHAR_WIDTH_FACTOR * size > width -8 || length * AVG_CHAR_WIDTH_FACTOR * size > depth - 8) return false;
+    else if (size * LINE_HEIGHT_FACTOR > height - 8) return false;
+    else if (size < 2) return false;
+    return true;
   }
 }

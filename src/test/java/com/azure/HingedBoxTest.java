@@ -11,11 +11,7 @@ public class HingedBoxTest {
 
   @Test
   public void verifyPanelRoles () {
-
-    ArrayList<Double> tols = new ArrayList<Double>();
-    for (int i = 0; i < 10; i++) tols.add(1.0);
-
-    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
 
     assertEquals(Panel.PanelRole.frontTop, box1.panels.get(0).role);
     assertEquals(Panel.PanelRole.frontBottom, box1.panels.get(1).role);
@@ -31,11 +27,7 @@ public class HingedBoxTest {
 
   @Test
   public void verifyEdgeRoles () {
-    
-    ArrayList<Double> tols = new ArrayList<Double>();
-    for (int i = 0; i < 10; i++) tols.add(1.0);
-
-    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
 
     // front top panel
     assertEquals(Panel.EdgeRole.male, box1.panels.get(0).edges.get(0));
@@ -100,9 +92,7 @@ public class HingedBoxTest {
 
   @Test
   public void verifyStartPoints() {
-    ArrayList<Double> tols = new ArrayList<Double>();
-    for (int i = 0; i < 10; i++) tols.add(1.0);
-    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", tols);
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
  
     assertEquals(10, box1.panels.get(0).startPoint.get(0), 0);
     assertEquals(20, box1.panels.get(0).startPoint.get(1), 0);
