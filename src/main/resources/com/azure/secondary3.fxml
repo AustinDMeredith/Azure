@@ -128,7 +128,7 @@
                         <Insets top="15"/>
                     </padding>
                     <Label text="Engraving:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
-                    <TextField fx:id="engravingField" text="AZ" prefWidth="60"
+                    <TextField fx:id="engravingField" text="" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
                     <Label text="Font Size:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="engravingSizeField" text="20" prefWidth="60"
