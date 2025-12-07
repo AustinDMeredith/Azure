@@ -26,6 +26,8 @@ public class Secondary3Controller {
     @FXML
     private VBox topControls;
     @FXML
+    private VBox advancedSettingVBox;
+    @FXML
     private HBox teethHBox;
     @FXML
     private HBox dimensionsHBox;
@@ -74,6 +76,8 @@ public class Secondary3Controller {
         if (!isFullscreen) {
             topControls.setVisible(false);               // hide teeth + dimensions
             topControls.setManaged(false);               // remove from layout calculations
+            advancedSettingVBox.setVisible(false);
+            advancedSettingVBox.setManaged(false);
             fullscreenBtnContainer.setVisible(false);    // hide fullscreen button container
             fullscreenBtnContainer.setManaged(false);    // remove from layout calculations
             mainVBox.setPadding(new Insets(0, 0, 20, 0)); // remove top/side padding, keep bottom for buttons
@@ -92,6 +96,8 @@ public class Secondary3Controller {
         if (isFullscreen) {
             topControls.setVisible(true);                // show teeth + dimensions
             topControls.setManaged(true);                // add back to layout calculations
+            advancedSettingVBox.setVisible(true);
+            advancedSettingVBox.setManaged(true);
             fullscreenBtnContainer.setVisible(true);     // show fullscreen button container
             fullscreenBtnContainer.setManaged(true);     // add back to layout calculations
             mainVBox.setPadding(new Insets(20));         // restore padding
