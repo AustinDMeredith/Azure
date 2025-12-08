@@ -47,13 +47,13 @@
                 <!-- Dimensions inputs -->
                 <HBox fx:id="dimensionsHBox" spacing="10" alignment="CENTER_LEFT">
 
-                    <Label text="X:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label text="X (mm):" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="widthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
-                    <Label text="Y:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label text="Y (mm):" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="heightField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
-                    <Label text="Z:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <Label text="Z (mm):" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
                     <TextField fx:id="depthField" text="100" prefWidth="60"
                                style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0, 1, 1);"/>
 
