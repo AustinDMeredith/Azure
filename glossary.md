@@ -7,3 +7,6 @@ Apache: We will use this to run test cases in our program. Apache is a popular o
 GitHub: A proprietary developer platform that allows developers to create, store, manage, and share their code.
 
 Kerf: Is the width of the material removed by a saw or laser. The gap thats left after the cut is made. 
+
+Repository- A repository contains all of your code, your files, and each file's revision history. You can discuss and manage your work within the repository.
+
