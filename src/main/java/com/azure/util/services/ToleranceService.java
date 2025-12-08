@@ -6,12 +6,12 @@ package com.azure.util.services;
  * */
 
 public class ToleranceService {
-  // Class atributes
+  // presets for the tolerance values (determines the fit of the teeth) 
   private static double high = .05;
   private static double medium = .03;
   private static double low = .01;
 
-
+  // returns the value of the tolerance based on what the user picks in the UI (combo boxes use index to determine the selected preset)
   public static double getTolerance (int index) {
     if (index == 2) return low;
     else if (index == 1) return medium;

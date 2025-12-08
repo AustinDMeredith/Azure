@@ -14,8 +14,8 @@ import com.azure.objects.Panel;
 
 public class LayoutService {
 
+  // used for calculating the size of the svg (not currently used in the svgGen class)
   private static double svgX, svgY;
-
 
   // Grid config
   private static final int NUM_COLS = 2;
@@ -29,6 +29,7 @@ public class LayoutService {
   // Offset applied when the first edge is male (downward only)
   private static final double MALE_Y_OFFSET = 3.175;
 
+  // finds the start point of the panels so that they are centered in their respective columns
   public static void findStartPoint(ArrayList<Panel> panels) {
     if (panels == null || panels.isEmpty()) return;
 
@@ -135,6 +136,7 @@ public class LayoutService {
     }
   }
 
+  // not used
   public static ArrayList<Double> getVeiwBoxSize () {
     ArrayList<Double> veiwBoxSize = new ArrayList<Double>();
     veiwBoxSize.add(svgX);

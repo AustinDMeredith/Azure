@@ -5,8 +5,6 @@ package com.azure.util.services;
  * Description: This class will generate the svg. We will probably have a .svg that has all the boilerplate that we just manipulate
  *              the stuff we need to change.
  * */
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.azure.objects.Panel;
@@ -17,9 +15,6 @@ public class SvgGen {
   static double x = 1000;
   static double y = 1000;
 
-  static Path svgPath = Paths.get("src", "main", "resources", "com", "azure", "box.svg");
-
-  
   // prefix and viewbox data
   static String prefix = "<?xml version='1.0' encoding='utf-8'?>\n";
   static String viewBox = "<svg height=\"" + y + "mm" + "\"" + " viewBox=\"0.0 0.0 " + x + " " + y + "\" width=\"" + x + "mm" + "\" \n";
@@ -35,6 +30,7 @@ public class SvgGen {
     
       StringBuilder sb = new StringBuilder();
 
+      // append the boilerplate data
       sb.append(prefix);
       sb.append(viewBox);
       sb.append(urls);
@@ -46,6 +42,7 @@ public class SvgGen {
         sb.append("</g>\n");
       }
 
+      // append the close tag
       sb.append("</svg>");
 
       return sb.toString();

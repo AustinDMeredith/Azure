@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import com.azure.objects.Panel;
 
 public class SetEdgeRoles {
+  // sets all the edge roles for the panels
   public static void setRoles (ArrayList<Panel> panels) {
     for (Panel panel : panels) {
       if (panel.role == Panel.PanelRole.front || panel.role == Panel.PanelRole.back) { // Sets all edge roles to male for front panels

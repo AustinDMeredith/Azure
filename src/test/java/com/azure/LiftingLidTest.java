@@ -7,6 +7,7 @@ import com.azure.objects.*;
 
 public class LiftingLidTest {
 
+  /******* This test verifys that the generated edge length equals the entered length for said edge *******/
   @Test 
   public void verifyLengths() {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -34,7 +35,7 @@ public class LiftingLidTest {
     }
   }
 
-  // test to make sure boxes get correct panel roles
+  /******* This test verifys that all lifting lid based and simple boxes get assigned the correct panel roles *******/
   @Test
   public void verifyPanelRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -64,6 +65,7 @@ public class LiftingLidTest {
     assertEquals(BasedBox.panels.get(7).role, Panel.PanelRole.handle);
   }
   
+  /******* This test verifys that all lifting lid based and simple boxes get assigned the correct edge roles *******/
   @Test
   public void verifyEdgeRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.azure.objects.*;
 
 public class HingedBoxTest {
-  
-
+ 
+  /******* This test verifys that all hinged boxes get assigned the correct panel roles *******/
   @Test
   public void verifyPanelRoles () {
     BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
@@ -24,6 +24,7 @@ public class HingedBoxTest {
     assertEquals(Panel.PanelRole.bottom, box1.panels.get(9).role);
   }
 
+  /******* This test verifys that all hinged boxes get assigned the correct edge roles *******/
   @Test
   public void verifyEdgeRoles () {
     BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
@@ -89,6 +90,7 @@ public class HingedBoxTest {
     assertEquals(Panel.EdgeRole.female, box1.panels.get(9).edges.get(3));
   }
 
+  /******* This test verifys that the start points are good *******/
   @Test
   public void verifyStartPoints() {
     BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
@@ -125,9 +127,9 @@ public class HingedBoxTest {
     
     assertEquals(120, box1.panels.get(9).startPoint.get(0), 0);
     assertEquals(290, box1.panels.get(9).startPoint.get(1), 0);
-    
   }
 
+  /******* This test verifys that the generated edge length equals the entered length for said edge *******/
   @Test
   public void verifyLengths () {
 
@@ -153,5 +155,4 @@ public class HingedBoxTest {
       }
     }
   }
-
 }

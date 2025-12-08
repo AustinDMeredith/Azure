@@ -56,6 +56,7 @@ public class Secondary3Controller {
     private boolean isFullscreen = false;
     
     @FXML
+    // initializes the page and adds listeners to fields
     private void initialize() {        
         globalTolCombo.getSelectionModel().select(1);
         kerfCombo.getSelectionModel().select(1);
@@ -155,12 +156,13 @@ public class Secondary3Controller {
         return box.svg;
     }
 
-    // Saves the svg file
+    // opens the download page and generates the svg before sending it to the download page 
     @FXML
     private void downloadSVG() throws IOException {
        App.openDownloadPopup("downloadPopup", generateSVGFile());
     }
     
+    // finds where the exception occured and highlight that field or fields red
     private void highlightInvalidInputs(Exception e) {
       String msg = e.getMessage();
         if (msg.contains("height")) {
@@ -177,7 +179,7 @@ public class Secondary3Controller {
         }
     }
 
-
+    // resets all the styling for the errors
     private void resetFieldStyles() {
         widthField.getStyleClass().remove("text-field-error");
         heightField.getStyleClass().remove("text-field-error");

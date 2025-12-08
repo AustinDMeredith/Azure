@@ -118,12 +118,14 @@ public class PathGen {
       d.append(RailHoleGen.gen(w, toothWidth, toothDepth, dx, dy, panel.edges.get(last), panel.edges.get(next), panel));
     }
     
+    // places the holes on the inner and outer lid for lifting lids
     if (panel.role == Panel.PanelRole.liftingLid || panel.role == Panel.PanelRole.innerLid) {
       x0 += w * .4 + (toothKerf / 2);
       y0 += (h / 2) - ((3.175 - toothKerf) / 2);
       d.append(LidAccessoryGen.holeGen(w * .2, x0, y0, panel));
     }
 
+    // makes a handle for lifting lids
     if (panel.role == Panel.PanelRole.handle) {
       x0 += 5;
       d.append(LidAccessoryGen.handleGen(w, x0, y0));

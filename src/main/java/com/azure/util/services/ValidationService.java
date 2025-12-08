@@ -8,6 +8,7 @@ package com.azure.util.services;
 import com.azure.objects.BoxSpec;
 import com.azure.objects.Panel;
 public class ValidationService {
+  // verifys the user input and throws an exception if any input is invalid (exception gets caught in the front end and displays which text box the error came from)
   public static void verifyInput (double height, double width, double depth, double toothWidth, String engraving, double fontSize, BoxSpec.BoxType boxType, Panel.PanelRole lidType) {
     if (!isValidHeigth(height, boxType)) throw new IllegalArgumentException("Entered height is not valid");
     else if (!isValidWidth(width, lidType)) throw new IllegalArgumentException("Entered width is not valid");
@@ -18,12 +19,14 @@ public class ValidationService {
     else if (!isValidEngraving(engraving, fontSize, width, height, depth, boxType)) throw new IllegalArgumentException("Entered font size or engraving is not valid");
   }
 
+  // if the value is too small or the value is too big for an edge, return false
   public static boolean isValidToothWidth (double toothWidth, double length) {
     if (toothWidth < 3 && toothWidth >= 0) return false;
     else if (length / toothWidth < 3) return false;
     return true;
   }
 
+  // if the value is too small or too large for the associated box, return false 
   public static boolean isValidHeigth (double height, BoxSpec.BoxType boxType) {
     boolean isHinged = (boxType == BoxSpec.BoxType.hinged);
     if (isHinged && height < 60) return false;
@@ -31,6 +34,7 @@ public class ValidationService {
     return true;
   }
 
+  // if the value is too small or too large for the associated box, return false 
   public static boolean isValidWidth (double width, Panel.PanelRole lidType) {
     boolean isLiftingLid = (lidType == Panel.PanelRole.liftingLid);
     if (isLiftingLid && width < 50) return false;
@@ -38,6 +42,7 @@ public class ValidationService {
     return true;
   }
 
+  // if the value is too small or too large for the associated box, return false 
   public static boolean isValidDepth (double depth, Panel.PanelRole lidType) {
     boolean isSlidingLid = (lidType == Panel.PanelRole.slidingLid);
     if (isSlidingLid && depth < 30) return false;
@@ -45,6 +50,7 @@ public class ValidationService {
     return true;
   }
 
+  // if the engraving is too large for the any of the panels on the box, return false 
   public static boolean isValidEngraving (String engraving, double size, double width, double height, double depth, BoxSpec.BoxType boxType) {
     final double AVG_CHAR_WIDTH_FACTOR = 0.6;   // width per char in "fontSize units"
     final double LINE_HEIGHT_FACTOR    = 1.2;   // line height in "fontSize units"

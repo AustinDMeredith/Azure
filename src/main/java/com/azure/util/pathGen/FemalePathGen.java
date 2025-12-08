@@ -17,6 +17,7 @@ public class FemalePathGen {
     // Perpendicular (flip) to the edge direction for "in/out" moves
     final int px = dy, py = -dx;
 
+    // gets the specifications for the edge to pass into the genEdge function
     ArrayList<Double> specs = getEdgeSpecs (lastRole, nextRole, length,toothWidth, depth, panel.role, panel);
     double n = specs.get(0);
     double toothKerf = specs.get(1);
@@ -30,8 +31,10 @@ public class FemalePathGen {
       return String.format("l%.3f %.3f ", dx * length, dy * length);
     }
 
+    // returns a string of the generated edge
     String path = genEdge(lastRole, nextRole, dx, dy, px, py, toothWidth, toothKerf, depth, n, leftCornerTravel, rightCornerTravel, panel.role);
 
+    // calulates the final length of the edge
     final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
     final double kerfSubtracted = ((n / 2) + 1) * toothKerf;
     final double kerfAdded = (n / 2) * toothKerf + cornerKerf * 2;
@@ -47,6 +50,7 @@ public class FemalePathGen {
     double leftCornerTravel;
     double rightCornerTravel;
 
+    // does some checking for what the last current and next edge role is
     final boolean lastIsMale = (lastRole == Panel.EdgeRole.male);
     final boolean nextIsMale = (nextRole == Panel.EdgeRole.male);      
     final boolean lastIsFlat = (lastRole == Panel.EdgeRole.flat);
@@ -55,23 +59,23 @@ public class FemalePathGen {
     final boolean nextIsSlidingFront = (nextRole == Panel.EdgeRole.slidableFront);
     final boolean isBackBottom = (role == Panel.PanelRole.backBottom);
     final boolean isBackTop = (role == Panel.PanelRole.backTop);
-    
+ 
+    // if the panel role is back bottom, then remove 4.825mm
     length -= isBackBottom ? 4.825 : 0;
     
+    // gets the basic corner length and the amount of teeth (n)
     ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole, (isBackTop || isBackBottom));
     corner = edgeSpec.get(0);
     n = edgeSpec.get(1);
 
+    // Effective corner travel on each side after accounting for neighbor male-depth retraction and back panels for hinged boxes.
     if (role == Panel.PanelRole.backTop) {
-      // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       leftCornerTravel  = corner - (lastIsMale ? depth + 3 : 8.0) + (nextIsMale ? 3 : 0);
       rightCornerTravel = corner - (nextIsMale ? depth + 3 : 8.0) + (lastIsMale ? 3 : 0);
     } else if (role == Panel.PanelRole.backBottom) {
-      // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       leftCornerTravel = corner - (lastIsMale ? depth : 0.0) - (lastIsFlat ? depth : 0);
       rightCornerTravel = corner - (nextIsMale ? depth : 0.0) - (nextIsFlat ? depth : 0);
     } else {
-      // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       leftCornerTravel  = corner - (lastIsMale ? depth : 0.0) - (lastIsSlidingFront ? depth * 2 : 0.0);
       rightCornerTravel = corner - (nextIsMale ? depth : 0.0) - (nextIsSlidingFront ? depth * 2 : 0.0);
     }
@@ -81,10 +85,12 @@ public class FemalePathGen {
     double toothKerf = kerf.get(0);
     double cornerKerf = kerf.get(1);
 
+    // recalculate the corner kerf accounting for tolerance
     double tol = panel.tolerance;
     toothKerf -= tol;
     cornerKerf = toothKerf / 2;
     
+    // add corner kerf to corner travel since edge is female
     leftCornerTravel  +=  cornerKerf;
     rightCornerTravel += cornerKerf;
 
@@ -93,6 +99,7 @@ public class FemalePathGen {
     if (leftCornerTravel  < 0 && leftCornerTravel  > -EPS)  leftCornerTravel  = 0;
     if (rightCornerTravel < 0 && rightCornerTravel > -EPS)  rightCornerTravel = 0;
 
+    // make a new array list and add all the specs to return
     ArrayList<Double> specs = new ArrayList<Double>();
     specs.add(n);
     specs.add(toothKerf);
@@ -110,17 +117,20 @@ public class FemalePathGen {
     final boolean lastIsFlat = (lastRole == Panel.EdgeRole.flat);
     final boolean nextIsFlat = (nextRole == Panel.EdgeRole.flat);
 
+    // goes down by 8 then out by depth for the right side of a back bottom panel
     if (lastIsFlat && role == Panel.PanelRole.backBottom) {
       sb.append(rel(dx * 8, dy * 8));
       sb.append(rel(px * depth, py * depth));
     }
 
+    // appends the top of the right edge for back top panels
     if (lastIsFlat && role == Panel.PanelRole.backTop) {
       sb.append(rel(dx * (3 + (2*toothKerf)), dy * (3 + (2*toothKerf))));
       sb.append(rel(px * -depth, py * -depth));
       sb.append(rel(dx * (5 - toothKerf), dy * (5 - toothKerf)));
       sb.append(rel(px * depth, py * depth));
     }
+
     // ---- left corner offset ----
     sb.append(rel(dx * leftCornerTravel, dy * leftCornerTravel));
 
@@ -130,12 +140,13 @@ public class FemalePathGen {
     // ---- right corner offset ----
     sb.append(rel(dx * rightCornerTravel, dy * rightCornerTravel));
 
+    // goes out by depth then up by 8 for the right side of a back bottom panel
     if (nextIsFlat && role == Panel.PanelRole.backBottom) {
       sb.append(rel(px * -depth, py * -depth));
       sb.append(rel(dx * 8, dy * 8));
     }
 
-    
+    // appends the top of the left edge for back top panels
     if (nextIsFlat && role == Panel.PanelRole.backTop) {
       sb.append(rel(px * -depth, py * -depth));
       sb.append(rel(dx * (5 - toothKerf), dy * (5 - toothKerf)));

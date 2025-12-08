@@ -72,6 +72,7 @@ public class Secondary1Controller {
     private boolean isFullscreen = false;
 
     @FXML
+    // initializes the page and adds listeners to fields
     private void initialize() {
         dimensionTypeCombo.getSelectionModel().select(0);
         globalTolCombo.getSelectionModel().select(1);
@@ -186,7 +187,7 @@ public class Secondary1Controller {
         return box.svg;
     }
 
-    //
+    // opens the download page and generates the svg before sending it to the download page 
     @FXML
     private void downloadSVG() throws IOException {
        App.openDownloadPopup("downloadPopup", generateSVGFile());
@@ -199,7 +200,7 @@ public class Secondary1Controller {
         
     }
 
-
+    // finds where the exception occured and highlight that field or fields red
     private void highlightInvalidInputs(Exception e) {
       String msg = e.getMessage();
         if (msg.contains("height")) {
@@ -216,7 +217,7 @@ public class Secondary1Controller {
         }
     }
 
-
+    // resets all the styling for the errors
     private void resetFieldStyles() {
         widthField.getStyleClass().remove("text-field-error");
         heightField.getStyleClass().remove("text-field-error");
@@ -226,6 +227,7 @@ public class Secondary1Controller {
         engravingSizeField.getStyleClass().remove("text-field-error");
     }
     
+    // change the per panel tolerance boxes when the global tolerance box gets changed
     private void changePerPanelCombo () {
         int index = globalTolCombo.getSelectionModel().getSelectedIndex();
         frontTolCombo.getSelectionModel().select(index);
@@ -237,10 +239,12 @@ public class Secondary1Controller {
         globalTolCombo.getSelectionModel().select(index);
     }
 
+    // sets the global tolerance box to custom when any of the per panel tolerance boxes bet changed
     private void changeGlobalCombo () {
         globalTolCombo.getSelectionModel().select(3);
     }
 
+    // returns a new array list of the tolerances for constrution
     private ArrayList<Double> getTols () {
       ArrayList<Double> tols = new ArrayList<Double>();
       tols.add(ToleranceService.getTolerance(frontTolCombo.getSelectionModel().getSelectedIndex()));

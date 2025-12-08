@@ -5,13 +5,14 @@ import com.azure.objects.Panel;
 import com.azure.util.services.KerfService;
 
 public class LidAccessoryGen {
+  // creates a path for the hole in the lids for the handle on lifting lids
   public static String holeGen (double length, double x0, double y0, Panel panel) {
     StringBuilder sb = new StringBuilder();
     double depth = 3.175;
     int dx = 1, dy = 0;
     double px = dy, py = -dx;
     
-    // calls the kerf service to the toothkerf and the corner kerf
+    // calls the kerf service to the toothkerf 
     ArrayList<Double> kerfArr = KerfService.getKerf();
     double kerf = kerfArr.get(0);
 
@@ -49,15 +50,19 @@ public class LidAccessoryGen {
     // Right side: down h - 2r
     sb.append(rel(0, h - 2 * r));
 
+    // out by 2
     sb.append(rel(2, 0));
 
+    // down by 2
     sb.append(rel(0, 2));
 
     // Bottom edge: back left
     sb.append(rel(-(length + 4), 0));
 
+    // up by 2
     sb.append(rel(0, -2));
 
+    // back in by 2
     sb.append(rel(2, 0));
 
     // Left side: up

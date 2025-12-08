@@ -13,16 +13,17 @@ public class RailHoleGen {
     ArrayList<Double> startPoints = new ArrayList<Double>();
     StringBuilder sb = new StringBuilder();
     
+    // gets the corner length and ammount of teeth(n)
     ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole, false);
     double corner = edgeSpec.get(0);
     double n = edgeSpec.get(1);
-
 
     // calls the kerf service to the toothkerf and the corner kerf
     ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
     double cornerKerf = kerf.get(1);
 
+    // places the first starting point in the correct pos
     double cx = sp.get(0) + dx * (corner) - 3.175 + cornerKerf;
     double cy = sp.get(1) + dy * (corner) + py * edgeInset;
 
@@ -48,10 +49,12 @@ public class RailHoleGen {
       }
     }
 
+    // used for testing
     panel.holeStartPoints = startPoints;
     return sb.toString();
   } 
 
+  // helper for appending the lines using relative positions
   private static String rel(double rx, double ry) {
     return String.format("l%.3f %.3f ", rx, ry);
   }

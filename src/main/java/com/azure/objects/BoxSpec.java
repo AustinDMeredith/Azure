@@ -21,6 +21,7 @@ public class BoxSpec {
   // constructor
   public BoxSpec () {};
 
+  // a list of all the box types to use.
   public static enum BoxType {based, hinged, simple};
 
   // getters

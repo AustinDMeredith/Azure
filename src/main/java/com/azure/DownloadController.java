@@ -21,6 +21,7 @@ public class DownloadController {
   private String defaultFileName = "box.svg";
 
   @FXML
+  //opens a new window with a directory picker to save file
   private void handleSaveSvg(ActionEvent event) {
     DirectoryChooser chooser = new DirectoryChooser();
     chooser.setTitle("Choose folder to save SVG");
@@ -40,11 +41,13 @@ public class DownloadController {
   }
  
   @FXML
+  // handles the close of the window
   private void handleClose(ActionEvent event) {
     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.close();
   }
 
+  // setter for the svg content
   public void setSvgContent(String svgContent) {
     this.svgContent = svgContent;
   }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.azure.objects.*;
 
 public class SlidingLidTest {
-  // test to make sure rails are the correct size
+  /******* This test verifys that the generated edge length equals the entered length for rails and lids on sliding lid boxes *******/
   @Test
   public void verifyLength() {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -144,8 +144,7 @@ public class SlidingLidTest {
     assertEquals(4.825, box4.panels.get(10).finalEdgeLengths.get(3), 0);
   }
   
-
-  // test to varify Slidable panel holes are placed correctly
+  /******* This test verifys that the generated holes for the bottom rails are placed correctly on sliding lid boxes *******/
   @Test
   public void verifySlidablePanelHoles() {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -171,10 +170,8 @@ public class SlidingLidTest {
       box2LeftSP += 2 * 14;
     } 
   }
-  // test to make sure rails have the correct specifications
-
   
-  // test to make sure panels for sliding lid boxes get correct edge roles
+  /******* This test verifys that all sliding lid based boxes get assigned the correct edge roles *******/
   @Test
   public void verifyEdgeRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -247,8 +244,7 @@ public class SlidingLidTest {
     assertEquals(Panel.EdgeRole.flat, slidingLidBasedBox.panels.get(10).edges.get(3));
   }
 
-
-  // test to make sure boxes get correct panel roles
+  /******* This test verifys that all sliding lid based and simple boxes get assigned the correct panel roles *******/
   @Test
   public void verifyPanelRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();

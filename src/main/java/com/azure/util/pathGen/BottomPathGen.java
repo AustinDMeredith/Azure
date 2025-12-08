@@ -97,6 +97,7 @@ public class BottomPathGen {
     panel.finalEdgeLengths.add(finalLength);
   }
 
+  // helper to append a line using relative position
   private static String rel(double rx, double ry) {
     return String.format("l%.3f %.3f ", rx, ry);
   }

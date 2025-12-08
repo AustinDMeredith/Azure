@@ -13,7 +13,7 @@ import com.azure.objects.BoxSpec;
 public class IngravingService {
   public static void addEngravings (String engraving, double size, ArrayList<Panel> panels, BoxSpec.BoxType boxType) {
     boolean isHinged = (boxType == BoxSpec.BoxType.hinged);
-    if (isHinged) {
+    if (isHinged) { // if the box is hinged then only place the engraving on the bottom panels
       for (int i = 1; i < 8; i+=2) {
         Panel panel = panels.get(i);
         double px, py;
@@ -31,7 +31,7 @@ public class IngravingService {
         
         panel.path = sb.toString();
       }
-    } else {
+    } else { // if the box is not hinged then place the engraving on the sides
       for (int i = 0; i < 4; i++) {
         Panel panel = panels.get(i);
         double px, py;
@@ -51,6 +51,4 @@ public class IngravingService {
       }
     }
   }
-
-  // normal engraving function should go here
 }

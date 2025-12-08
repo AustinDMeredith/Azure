@@ -16,6 +16,7 @@ public class MalePathGen {
     // Perpendicular (flip) to the edge direction for "in/out" moves
     final int px = dy, py = -dx;
 
+    // gets the specifications for the edge to pass into the genEdge function
     ArrayList<Double> specs = getEdgeSpecs (lastRole, nextRole, length,toothWidth, depth, panel.role, edgeRole, panel);
     double n = specs.get(0);
     double toothKerf = specs.get(1);
@@ -29,23 +30,26 @@ public class MalePathGen {
       return String.format("l%.3f %.3f ", dx * length, dy * length);
     }
 
+    // returns a string of the generated edge
     String path = genEdge(lastRole, nextRole, dx, dy, px, py, toothWidth, toothKerf, depth, n, leftCornerTravel, rightCornerTravel, panel.role, edgeRole);
 
+    // calulates the final length of the edge
     final double patternFootprint = (n == 0) ? 0.0 : ((2 * n - 1) * toothWidth); // the final space between the corners
     final double kerfAdded = ((n / 2) + 1) * toothKerf;
     final double kerfSubtracted = (n / 2) * toothKerf + cornerKerf * 2;
     setFinalLength(panel, corner, patternFootprint, kerfAdded, kerfSubtracted);
 
     return path;
-    }
+  }
 
- // helper to define the specifications for the edge
+  // helper to define the specifications for the edge
   private static ArrayList<Double> getEdgeSpecs (Panel.EdgeRole lastRole, Panel.EdgeRole nextRole, double length, double toothWidth, double depth, Panel.PanelRole role, Panel.EdgeRole edgeRole, Panel panel) {
     double corner;
     double n;
     double leftCornerTravel;
     double rightCornerTravel;
 
+    // does some checking for what the last current and next edge role is
     final boolean lastIsMale = (lastRole == Panel.EdgeRole.male || lastRole == Panel.EdgeRole.maleHinge || lastRole == Panel.EdgeRole.maleCutOut);
     final boolean nextIsMale = (nextRole == Panel.EdgeRole.male || nextRole == Panel.EdgeRole.maleHinge || nextRole == Panel.EdgeRole.maleCutOut);      
     final boolean isTopRightRail = (role == Panel.PanelRole.topRightRail);
@@ -55,18 +59,19 @@ public class MalePathGen {
     final boolean isBackRail = (role == Panel.PanelRole.backRail);
     final boolean isHinged = (edgeRole == Panel.EdgeRole.maleHinge || edgeRole == Panel.EdgeRole.maleCutOut);
     
+    // if the edge role is male hinge, then remove 4.825mm
     length -= (edgeRole == Panel.EdgeRole.maleHinge) ? 4.825 : 0;
     
+    // gets the basic corner length and the amount of teeth (n)
     ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole, isHinged);
     corner = edgeSpec.get(0);
     n = edgeSpec.get(1);
 
+    // Effective corner travel on each side after accounting for neighbor male-depth retraction and for male cut out edges.
     if (edgeRole == Panel.EdgeRole.maleCutOut) {
-      // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       leftCornerTravel  = corner - (lastIsMale ? depth + 3 : 0.0) - ((role == Panel.PanelRole.leftTop) ? 8 : 0) + (nextIsMale ? 3 : 0);
       rightCornerTravel = corner - (nextIsMale ? depth + 3 : 0.0) - ((role == Panel.PanelRole.rightTop) ? 8 : 0) + (lastIsMale ? 3 : 0);
     } else {
-      // Effective corner travel on each side after accounting for neighbor male-depth retraction.
       leftCornerTravel  = corner - (lastIsMale ? depth : 0.0);
       rightCornerTravel = corner - (nextIsMale ? depth : 0.0);            
       leftCornerTravel = isBackRail ? leftCornerTravel - 8 : leftCornerTravel;
@@ -79,10 +84,12 @@ public class MalePathGen {
     ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
     
+    // recalculate the corner kerf accounting for tolerance
     double tol = panel.tolerance;
     toothKerf -= tol;
     double cornerKerf = toothKerf / 2;
     
+    // subtract corner kerf to corner travel since edge is male
     leftCornerTravel  -= cornerKerf;
     rightCornerTravel -= cornerKerf;
 
@@ -91,6 +98,7 @@ public class MalePathGen {
     if (leftCornerTravel  < 0 && leftCornerTravel  > -EPS)  leftCornerTravel  = 0;
     if (rightCornerTravel < 0 && rightCornerTravel > -EPS)  rightCornerTravel = 0;
 
+    // make a new array list and add all the specs to return
     ArrayList<Double> specs = new ArrayList<Double>();
     specs.add(n);
     specs.add(toothKerf);
@@ -107,11 +115,13 @@ public class MalePathGen {
     double hingeRM = 0;
     StringBuilder sb = new StringBuilder();
  
+    // appends the cut out for the hinge on top left hinged box panels
     if (role == Panel.PanelRole.leftTop && edgeRole == Panel.EdgeRole.maleCutOut) {
       sb.append(relA(-8, -8, 0));
       sb.append(rel(px * -depth, py * -depth));
     } 
 
+    // appends the hinge on bottom right hinged box panels
     if (role == Panel.PanelRole.rightBottom && lastRole == Panel.EdgeRole.flat) {
         sb.append(relA(8, -8, 1));
         sb.append(relA(8, 8, 1));
@@ -130,11 +140,13 @@ public class MalePathGen {
     // ---- right corner offset ----
     sb.append(rel(dx * (rightCornerTravel - hingeRM), dy * (rightCornerTravel - hingeRM)));
  
+    // appends the cut out for the hinge on top right hinged box panels
     if (role == Panel.PanelRole.rightTop && edgeRole == Panel.EdgeRole.maleCutOut) {
       sb.append(rel(px * depth, py * depth));
       sb.append(relA(-8, 8, 0));
     }  
 
+    // appends the hinge on the bottom left hinged box panels
     if (role == Panel.PanelRole.leftBottom && nextRole == Panel.EdgeRole.flat) {
       sb.append(rel(px * depth, py * depth));
       sb.append(relA(-8, -8, 1));
@@ -167,6 +179,7 @@ public class MalePathGen {
     return sb;
   }
 
+  // helper for calculating the final length of the edge after generation
   private static void setFinalLength(Panel panel, double corner, double patternFootprint, double kerfAdded, double kerfSubtracted) {
     double finalLength = (2 * corner) + patternFootprint + (kerfAdded - kerfSubtracted);
     panel.finalEdgeLengths.add(finalLength);
@@ -177,6 +190,7 @@ public class MalePathGen {
     return String.format("l%.3f %.3f ", rx, ry);
   }
 
+  // helper for appending arcs to the path
   private static String relA(double dx, double dy, int sweep) {
       return String.format("a 8 8 0 0 %d %.3f %.3f ", sweep, dx, dy);
   }

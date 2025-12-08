@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import com.azure.objects.*;
 import com.azure.util.services.KerfService;
 
-public class AzureTest {
+public class ServicesTest {
 
-  // test to make sure validation works
+  /******* This test verifys that the validation serivce works and catches exceptions where it should and does not where it should not *******/
   @Test
   public void verifyValidation () {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -68,12 +68,13 @@ public class AzureTest {
     );
   }
 
-  // test to make sure panels dont overlap in svg
+  /******* This test verifys that the layout service places panels with no overlapping panels *******/
   @Test 
   public void verifyLayout () {
     ArrayList<Double> tols = new ArrayList<Double>();
     for (int i = 0; i < 6; i++) tols.add(.03);
     
+    // every box type that we have
     BoxSpec box1 = new SimpleBox(200, 250, 250, Panel.PanelRole.top, 14, "", 10, tols);
     BoxSpec box2 = new SimpleBox(40, 40, 40, Panel.PanelRole.top, 7, "", 10, tols);
     BoxSpec box3 = new BasedBox(200, 250, 250, Panel.PanelRole.top, 14, "", 10, tols);
@@ -118,7 +119,7 @@ public class AzureTest {
     }
   }
 
-  // test to make sure tolerance adjusts path correctly
+  /******* This test verifys that the tolerance service does not change the final length of the edge regardless of the preset *******/
   @Test
   public void verifyTolerance () {
     ArrayList<Double> low = new ArrayList<Double>();
@@ -160,7 +161,7 @@ public class AzureTest {
     }
   }
 
-  // test to make sure kerf service adjusts path correctly
+  /******* This test verifys that the kerf service does not change the final length of the edge regardless of the preset *******/
   @Test
   public void verifyKerf () {
     ArrayList<Double> tols = new ArrayList<Double>();

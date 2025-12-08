@@ -35,7 +35,7 @@ public class SimpleBasedBoxTest {
     }
   }
   
-  // test to make sure boxes get correct panel roles
+  /******* This test verifys that all normal lid based and simple boxes get assigned the correct panel roles *******/
   @Test
   public void verifyPanelRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();
@@ -62,6 +62,7 @@ public class SimpleBasedBoxTest {
 
   }
 
+  /******* This test verifys that all normal lid based and simple boxes get assigned the correct edge roles *******/
   @Test
   public void verifyEdgeRoles () {
     ArrayList<Double> tols = new ArrayList<Double>();

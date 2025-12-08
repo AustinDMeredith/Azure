@@ -64,6 +64,8 @@ public class EdgeSpec {
         }
       }
     }
+
+    // make a new array list and add the corner and tooth number(n) for return
     ArrayList<Double> obj = new ArrayList<Double>();
     obj.add(corner);
     obj.add((double)n);

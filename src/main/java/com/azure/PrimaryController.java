@@ -95,19 +95,20 @@ public class PrimaryController {
     }
     
     @FXML
+    // changes page to the simple box editor
     private void handleRegularBoxClick(MouseEvent event) throws IOException {
         App.setRoot("secondary1");
     }
 
     @FXML
+    // changes page to the based box editor
     private void handleBasedBoxClick(MouseEvent event) throws IOException {
         App.setRoot("secondary2");
     }
 
     @FXML
+    // changes page to the hinged box editor
     private void handleDieBoxClick(MouseEvent event) throws IOException {
         App.setRoot("secondary3");
     }
- 
-
 }
