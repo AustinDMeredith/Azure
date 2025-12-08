@@ -10,3 +10,7 @@ Kerf: Is the width of the material removed by a saw or laser. The gap thats left
 
 Repository- A repository contains all of your code, your files, and each file's revision history. You can discuss and manage your work within the repository.
 
+JUnit- an open-source testing framework specifically designed for writing and running unit tests in Java applications. It provides a set of tools and annotations that facilitate the creation of test cases, the execution of tests, and the assertion of expected outcomes.
+
+JavaFX- JavaFX is a software platform and a set of graphics and media packages for the Java programming language. It enables developers to design, create, test, debug, and deploy rich client applications with graphical user interfaces (GUIs) and 3D graphics.
+
