@@ -15,22 +15,17 @@ import com.azure.objects.Panel;
 public class SetEdgeRoles {
   public static void setRoles (ArrayList<Panel> panels) {
     for (Panel panel : panels) {
-      if (panel.role == Panel.PanelRole.front) { // Sets all edge roles to male for front panels
+      if (panel.role == Panel.PanelRole.front || panel.role == Panel.PanelRole.back) { // Sets all edge roles to male for front panels
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
-      } else if (panel.role == Panel.PanelRole.bottom) { // Sets all edge roles to female for bottom panels
+      } else if (panel.role == Panel.PanelRole.bottom || panel.role == Panel.PanelRole.top) { // Sets all edge roles to female for bottom panels
         panel.edges.add(Panel.EdgeRole.female);
         panel.edges.add(Panel.EdgeRole.female);
         panel.edges.add(Panel.EdgeRole.female);
         panel.edges.add(Panel.EdgeRole.female);
-      } else if (panel.role == Panel.PanelRole.right) { // Alternates edge roles male and female for right panels
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.female);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.female);
-      } else if (panel.role == Panel.PanelRole.left) { // Alternates edge roles male and female for right panels
+      } else if (panel.role == Panel.PanelRole.right || panel.role == Panel.PanelRole.left) { // Alternates edge roles male and female for right panels
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.female);
         panel.edges.add(Panel.EdgeRole.male);
@@ -40,16 +35,6 @@ public class SetEdgeRoles {
         panel.edges.add(Panel.EdgeRole.bottom);
         panel.edges.add(Panel.EdgeRole.bottom);
         panel.edges.add(Panel.EdgeRole.bottom);
-      } else if (panel.role == Panel.PanelRole.top) {
-        panel.edges.add(Panel.EdgeRole.female);
-        panel.edges.add(Panel.EdgeRole.female);
-        panel.edges.add(Panel.EdgeRole.female);
-        panel.edges.add(Panel.EdgeRole.female);
-      } else if (panel.role == Panel.PanelRole.back) {
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.male);
       } else if (panel.role == Panel.PanelRole.slidableFront) {
         panel.edges.add(Panel.EdgeRole.slidableFront);
         panel.edges.add(Panel.EdgeRole.female);
@@ -60,12 +45,7 @@ public class SetEdgeRoles {
         panel.edges.add(Panel.EdgeRole.female);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.female);
-      } else if (panel.role == Panel.PanelRole.slidableLeft) {
-        panel.edges.add(Panel.EdgeRole.slidableSide);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.male);
-      } else if (panel.role == Panel.PanelRole.slidableRight) {
+      } else if (panel.role == Panel.PanelRole.slidableLeft || panel.role == Panel.PanelRole.slidableRight) {
         panel.edges.add(Panel.EdgeRole.slidableSide);
         panel.edges.add(Panel.EdgeRole.male);
         panel.edges.add(Panel.EdgeRole.male);
@@ -75,27 +55,7 @@ public class SetEdgeRoles {
         panel.edges.add(Panel.EdgeRole.flatLid);
         panel.edges.add(Panel.EdgeRole.flatLid);
         panel.edges.add(Panel.EdgeRole.flatLid);
-      } else if (panel.role == Panel.PanelRole.bottomLeftRail) {
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.flat);
-      } else if (panel.role == Panel.PanelRole.bottomRightRail) {
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.flat);
-      } else if (panel.role == Panel.PanelRole.topLeftRail) {
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.flat);
-      } else if (panel.role == Panel.PanelRole.topRightRail) {
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.flat);
-        panel.edges.add(Panel.EdgeRole.male);
-        panel.edges.add(Panel.EdgeRole.flat);
-      } else if (panel.role == Panel.PanelRole.backRail) {
+      } else if (panel.role == Panel.PanelRole.bottomLeftRail || panel.role == Panel.PanelRole.bottomRightRail || panel.role == Panel.PanelRole.topLeftRail || panel.role == Panel.PanelRole.topRightRail || panel.role == Panel.PanelRole.backRail) {
         panel.edges.add(Panel.EdgeRole.flat);
         panel.edges.add(Panel.EdgeRole.flat);
         panel.edges.add(Panel.EdgeRole.male);

@@ -82,7 +82,7 @@ public class PathGen {
     // Close
     d.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
  
-    ArrayList<Double> kerf = KerfService.getKerf(1);
+    ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
     if (panel.role == Panel.PanelRole.rightBottom) {
       // places the hinge in the correct position

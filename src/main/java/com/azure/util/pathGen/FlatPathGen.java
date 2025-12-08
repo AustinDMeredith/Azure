@@ -28,11 +28,19 @@ public class FlatPathGen {
     }
     
     sb.append(rel(dx * (length - hingedRM), dy * (length - hingedRM)));
+
+    setFinalLength(panel, length, hingedRM);
   
     return sb.toString();
   }
   
   private static String rel(double rx, double ry) {
     return String.format("l%.3f %.3f ", rx, ry);
+  }
+
+  
+  private static void setFinalLength(Panel panel, double length, double hingedRM) {
+    double finalLength = length - hingedRM;
+    panel.finalEdgeLengths.add(finalLength);
   }
 }

@@ -76,13 +76,12 @@ public class MalePathGen {
     }
 
     // calls the kerf service to the toothkerf and the corner kerf
-    ArrayList<Double> kerf = KerfService.getKerf(n);
+    ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
-    double cornerKerf = kerf.get(1);
-
+    
     double tol = panel.tolerance;
     toothKerf -= tol;
-    cornerKerf += (n * tol) / 2;
+    double cornerKerf = toothKerf / 2;
     
     leftCornerTravel  -= cornerKerf;
     rightCornerTravel -= cornerKerf;
@@ -153,11 +152,11 @@ public class MalePathGen {
     //   in by depth, along baseline by toothWidth, out by depth,
     //   AND if not last slot: advance another toothWidth baseline before next slot.
     for (int i = 0; i < n; i++) {
-      // go in by 'depth'
+      // go out by 'depth'
       sb.append(rel(px * depth, py * depth));
       // along baseline (slot width)
       sb.append(rel(dx * (toothWidth + toothKerf), dy * (toothWidth + toothKerf)));
-      // out by 'depth'
+      // go in by 'depth'
       sb.append(rel(px * -depth, py * -depth));
 
       // land between slots (except after the last slot)

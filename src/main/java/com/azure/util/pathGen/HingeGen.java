@@ -19,7 +19,7 @@ public class HingeGen {
     double toothWidth = 3;
     int dx = 0, dy = 1;
     final int px = dy, py = -dx;
-    ArrayList<Double> kerf = KerfService.getKerf(1);
+    ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
 
     double tol = panel.tolerance;

@@ -13,7 +13,7 @@ public class KerfService {
   static double largeKerf = .7;
   static double currentKerf = mediumKerf;
 
-  public static ArrayList<Double> getKerf (double n) {
+  public static ArrayList<Double> getKerf () {
     ArrayList<Double> settings = new ArrayList<Double>();
     double toothKerf = currentKerf / 2;
     double cornerKerf = currentKerf / 4;    

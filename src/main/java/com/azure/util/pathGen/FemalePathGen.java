@@ -77,13 +77,13 @@ public class FemalePathGen {
     }
 
     // calls the kerf service to the toothkerf and the corner kerf
-    ArrayList<Double> kerf = KerfService.getKerf(n);
+    ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
     double cornerKerf = kerf.get(1);
 
     double tol = panel.tolerance;
     toothKerf -= tol;
-    cornerKerf += (n * tol) / 2;
+    cornerKerf = toothKerf / 2;
     
     leftCornerTravel  +=  cornerKerf;
     rightCornerTravel += cornerKerf;
@@ -135,6 +135,7 @@ public class FemalePathGen {
       sb.append(rel(dx * 8, dy * 8));
     }
 
+    
     if (nextIsFlat && role == Panel.PanelRole.backTop) {
       sb.append(rel(px * -depth, py * -depth));
       sb.append(rel(dx * (5 - toothKerf), dy * (5 - toothKerf)));

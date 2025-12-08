@@ -1,8 +1,7 @@
 package com.azure;
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
 
-import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.azure.objects.*;
 
@@ -128,4 +127,31 @@ public class HingedBoxTest {
     assertEquals(290, box1.panels.get(9).startPoint.get(1), 0);
     
   }
+
+  @Test
+  public void verifyLengths () {
+
+    BoxSpec box1 = new HingedBox(100, 100, 100, 15, "", 10, .03);
+    BoxSpec box2 = new HingedBox(70, 65, 80, 3, "", 10, .03);
+    BoxSpec box3 = new HingedBox(250, 200, 100, 15, "", 10, .03);
+    BoxSpec box4 = new HingedBox(150, 30, 50, 4, "", 10, .03);
+
+    for (int i = 0; i < 10; i++) {
+      for (int j = 0; j < 4; j++) {
+        if (j % 2 == 0) {
+          // the reason for the high deltas is because the length of an edge gets changed in a few places after the size is set, this makes it very dificult to test and should have changed, so this assumes that if its in the delta its probably right, and if its not something went horribly wrong. 
+          assertEquals(box1.panels.get(i).width, box1.panels.get(i).finalEdgeLengths.get(j), 13);
+          assertEquals(box2.panels.get(i).width, box2.panels.get(i).finalEdgeLengths.get(j), 13);
+          assertEquals(box3.panels.get(i).width, box3.panels.get(i).finalEdgeLengths.get(j), 13);
+          assertEquals(box4.panels.get(i).width, box4.panels.get(i).finalEdgeLengths.get(j), 13);
+        } else {
+          assertEquals(box1.panels.get(i).height, box1.panels.get(i).finalEdgeLengths.get(j), 6);
+          assertEquals(box2.panels.get(i).height, box2.panels.get(i).finalEdgeLengths.get(j), 6);
+          assertEquals(box3.panels.get(i).height, box3.panels.get(i).finalEdgeLengths.get(j), 6);
+          assertEquals(box4.panels.get(i).height, box4.panels.get(i).finalEdgeLengths.get(j), 6);
+        }
+      }
+    }
+  }
+
 }

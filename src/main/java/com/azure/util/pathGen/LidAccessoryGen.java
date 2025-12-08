@@ -12,7 +12,7 @@ public class LidAccessoryGen {
     double px = dy, py = -dx;
     
     // calls the kerf service to the toothkerf and the corner kerf
-    ArrayList<Double> kerfArr = KerfService.getKerf(1);
+    ArrayList<Double> kerfArr = KerfService.getKerf();
     double kerf = kerfArr.get(0);
 
     double tol = panel.tolerance;

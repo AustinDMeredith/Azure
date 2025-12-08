@@ -10,6 +10,7 @@ public class RailHoleGen {
     final double edgeInset = 3.2 * 2;      
     final int px = -dy, py = dx;
     ArrayList<Double> sp = panel.startPoint; // MUST be top-left of this panel in SVG coords
+    ArrayList<Double> startPoints = new ArrayList<Double>();
     StringBuilder sb = new StringBuilder();
     
     ArrayList<Double> edgeSpec = EdgeSpec.getEdgeSpec(length, depth, toothWidth, lastRole, nextRole, false);
@@ -18,12 +19,14 @@ public class RailHoleGen {
 
 
     // calls the kerf service to the toothkerf and the corner kerf
-    ArrayList<Double> kerf = KerfService.getKerf(n);
+    ArrayList<Double> kerf = KerfService.getKerf();
     double toothKerf = kerf.get(0);
     double cornerKerf = kerf.get(1);
 
     double cx = sp.get(0) + dx * (corner) - 3.175 + cornerKerf;
     double cy = sp.get(1) + dy * (corner) + py * edgeInset;
+
+    startPoints.add(cx);
 
     for (int j = 0; j < n; j++) {
       sb.append(String.format("<path d=\"M%.3f %.3f ", cx, cy));
@@ -32,7 +35,7 @@ public class RailHoleGen {
       // inward
       sb.append(rel(px * depth, py * depth));
       // back along edge
-      sb.append(rel(dx * (-toothWidth + toothKerf), dy * (-toothWidth + toothKerf)));
+      sb.append(rel(dx * -(toothWidth - toothKerf), dy * -(toothWidth - toothKerf)));
       // back outward to the inset baseline
       sb.append(rel(px * -depth, py * -depth));
       sb.append("Z\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.1\"/>\n");
@@ -41,9 +44,11 @@ public class RailHoleGen {
       if (j < n - 1) {
         cx += dx * (2 * toothWidth);
         cy += dy * (2 * toothWidth);
+        startPoints.add(cx);
       }
     }
 
+    panel.holeStartPoints = startPoints;
     return sb.toString();
   } 
 
