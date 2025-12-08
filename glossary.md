@@ -6,4 +6,4 @@ Apache: We will use this to run test cases in our program. Apache is a popular o
 
 GitHub: A proprietary developer platform that allows developers to create, store, manage, and share their code.
 
-Dart: A programming language developed by Google, primarily used for building web, server, and mobile applications. When referring to Dart in the context of backend development, it typically involves using Dart to create server-side applications.
+Kerf: Is the width of the material removed by a saw or laser. The gap thats left after the cut is made. 
