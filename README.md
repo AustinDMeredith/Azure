@@ -4,11 +4,9 @@ A feature-dense and expandable tool that helps generate precise, laser-cut-ready
 ## About
 This repository is the Java-based codebase for Azure, a project being developed by Austin, Devin and Grant. The current focus includes:
 
-* Adding more box types
+* Extensive testing
 
-* Expanding features and refining the system
-
-* Adding a lightweight and easy-to-use GUI
+* Getting everything ready for our first production release!
 
 ## Getting Started
 
@@ -16,9 +14,11 @@ This repository is the Java-based codebase for Azure, a project being developed 
 
 * Java JDK (version 8 or newer)
 
-* Maven build tool
+* Maven build tool (version 3.9.11 or newer)
 
-* An IDE of your choice (IntelliJ, Eclipse, VS Code)
+* Javafx (MUST HAVE VERSION 21.0.9)
+
+* (Optional) An IDE of your choice (IntelliJ, Eclipse, VS Code, Vim)
 
 * (Optional) Git knowledge for managing branches and commits
 
@@ -30,14 +30,8 @@ Clone the repo
 git clone https://github.com/AustinDMeredith/Azure.git
 cd Azure
 ```
-Build the package 
+Build and Run the package
 
 ```
-mvn clean package
-```
-
-Run the package
-
-```
-java -jar target/azure-boxes-1.0-SNAPSHOT.jar
+mvn clean javafx:run
 ```
